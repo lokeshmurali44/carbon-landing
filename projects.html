@@ -366,12 +366,9 @@
                 </div>
               </div>
             </article>
-          </div>
-
-          <!-- Row 2 -->
-          <div class="grid-row flex gap-[21px] items-center w-full">
 
             <!-- Card 4: Grassland USA -->
+
             <article class="project-card bg-white rounded-[10px] w-[344px] shrink-0 flex flex-col items-start overflow-hidden cursor-pointer"
               data-status="active" data-name="grassland carbon sequestration project usa">
               <div class="flex flex-col h-[254px] items-start relative w-full">
@@ -475,12 +472,9 @@
                 </div>
               </div>
             </article>
-          </div>
-
-          <!-- Row 3 (upcoming cards — hidden by default via filter) -->
-          <div class="grid-row flex gap-[21px] items-center w-full">
 
             <!-- Card 7: Wind Energy Kenya -->
+
             <article class="project-card bg-white rounded-[10px] w-[344px] shrink-0 flex flex-col items-start overflow-hidden cursor-pointer"
               data-status="upcoming" data-name="wind energy carbon credit kenya">
               <div class="flex flex-col h-[254px] items-start relative w-full">
@@ -584,11 +578,8 @@
                 </div>
               </div>
             </article>
-          </div>
-
-          <!-- Row 4 -->
-          <div class="grid-row flex gap-[21px] items-center w-full">
             <!-- Card 10: Savanna Tanzania -->
+
             <article class="project-card bg-white rounded-[10px] w-[344px] shrink-0 flex flex-col items-start overflow-hidden cursor-pointer"
               data-status="upcoming" data-name="savanna conservation carbon tanzania">
               <div class="flex flex-col h-[254px] items-start relative w-full">
@@ -679,11 +670,8 @@
         }
       });
 
-      // Hide empty rows
-      document.querySelectorAll('.grid-row').forEach(row => {
-        const visible = Array.from(row.children).some(c => c.style.display !== 'none');
-        row.style.display = visible ? '' : 'none';
-      });
+
+
 
       const empty = document.getElementById('emptyState');
       empty.classList.toggle('hidden', visibleCount > 0);
