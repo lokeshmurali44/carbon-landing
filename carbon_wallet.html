@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carbon Wallet - BlockchainX</title>
+  <meta name="description" content="Carbon Wallet page for BlockchainX with wallet overview and allocation transaction views.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { poppins: ["Poppins", "sans-serif"] },
+          colors: {
+            page: "#f5f7f9",
+            heading: "#1d2433",
+            subtext: "#72798b",
+            border: "#d8dfeb",
+            sidebar: "#d1d1d6",
+            purple: "#661eb9",
+            purpleSoft: "rgba(102, 30, 185, 0.10)",
+            card: "#ffffff",
+            tableHead: "#f8f8f8",
+            green: "#00b86b",
+            red: "#ff4d5e"
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-page font-poppins text-heading antialiased">
+  <!-- Mobile Header -->
+  <header class="border-b border-border bg-white px-4 py-4 min-[1200px]:hidden">
+    <div class="mx-auto flex max-w-[1074px] items-center justify-between gap-4">
+      <a href="index.html" aria-label="BlockchainX home">
+        <img src="./Image/Blockchain%20Logo%20White.png" alt="BlockchainX" class="h-[43px] w-[138px] object-contain">
+      </a>
+      <button id="mobile-menu-button" type="button" aria-expanded="false" aria-controls="mobile-sidebar" class="flex h-10 w-10 items-center justify-center rounded-[10px] border border-border bg-white text-heading">
+        <span class="sr-only">Open navigation</span>
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M4 7h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 17h16"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Sidebar -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 z-40 hidden bg-heading/20 min-[1200px]:hidden"></div>
+  <aside id="mobile-sidebar" class="fixed left-0 top-0 z-50 hidden h-full w-[286px] flex-col border-r border-sidebar bg-white px-6 py-8 min-[1200px]:hidden" aria-label="Mobile navigation">
+    <div class="flex items-center justify-between">
+      <a href="index.html" aria-label="BlockchainX home">
+        <img src="./Image/Blockchain%20Logo%20White.png" alt="BlockchainX" class="h-[56px] w-[180px] object-contain">
+      </a>
+      <button id="mobile-menu-close" type="button" class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-border bg-white text-heading">
+        <span class="sr-only">Close navigation</span>
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M6 6l12 12"></path>
+          <path d="M18 6l-12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="mt-11 flex flex-col gap-6 text-[18px] leading-[22px] tracking-[-0.54px]" aria-label="Primary">
+      <div class="flex flex-col gap-2">
+        <a href="projects.html" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+          <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a15.5 15.5 0 0 1 0 18"></path><path d="M12 3a15.5 15.5 0 0 0 0 18"></path></svg>
+          <span class="font-medium">Marketplace</span>
+        </a>
+        <a href="dashboard.html" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+          <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 18.5V8.75L12 4l7.5 4.75v9.75"></path><path d="M8 18.5h8"></path><path d="M8 11.5h8"></path><path d="M10 18.5v-7"></path><path d="M14 18.5v-7"></path></svg>
+          <span class="font-medium">My Carbon Portfolio</span>
+        </a>
+        <a href="carbon_wallet.html" aria-current="page" class="flex h-[52px] items-center gap-3 rounded-[8px] bg-purpleSoft px-4 py-[14px] text-purple">
+          <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H18a2 2 0 0 1 2 2v9.5A2.5 2.5 0 0 1 17.5 19H5.5A2.5 2.5 0 0 1 3 16.5z"></path><path d="M3 9.5h17"></path><circle cx="16.5" cy="14.5" r="1"></circle></svg>
+          <span class="font-medium">Carbon Wallet</span>
+        </a>
+      </div>
+
+      <div class="h-px w-full bg-[#e8edf5]"></div>
+
+      <div class="flex flex-col gap-2">
+        <a href="#" class="flex h-[52px] items-center justify-between rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+          <span class="flex items-center gap-3">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c1.8-3.9 4.5-5.8 8-5.8S18.2 16.1 20 20"></path></svg>
+            <span class="font-medium">Profile</span>
+          </span>
+          <svg class="h-4 w-4 shrink-0 text-[#aab0bd]" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"></path></svg>
+        </a>
+        <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+          <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0v5l2 3H4l2-3z"></path><path d="M10 19a2 2 0 0 0 4 0"></path></svg>
+          <span class="font-medium">Notifications</span>
+        </a>
+        <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+          <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9.25 9.4a2.8 2.8 0 1 1 5.18 1.46c-.59.92-1.54 1.42-1.93 2.39"></path><path d="M12 16.7h.01"></path></svg>
+          <span class="font-medium">Help &amp; Support</span>
+        </a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Desktop Sidebar -->
+  <aside class="fixed left-0 top-0 hidden h-screen w-[286px] border-r border-sidebar bg-white min-[1200px]:block" aria-label="Sidebar">
+    <div class="flex h-full flex-col gap-[44px] px-6 py-8">
+      <div class="h-[60px] w-[220px]">
+        <a href="index.html" aria-label="BlockchainX home">
+          <img src="./Image/Blockchain%20Logo%20White.png" alt="BlockchainX" class="h-[56px] w-[180px] object-contain">
+        </a>
+      </div>
+
+      <div class="flex flex-col gap-6">
+        <nav class="flex w-[237px] flex-col gap-2 text-[18px] leading-[22px] tracking-[-0.54px]" aria-label="Primary">
+          <a href="projects.html" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a15.5 15.5 0 0 1 0 18"></path><path d="M12 3a15.5 15.5 0 0 0 0 18"></path></svg>
+            <span class="font-medium">Marketplace</span>
+          </a>
+          <a href="dashboard.html" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 18.5V8.75L12 4l7.5 4.75v9.75"></path><path d="M8 18.5h8"></path><path d="M8 11.5h8"></path><path d="M10 18.5v-7"></path><path d="M14 18.5v-7"></path></svg>
+            <span class="font-medium">My Carbon Portfolio</span>
+          </a>
+          <a href="carbon_wallet.html" aria-current="page" class="flex h-[52px] items-center gap-3 rounded-[8px] bg-purpleSoft px-4 py-[14px] text-purple">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H18a2 2 0 0 1 2 2v9.5A2.5 2.5 0 0 1 17.5 19H5.5A2.5 2.5 0 0 1 3 16.5z"></path><path d="M3 9.5h17"></path><circle cx="16.5" cy="14.5" r="1"></circle></svg>
+            <span class="font-medium">Carbon Wallet</span>
+          </a>
+        </nav>
+
+        <div class="h-px w-[238px] bg-[#e8edf5]"></div>
+
+        <nav class="flex w-[237px] flex-col gap-2 text-[18px] leading-[22px] tracking-[-0.54px]" aria-label="Secondary">
+          <a href="#" class="flex h-[52px] items-center justify-between rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+            <span class="flex items-center gap-3">
+              <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c1.8-3.9 4.5-5.8 8-5.8S18.2 16.1 20 20"></path></svg>
+              <span class="font-medium">Profile</span>
+            </span>
+            <svg class="h-4 w-4 shrink-0 text-[#aab0bd]" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"></path></svg>
+          </a>
+          <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0v5l2 3H4l2-3z"></path><path d="M10 19a2 2 0 0 0 4 0"></path></svg>
+            <span class="font-medium">Notifications</span>
+          </a>
+          <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9.25 9.4a2.8 2.8 0 1 1 5.18 1.46c-.59.92-1.54 1.42-1.93 2.39"></path><path d="M12 16.7h.01"></path></svg>
+            <span class="font-medium">Help &amp; Support</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="pb-16 pt-6 min-[1200px]:ml-[326px] min-[1200px]:w-[calc(100%-326px)] min-[1200px]:pb-[54px] min-[1200px]:pt-[60px] min-[1200px]:pr-10">
+    <div class="mx-auto max-w-[1074px] px-4 md:px-8 min-[1200px]:px-0">
+      <!-- Page Header -->
+      <section class="space-y-[6px]">
+        <h1 class="text-[28px] font-semibold leading-[32px] tracking-[-0.84px] text-heading">Carbon Wallet</h1>
+        <p class="text-[14px] font-normal leading-[22px] tracking-[-0.28px] text-subtext">View your carbon credit balance, retirement activity, and transaction history.</p>
+      </section>
+
+      <!-- Summary Cards -->
+      <section class="mt-[35px] grid gap-[22px] min-[960px]:grid-cols-[526px_526px]">
+        <article class="rounded-[12px] border border-border bg-card min-[960px]:h-[141px]">
+          <div class="grid h-full grid-cols-1 gap-5 px-5 py-5 min-[640px]:grid-cols-[1fr_220px] min-[640px]:items-start">
+            <div class="space-y-[10px] pt-[6px]">
+              <div class="flex items-center gap-[6px]">
+                <span class="text-[12px] font-normal leading-[18px] tracking-[-0.24px] text-subtext">Total Credit Value</span>
+                <svg class="h-[14px] w-[14px] text-subtext" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <circle cx="7" cy="7" r="5.75"></circle>
+                  <path d="M7 5.2v.15"></path>
+                  <path d="M7 6.7v2.3"></path>
+                </svg>
+              </div>
+              <div class="space-y-1">
+                <p class="text-[16px] font-semibold leading-9 tracking-[-0.48px] text-heading min-[1200px]:text-[17px]">190,166.65 USDC</p>
+                <p class="text-[14px] font-normal leading-[21px] tracking-[-0.28px] text-subtext">$96600.896</p>
+              </div>
+            </div>
+
+            <div class="space-y-[13px] min-[640px]:w-[220px]">
+              <div class="flex h-[44px] items-center justify-center gap-[9px] rounded-[8px] border border-border bg-white px-4">
+                <span class="flex h-6 w-6 items-center justify-center rounded-[6px] bg-[#fff1e9]">
+                  <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 12.5 8.8 5l3.2 2.2L15.2 5 20 12.5l-2.6 6.5H6.6L4 12.5Z" fill="#f97316"></path>
+                    <path d="m12 7.2 2.7 3.1L12 19l-2.8-8.7L12 7.2Z" fill="#7c2d12"></path>
+                  </svg>
+                </span>
+                <span class="text-[11px] font-medium leading-[17px] tracking-[-0.22px] text-heading">0xA0b86...0cE3606</span>
+                <svg class="h-[14px] w-[14px] text-subtext" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <rect x="4.2" y="4.2" width="7" height="7" rx="1.2"></rect>
+                  <path d="M2.8 9.1V3.9A1.4 1.4 0 0 1 4.2 2.5h5.2"></path>
+                </svg>
+              </div>
+              <button type="button" class="flex h-[44px] w-full items-center justify-center rounded-[8px] bg-[#f1f2f4] text-[12px] font-medium leading-[18px] tracking-[-0.24px] text-heading">Disconnect Wallet</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-[12px] border border-border bg-card min-[960px]:h-[141px]">
+          <div class="grid h-full grid-cols-1 gap-5 px-5 py-5 min-[640px]:grid-cols-[1fr_220px] min-[640px]:items-start">
+            <div class="space-y-[10px] pt-[6px]">
+              <div class="flex items-center gap-[6px]">
+                <span class="text-[12px] font-normal leading-[18px] tracking-[-0.24px] text-subtext">Available Credits to Retire</span>
+                <svg class="h-[14px] w-[14px] text-subtext" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <circle cx="7" cy="7" r="5.75"></circle>
+                  <path d="M7 5.2v.15"></path>
+                  <path d="M7 6.7v2.3"></path>
+                </svg>
+              </div>
+              <div class="space-y-1">
+                <p class="text-[16px] font-semibold leading-9 tracking-[-0.48px] text-heading min-[1200px]:text-[17px]">2,386 CO₂ Credits</p>
+                <p class="text-[14px] font-normal leading-[21px] tracking-[-0.28px] text-subtext">$96600.896</p>
+              </div>
+            </div>
+
+            <div class="space-y-[13px] min-[640px]:w-[220px]">
+              <div class="flex h-[44px] items-center justify-center gap-[9px] rounded-[8px] border border-border bg-white px-4">
+                <span class="flex h-6 w-6 items-center justify-center rounded-[6px] bg-[#fff1e9]">
+                  <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 12.5 8.8 5l3.2 2.2L15.2 5 20 12.5l-2.6 6.5H6.6L4 12.5Z" fill="#f97316"></path>
+                    <path d="m12 7.2 2.7 3.1L12 19l-2.8-8.7L12 7.2Z" fill="#7c2d12"></path>
+                  </svg>
+                </span>
+                <span class="text-[11px] font-medium leading-[17px] tracking-[-0.22px] text-heading">0xA0b86...0cE3606</span>
+              </div>
+              <button type="button" class="flex h-[44px] w-full items-center justify-center rounded-[8px] bg-purpleSoft text-[12px] font-medium leading-[18px] tracking-[-0.24px] text-purple">Retire Credits</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Activity By Project -->
+      <section class="mt-10">
+        <h2 class="text-[16px] font-semibold leading-5 tracking-[-0.32px] text-heading">Carbon Credit Activity by Project</h2>
+        <div class="mt-5 overflow-hidden rounded-[12px] border border-border bg-white">
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[1074px] border-collapse">
+              <thead class="bg-tableHead text-left">
+                <tr class="h-[50px] text-[12px] font-normal leading-[18px] tracking-[-0.24px] text-subtext">
+                  <th class="min-w-[350px] px-5">Carbon Project</th>
+                  <th class="min-w-[182px] px-5">Last Activity</th>
+                  <th class="min-w-[176px] px-5">Last Activity Date</th>
+                  <th class="min-w-[186px] px-5">Available Credits</th>
+                  <th class="min-w-[90px] px-5">Action</th>
+                </tr>
+              </thead>
+              <tbody class="text-[14px] font-normal leading-5 tracking-[-0.28px] text-heading">
+                <tr class="h-[80px] border-t border-border">
+                  <td class="px-5"><div class="flex items-center gap-4"><img src="./Image/project-amazon-rainforest.png" alt="Amazon Rainforest Project" class="h-10 w-16 rounded-[2px] object-cover"><span class="max-w-[230px] leading-5">Amazon Rainforest Project -<br>Brazil</span></div></td>
+                  <td class="px-5 text-green">+173 CO₂ Credits (Generated)</td>
+                  <td class="px-5">2 March 2025</td>
+                  <td class="px-5">12,000 CO₂ Credits</td>
+                  <td class="px-5"><button type="button" class="flex h-[29px] w-[61px] items-center justify-center rounded-[6px] bg-purpleSoft text-[10px] font-semibold leading-[15px] tracking-[-0.2px] text-purple">Retire</button></td>
+                </tr>
+                <tr class="h-[80px] border-t border-border">
+                  <td class="px-5"><div class="flex items-center gap-4"><img src="./Image/project-mangrove-indonesia.png" alt="Mangrove Restoration Project" class="h-10 w-16 rounded-[2px] object-cover"><span class="max-w-[230px] leading-5">Mangrove Restoration Project -<br>Indonesia</span></div></td>
+                  <td class="px-5 text-green">+210 CO₂ Credits (Issued)</td>
+                  <td class="px-5">28 Feb 2025</td>
+                  <td class="px-5">9,850 CO₂ Credits</td>
+                  <td class="px-5"><button type="button" class="flex h-[29px] w-[61px] items-center justify-center rounded-[6px] bg-purpleSoft text-[10px] font-semibold leading-[15px] tracking-[-0.2px] text-purple">Retire</button></td>
+                </tr>
+                <tr class="h-[80px] border-t border-border">
+                  <td class="px-5"><div class="flex items-center gap-4"><img src="./Image/project-solar-energy-india.png" alt="Wind Energy Project" class="h-10 w-16 rounded-[2px] object-cover"><span class="max-w-[230px] leading-5">Wind Energy Project -<br>India</span></div></td>
+                  <td class="px-5 text-green">+145 CO₂ Credits (Verified)</td>
+                  <td class="px-5">25 Feb 2025</td>
+                  <td class="px-5">8,420 CO₂ Credits</td>
+                  <td class="px-5"><button type="button" class="flex h-[29px] w-[61px] items-center justify-center rounded-[6px] bg-purpleSoft text-[10px] font-semibold leading-[15px] tracking-[-0.2px] text-purple">Retire</button></td>
+                </tr>
+                <tr class="h-[80px] border-t border-border">
+                  <td class="px-5"><div class="flex items-center gap-4"><img src="./Image/project-wind-energy-kenya.png" alt="Solar Farm Offset" class="h-10 w-16 rounded-[2px] object-cover"><span class="max-w-[230px] leading-5">Solar Farm Offset -<br>UAE</span></div></td>
+                  <td class="px-5 text-green">+190 CO₂ Credits (Generated)</td>
+                  <td class="px-5">20 Feb 2025</td>
+                  <td class="px-5">10,760 CO₂ Credits</td>
+                  <td class="px-5"><button type="button" class="flex h-[29px] w-[61px] items-center justify-center rounded-[6px] bg-purpleSoft text-[10px] font-semibold leading-[15px] tracking-[-0.2px] text-purple">Retire</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Transactions -->
+      <section class="mt-[30px]">
+        <div class="flex flex-col gap-4 min-[900px]:flex-row min-[900px]:items-center min-[900px]:justify-between">
+          <h2 class="text-[16px] font-semibold leading-5 tracking-[-0.32px] text-heading">Transactions</h2>
+          <div role="tablist" aria-label="Wallet transactions views" class="flex w-full gap-[14px] overflow-x-auto pb-1 min-[900px]:w-auto min-[900px]:justify-end min-[900px]:pb-0">
+            <button type="button" role="tab" id="tab-credit-activity" aria-selected="true" aria-controls="panel-credit-activity" data-tab-target="credit-activity" class="wallet-tab flex h-[34px] shrink-0 items-center justify-center rounded-[8px] border border-purple bg-purpleSoft px-4 text-[12px] font-semibold leading-[18px] tracking-[-0.24px] text-purple">Credit Activity</button>
+            <button type="button" role="tab" id="tab-allocation-transactions" aria-selected="false" aria-controls="panel-allocation-transactions" data-tab-target="allocation-transactions" tabindex="-1" class="wallet-tab flex h-[34px] shrink-0 items-center justify-center rounded-[8px] border border-transparent bg-[#f1f2f4] px-4 text-[12px] font-normal leading-[18px] tracking-[-0.24px] text-heading">Allocation Transactions</button>
+          </div>
+        </div>
+
+        <div id="panel-credit-activity" role="tabpanel" aria-labelledby="tab-credit-activity" data-tab-panel="credit-activity" class="mt-5 overflow-hidden rounded-[12px] border border-border bg-white">
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[1074px] border-collapse">
+              <thead class="bg-tableHead text-left">
+                <tr class="h-[50px] text-[12px] font-normal leading-[18px] tracking-[-0.24px] text-subtext">
+                  <th class="min-w-[348px] px-5">Carbon Project</th>
+                  <th class="min-w-[189px] px-5">Transaction Date</th>
+                  <th class="min-w-[198px] px-5">Activity Type</th>
+                  <th class="min-w-[168px] px-5">Credits / Value</th>
+                  <th class="min-w-[130px] px-5">Status</th>
+                </tr>
+              </thead>
+              <tbody class="text-[14px] font-normal leading-5 tracking-[-0.28px] text-heading">
+                <tr class="h-[80px] border-t border-border">
+                  <td class="px-5"><div class="flex items-center gap-4"><img src="./Image/project-amazon-rainforest.png" alt="Amazon Rainforest Project" class="h-10 w-16 rounded-[2px] object-cover"><span class="max-w-[230px] leading-5">Amazon Rainforest Project -<br>Brazil</span></div></td>
+                  <td class="px-5">2 Jan 2025</td>
+                  <td class="px-5">Credits Retired</td>
+                  <td class="px-5 text-red">-10 CO₂ Credits</td>
+                  <td class="px-5">Completed</td>
+                </tr>
+                <tr class="h-[80px] border-t border-border">
+                  <td class="px-5"><div class="flex items-center gap-4"><img src="./Image/project-mangrove-indonesia.png" alt="Mangrove Restoration Project" class="h-10 w-16 rounded-[2px] object-cover"><span class="max-w-[230px] leading-5">Mangrove Restoration Project -<br>Indonesia</span></div></td>
+                  <td class="px-5">23 Jan 2025</td>
+                  <td class="px-5">Credits Generated</td>
+                  <td class="px-5 text-green">20 CO₂ Credits</td>
+                  <td class="px-5">Completed</td>
+                </tr>
+                <tr class="h-[80px] border-t border-border">
+                  <td class="px-5"><div class="flex items-center gap-4"><img src="./Image/project-solar-energy-india.png" alt="Wind Energy Carbon Offset" class="h-10 w-16 rounded-[2px] object-cover"><span class="max-w-[230px] leading-5">Wind Energy Carbon Offset -<br>India</span></div></td>
+                  <td class="px-5">4 Feb 2025</td>
+                  <td class="px-5">Credits Retired</td>
+                  <td class="px-5 text-red">-11 CO₂ Credits</td>
+                  <td class="px-5">Completed</td>
+                </tr>
+                <tr class="h-[80px] border-t border-border">
+                  <td class="px-5"><div class="flex items-center gap-4"><img src="./Image/project-wind-energy-kenya.png" alt="Solar Energy Carbon Credits" class="h-10 w-16 rounded-[2px] object-cover"><span class="max-w-[230px] leading-5">Solar Energy Carbon Credits -<br>UAE</span></div></td>
+                  <td class="px-5">24 Feb 2025</td>
+                  <td class="px-5">Credits Retired</td>
+                  <td class="px-5 text-red">-1k CO₂ Credits</td>
+                  <td class="px-5">Completed</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="panel-allocation-transactions" role="tabpanel" aria-labelledby="tab-allocation-transactions" data-tab-panel="allocation-transactions" hidden class="mt-5 overflow-hidden rounded-[12px] border border-border bg-white">
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[1074px] border-collapse">
+              <thead class="bg-tableHead text-left">
+                <tr class="h-[50px] text-[12px] font-normal leading-[18px] tracking-[-0.24px] text-subtext">
+                  <th class="min-w-[350px] px-5">Carbon Project</th>
+                  <th class="min-w-[172px] px-5">Allocation Amount</th>
+                  <th class="min-w-[160px] px-5">Allocation Date</th>
+                  <th class="min-w-[165px] px-5">Credits Purchased</th>
+                  <th class="min-w-[125px] px-5">Portfolio Share</th>
+                  <th class="min-w-[110px] px-5">Action</th>
+                </tr>
+              </thead>
+              <tbody class="text-[14px] font-normal leading-5 tracking-[-0.28px] text-heading">
+                <tr class="h-[76px] border-t border-border">
+                  <td class="px-5"><div class="flex items-center gap-4"><img src="./Image/project-amazon-rainforest.png" alt="Amazon Rainforest Project" class="h-10 w-16 rounded-[2px] object-cover"><span class="max-w-[230px] leading-5">Amazon Rainforest Project -<br>Brazil</span></div></td>
+                  <td class="px-5">1,456,900 USDC</td>
+                  <td class="px-5">17 Feb 2025</td>
+                  <td class="px-5">120 CO₂ Credits</td>
+                  <td class="px-5">1.26%</td>
+                  <td class="px-5"><a href="project.html" class="font-medium text-purple underline underline-offset-2">View Details</a></td>
+                </tr>
+                <tr class="h-[76px] border-t border-border">
+                  <td class="px-5"><div class="flex items-center gap-4"><img src="./Image/project-mangrove-indonesia.png" alt="Mangrove Restoration Project" class="h-10 w-16 rounded-[2px] object-cover"><span class="max-w-[230px] leading-5">Mangrove Restoration Project -<br>Indonesia</span></div></td>
+                  <td class="px-5">1,900,130 USDC</td>
+                  <td class="px-5">4 Feb 2025</td>
+                  <td class="px-5">95 CO₂ Credits</td>
+                  <td class="px-5">2.89%</td>
+                  <td class="px-5"><a href="project.html" class="font-medium text-purple underline underline-offset-2">View Details</a></td>
+                </tr>
+                <tr class="h-[76px] border-t border-border">
+                  <td class="px-5"><div class="flex items-center gap-4"><img src="./Image/project-solar-energy-india.png" alt="Wind Energy Carbon Offset" class="h-10 w-16 rounded-[2px] object-cover"><span class="max-w-[230px] leading-5">Wind Energy Carbon Offset -<br>India</span></div></td>
+                  <td class="px-5">2,460,790 USDC</td>
+                  <td class="px-5">23 Jan 2025</td>
+                  <td class="px-5">114 CO₂ Credits</td>
+                  <td class="px-5">1.43%</td>
+                  <td class="px-5"><a href="project.html" class="font-medium text-purple underline underline-offset-2">View Details</a></td>
+                </tr>
+                <tr class="h-[76px] border-t border-border">
+                  <td class="px-5"><div class="flex items-center gap-4"><img src="./Image/project-wind-energy-kenya.png" alt="Solar Energy Carbon Credits" class="h-10 w-16 rounded-[2px] object-cover"><span class="max-w-[230px] leading-5">Solar Energy Carbon Credits -<br>UAE</span></div></td>
+                  <td class="px-5">1,656,490 USDC</td>
+                  <td class="px-5">15 Jan 2025</td>
+                  <td class="px-5">87 CO₂ Credits</td>
+                  <td class="px-5">1.59%</td>
+                  <td class="px-5"><a href="project.html" class="font-medium text-purple underline underline-offset-2">View Details</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const menuButton = document.getElementById("mobile-menu-button");
+      const menuClose = document.getElementById("mobile-menu-close");
+      const mobileSidebar = document.getElementById("mobile-sidebar");
+      const mobileOverlay = document.getElementById("mobile-menu-overlay");
+
+      function openMenu() {
+        mobileSidebar.classList.remove("hidden");
+        mobileSidebar.classList.add("flex");
+        mobileOverlay.classList.remove("hidden");
+        menuButton.setAttribute("aria-expanded", "true");
+      }
+
+      function closeMenu() {
+        mobileSidebar.classList.add("hidden");
+        mobileSidebar.classList.remove("flex");
+        mobileOverlay.classList.add("hidden");
+        menuButton.setAttribute("aria-expanded", "false");
+      }
+
+      menuButton?.addEventListener("click", openMenu);
+      menuClose?.addEventListener("click", closeMenu);
+      mobileOverlay?.addEventListener("click", closeMenu);
+
+      const tabs = Array.from(document.querySelectorAll("[data-tab-target]"));
+      const panels = Array.from(document.querySelectorAll("[data-tab-panel]"));
+
+      function activateTab(target) {
+        tabs.forEach((tab) => {
+          const selected = tab.dataset.tabTarget === target;
+          tab.setAttribute("aria-selected", String(selected));
+          tab.tabIndex = selected ? 0 : -1;
+          tab.classList.toggle("border-purple", selected);
+          tab.classList.toggle("bg-purpleSoft", selected);
+          tab.classList.toggle("text-purple", selected);
+          tab.classList.toggle("font-semibold", selected);
+          tab.classList.toggle("bg-[#f1f2f4]", !selected);
+          tab.classList.toggle("border-transparent", !selected);
+          tab.classList.toggle("text-heading", !selected);
+          tab.classList.toggle("font-normal", !selected);
+        });
+
+        panels.forEach((panel) => {
+          panel.hidden = panel.dataset.tabPanel !== target;
+        });
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => activateTab(tab.dataset.tabTarget));
+      });
+
+      activateTab("credit-activity");
+    })();
+  </script>
+</body>
+</html>
