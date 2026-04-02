@@ -3,595 +3,737 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Carbon Portfolio – BlockchainX</title>
-  <meta name="description" content="Track your carbon impact, investments, and project updates on BlockchainX.">
+  <title>My Carbon Portfolio - BlockchainX</title>
+  <meta
+    name="description"
+    content="Project-level carbon portfolio detail view for BlockchainX."
+  >
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            poppins: ['Poppins', 'sans-serif'],
+            poppins: ["Poppins", "sans-serif"],
           },
           colors: {
-            'bx-purple': '#661eb9',
-            'bx-purple-dark': '#4e1fa3',
-            'bx-heading': '#111928',
-            'bx-subtext': '#72798b',
-            'bx-body': '#6d6d6d',
-            'bx-stroke': '#d8dfeb',
-            'bx-dark': '#191a1e',
-            'bx-bg': '#f5f7f9',
-            'bx-pill': '#edeef0',
-            'bx-sidebar-border': '#d1d1d6',
-            'bx-green': '#0e9f6e',
-            'bx-red': '#f05252'
+            page: "#f5f7f9",
+            heading: "#111928",
+            subtext: "#72798b",
+            border: "#d8dfeb",
+            sidebar: "#d1d1d6",
+            muted: "#f8f8f8",
+            control: "#e5e5ea",
+            purple: "#661eb9",
+            purpleSoft: "rgba(102, 30, 185, 0.1)",
+            purpleTint: "rgba(102, 30, 185, 0.05)",
+            purpleStroke: "rgba(102, 30, 185, 0.5)",
+            pill: "#ececec"
           }
         }
       }
-    }
+    };
   </script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Poppins', sans-serif; background-color: #f5f7f9; overflow-x: hidden; }
-
-    /* Custom scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #f1f1f1; }
-    ::-webkit-scrollbar-thumb { background: rgba(102,30,185,0.3); border-radius: 3px; }
-
-    /* Sidebar nav item hover */
-    .nav-item:hover { background: rgba(102,30,185,0.06); }
-
-    /* Custom Chart Tooltip styling */
-    .chart-tooltip { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-    
-    /* Table specific styles */
-    th { text-transform: none; letter-spacing: normal; }
-    
-    /* Card hover effect for interactions */
-    .interactive-card { transition: box-shadow 0.2s ease, transform 0.2s ease; }
-    .interactive-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(102,30,185,0.12); }
-    
-    /* Tab active state for Holdings */
-    .tab-active {
-      background: linear-gradient(135deg, rgba(78,31,163,0.1), rgba(102,30,185,0.1));
-      border: 1px solid #4e1fa3;
-    }
-    .tab-active span {
-      background: linear-gradient(90deg, #4e1fa3, #661eb9);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    /* Chart area approximations */
-    .area-fill { background: linear-gradient(180deg, rgba(102,30,185,0.15) 0%, rgba(102,30,185,0.01) 100%); }
-  </style>
 </head>
+<body class="bg-page font-poppins text-heading antialiased">
+  <!-- Mobile Header -->
+  <header class="border-b border-sidebar bg-white px-4 py-4 min-[1200px]:hidden">
+    <div class="mx-auto flex max-w-[1074px] items-center justify-between gap-4">
+      <a href="index.html" aria-label="BlockchainX home">
+        <img
+          src="./Image/Blockchain%20Logo%20White.png"
+          alt="BlockchainX"
+          class="h-[43px] w-[138px] object-contain"
+        >
+      </a>
+      <button
+        id="mobile-menu-button"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-sidebar"
+        class="flex h-10 w-10 items-center justify-center rounded-[10px] border border-border bg-white text-heading transition hover:bg-page focus:outline-none focus:ring-2 focus:ring-purple/20"
+      >
+        <span class="sr-only">Open navigation</span>
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M4 7h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 17h16"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
 
-<body class="bg-bx-bg font-poppins" style="overflow-x:hidden;">
+  <!-- Mobile Sidebar -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 z-40 hidden bg-heading/20 min-[1200px]:hidden"></div>
+  <aside
+    id="mobile-sidebar"
+    class="fixed left-0 top-0 z-50 hidden h-full w-[286px] flex-col border-r border-sidebar bg-white px-6 py-8 min-[1200px]:hidden"
+    aria-label="Mobile navigation"
+  >
+    <div class="flex items-center justify-between">
+      <a href="index.html" aria-label="BlockchainX home">
+        <img
+          src="./Image/Blockchain%20Logo%20White.png"
+          alt="BlockchainX"
+          class="h-[56px] w-[180px] object-contain"
+        >
+      </a>
+      <button
+        id="mobile-menu-close"
+        type="button"
+        class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-border bg-white text-heading"
+      >
+        <span class="sr-only">Close navigation</span>
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M6 6l12 12"></path>
+          <path d="M18 6l-12 12"></path>
+        </svg>
+      </button>
+    </div>
 
-  <!-- ========== SIDEBAR ========== -->
-  <aside class="fixed top-0 left-0 h-full w-[286px] bg-white border-r border-bx-sidebar-border flex flex-col z-50">
-    <div class="flex flex-col gap-[44px] items-start px-[24px] py-[32px] h-full">
-
-      <!-- Logo -->
-      <div class="h-[60px] w-[220px] relative shrink-0">
-        <a href="index.html" class="absolute top-1/2 -translate-y-1/2 left-0 w-[180px] h-[56px] block">
-          <img src="https://www.figma.com/api/mcp/asset/13038fa1-c64d-4a75-8f59-f79465fc8eed" alt="BlockchainX Logo" class="w-full h-full object-contain">
+    <!-- Mobile Nav -->
+    <nav class="mt-11 flex flex-col gap-6 text-[18px] leading-[22px] tracking-[-0.54px]" aria-label="Primary">
+      <div class="flex flex-col gap-2">
+        <a href="projects.html" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext">
+          <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M3 12h18"></path>
+            <path d="M12 3a15.5 15.5 0 0 1 0 18"></path>
+            <path d="M12 3a15.5 15.5 0 0 0 0 18"></path>
+          </svg>
+          <span class="font-medium">Marketplace</span>
+        </a>
+        <a href="portfolio.html" aria-current="page" class="flex h-[52px] items-center gap-3 rounded-[8px] bg-purpleSoft px-4 py-[14px] text-purple">
+          <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.5 18.5V8.75L12 4l7.5 4.75v9.75"></path>
+            <path d="M8 18.5h8"></path>
+            <path d="M8 11.5h8"></path>
+            <path d="M10 18.5v-7"></path>
+            <path d="M14 18.5v-7"></path>
+          </svg>
+          <span class="font-medium">My Carbon Portfolio</span>
+        </a>
+        <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext">
+          <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H18a2 2 0 0 1 2 2v9.5A2.5 2.5 0 0 1 17.5 19H5.5A2.5 2.5 0 0 1 3 16.5z"></path>
+            <path d="M3 9.5h17"></path>
+            <circle cx="16.5" cy="14.5" r="1"></circle>
+          </svg>
+          <span class="font-medium">Carbon Wallet</span>
         </a>
       </div>
 
-      <!-- Main Nav -->
-      <div class="flex flex-col gap-[24px] w-full flex-1">
-        <div class="flex flex-col gap-[8px] w-[237px]">
+      <div class="h-px w-full bg-[#e8edf5]"></div>
 
-          <!-- Marketplace (Inactive) -->
-          <a href="projects.html" class="flex gap-[12px] items-center px-[16px] py-[14px] rounded-[8px] w-full no-underline nav-item">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
-              <circle cx="12" cy="12" r="10" stroke="#72798b" stroke-width="1.5"/>
-              <path d="M8 12h8M12 8v8" stroke="#72798b" stroke-width="1.5" stroke-linecap="round"/>
+      <div class="flex flex-col gap-2">
+        <a href="#" class="flex h-[52px] items-center justify-between rounded-[12px] px-4 py-[14px] text-subtext">
+          <span class="flex items-center gap-3">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+              <circle cx="12" cy="8" r="4"></circle>
+              <path d="M4 20c1.8-3.9 4.5-5.8 8-5.8S18.2 16.1 20 20"></path>
             </svg>
-            <span style="font-weight:500;font-size:18px;color:#72798b;line-height:22px;letter-spacing:-0.54px;white-space:nowrap;">Marketplace</span>
+            <span class="font-medium">Profile</span>
+          </span>
+          <svg class="h-4 w-4 shrink-0 text-[#aab0bd]" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 4l4 4-4 4"></path>
+          </svg>
+        </a>
+        <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext">
+          <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 8a6 6 0 1 1 12 0v5l2 3H4l2-3z"></path>
+            <path d="M10 19a2 2 0 0 0 4 0"></path>
+          </svg>
+          <span class="font-medium">Notifications</span>
+        </a>
+        <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext">
+          <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M9.25 9.4a2.8 2.8 0 1 1 5.18 1.46c-.59.92-1.54 1.42-1.93 2.39"></path>
+            <path d="M12 16.7h.01"></path>
+          </svg>
+          <span class="font-medium">Help &amp; Support</span>
+        </a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Desktop Sidebar -->
+  <aside class="fixed left-0 top-0 hidden h-screen w-[286px] border-r border-sidebar bg-white min-[1200px]:block" aria-label="Sidebar">
+    <div class="flex h-full flex-col gap-[44px] px-6 py-8">
+      <!-- Sidebar Logo -->
+      <div class="h-[60px] w-[220px]">
+        <a href="index.html" aria-label="BlockchainX home">
+          <img
+            src="./Image/Blockchain%20Logo%20White.png"
+            alt="BlockchainX"
+            class="h-[56px] w-[180px] object-contain"
+          >
+        </a>
+      </div>
+
+      <!-- Sidebar Navigation -->
+      <div class="flex flex-col gap-6">
+        <nav class="flex w-[237px] flex-col gap-2 text-[18px] leading-[22px] tracking-[-0.54px]" aria-label="Primary">
+          <a href="projects.html" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M3 12h18"></path>
+              <path d="M12 3a15.5 15.5 0 0 1 0 18"></path>
+              <path d="M12 3a15.5 15.5 0 0 0 0 18"></path>
+            </svg>
+            <span class="font-medium">Marketplace</span>
           </a>
 
-          <!-- My Carbon Portfolio (Active) -->
-          <a href="dashboard.html" class="flex gap-[12px] items-center px-[16px] py-[14px] rounded-[8px] bg-[rgba(102,30,185,0.1)] w-[237px] no-underline">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
-              <path d="M3 20V9a1 1 0 01.4-.8l8-5.8 8 5.8a1 1 0 01.4.8V20a1 1 0 01-1 1H4a1 1 0 01-1-1z" stroke="#661eb9" stroke-width="1.5"/>
-              <rect x="9" y="14" width="6" height="7" rx="0.5" stroke="#661eb9" stroke-width="1.3"/>
+          <a href="portfolio.html" aria-current="page" class="flex h-[52px] items-center gap-3 rounded-[8px] bg-purpleSoft px-4 py-[14px] text-purple">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 18.5V8.75L12 4l7.5 4.75v9.75"></path>
+              <path d="M8 18.5h8"></path>
+              <path d="M8 11.5h8"></path>
+              <path d="M10 18.5v-7"></path>
+              <path d="M14 18.5v-7"></path>
             </svg>
-            <span style="font-weight:500;font-size:18px;color:#661eb9;line-height:22px;white-space:nowrap;">My Carbon Portfolio</span>
+            <span class="font-medium">My Carbon Portfolio</span>
           </a>
 
-          <!-- Carbon Wallet -->
-          <a href="#" class="flex gap-[12px] items-center px-[16px] py-[14px] rounded-[12px] w-full no-underline nav-item">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
-              <rect x="2" y="6" width="20" height="14" rx="2" stroke="#72798b" stroke-width="1.5"/>
-              <path d="M2 10h20" stroke="#72798b" stroke-width="1.5"/>
-              <circle cx="18" cy="15" r="1.2" fill="#72798b"/>
+          <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H18a2 2 0 0 1 2 2v9.5A2.5 2.5 0 0 1 17.5 19H5.5A2.5 2.5 0 0 1 3 16.5z"></path>
+              <path d="M3 9.5h17"></path>
+              <circle cx="16.5" cy="14.5" r="1"></circle>
             </svg>
-            <span style="font-weight:500;font-size:18px;color:#72798b;line-height:22px;white-space:nowrap;">Carbon Wallet</span>
+            <span class="font-medium">Carbon Wallet</span>
           </a>
-        </div>
+        </nav>
 
-        <!-- Divider -->
-        <div class="w-full shrink-0" style="height:1px;background:#e8edf5;"></div>
+        <div class="h-px w-[238px] bg-[#e8edf5]"></div>
 
-        <!-- Bottom nav group -->
-        <div class="flex flex-col gap-[8px] w-full">
-
-          <!-- Profile -->
-          <a href="#" class="flex items-center justify-between px-[16px] py-[14px] rounded-[12px] w-[237px] no-underline nav-item">
-            <div class="flex gap-[12px] items-center">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
-                <circle cx="12" cy="8" r="4" stroke="#72798b" stroke-width="1.5"/>
-                <path d="M4 20c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="#72798b" stroke-width="1.5" stroke-linecap="round"/>
+        <nav class="flex w-[237px] flex-col gap-2 text-[18px] leading-[22px] tracking-[-0.54px]" aria-label="Secondary">
+          <a href="#" class="flex h-[52px] items-center justify-between rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+            <span class="flex items-center gap-3">
+              <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                <circle cx="12" cy="8" r="4"></circle>
+                <path d="M4 20c1.8-3.9 4.5-5.8 8-5.8S18.2 16.1 20 20"></path>
               </svg>
-              <span style="font-weight:500;font-size:18px;color:#72798b;line-height:22px;white-space:nowrap;">Profile</span>
-            </div>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;">
-              <path d="M6 4l4 4-4 4" stroke="#aab0bd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <span class="font-medium">Profile</span>
+            </span>
+            <svg class="h-4 w-4 shrink-0 text-[#aab0bd]" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 4l4 4-4 4"></path>
             </svg>
           </a>
 
-          <!-- Notifications -->
-          <a href="#" class="flex gap-[12px] items-center px-[16px] py-[14px] rounded-[12px] w-full no-underline nav-item">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
-              <path d="M12 2A7 7 0 005 9v6l-2 2h18l-2-2V9a7 7 0 00-7-7z" stroke="#72798b" stroke-width="1.5"/>
-              <path d="M10 19a2 2 0 004 0" stroke="#72798b" stroke-width="1.5" stroke-linecap="round"/>
+          <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 8a6 6 0 1 1 12 0v5l2 3H4l2-3z"></path>
+              <path d="M10 19a2 2 0 0 0 4 0"></path>
             </svg>
-            <span style="font-weight:500;font-size:18px;color:#72798b;line-height:22px;white-space:nowrap;">Notifications</span>
+            <span class="font-medium">Notifications</span>
           </a>
 
-          <!-- Help & Support -->
-          <a href="#" class="flex gap-[12px] items-center px-[16px] py-[14px] rounded-[12px] w-full no-underline nav-item">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
-              <circle cx="12" cy="12" r="10" stroke="#72798b" stroke-width="1.5"/>
-              <path d="M12 16v-1" stroke="#72798b" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M12 8a2 2 0 012 2c0 1-1 1-1 2.5" stroke="#72798b" stroke-width="1.5" stroke-linecap="round"/>
+          <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M9.25 9.4a2.8 2.8 0 1 1 5.18 1.46c-.59.92-1.54 1.42-1.93 2.39"></path>
+              <path d="M12 16.7h.01"></path>
             </svg>
-            <span style="font-weight:500;font-size:18px;color:#72798b;line-height:22px;white-space:nowrap;">Help & Support</span>
+            <span class="font-medium">Help &amp; Support</span>
           </a>
-        </div>
+        </nav>
       </div>
     </div>
   </aside>
 
-  <!-- ========== MAIN CONTENT ========== -->
-  <main class="ml-[326px] pt-[60px] pr-[40px] pb-[60px] min-h-screen" style="width:calc(100% - 326px);">
-    <div class="flex flex-col gap-[32px] items-start w-full max-w-[1074px]">
+  <!-- Main Content -->
+  <main class="pb-14 pt-6 min-[1200px]:ml-[326px] min-[1200px]:w-[calc(100%-326px)] min-[1200px]:pb-[124px] min-[1200px]:pt-[60px] min-[1200px]:pr-10">
+    <div class="mx-auto max-w-[1074px] px-4 md:px-8 min-[1200px]:px-0">
+      <!-- Top Controls -->
+      <section class="flex items-center justify-between">
+        <a href="dashboard.html" class="flex items-center gap-3 text-subtext transition hover:text-heading">
+          <span class="flex h-[30px] w-[36px] items-center justify-center rounded-[4.5px] bg-control">
+            <svg class="h-[15px] w-[15px]" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11.25 7.5H3.75"></path>
+              <path d="M6.875 4.375 3.75 7.5l3.125 3.125"></path>
+            </svg>
+          </span>
+          <span class="text-[16px] font-medium leading-[22px] tracking-[-0.16px]">Back to Portfolio</span>
+        </a>
 
-      <!-- ========== PAGE HEADER ========== -->
-      <header class="flex flex-col gap-[6px] items-start w-full">
-        <h1 class="font-bold text-[28px] text-[#191a1e] leading-[32px] tracking-[-0.28px]">Carbon Portfolio Dashboard</h1>
-        <p class="font-normal text-[18px] text-[#6d6d6d] leading-[22px]">Track, manage, and monitor your carbon credits, impact, and allocation activity.</p>
-      </header>
+        <button
+          type="button"
+          class="flex h-[30px] w-[30px] items-center justify-center rounded-[4.5px] bg-control text-subtext transition hover:text-heading"
+          aria-label="Share project"
+        >
+          <svg class="h-[15px] w-[15px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="2"></circle>
+            <circle cx="6" cy="12" r="2"></circle>
+            <circle cx="18" cy="19" r="2"></circle>
+            <path d="m7.8 11 8-4.5"></path>
+            <path d="m7.8 13 8 4.5"></path>
+          </svg>
+        </button>
+      </section>
 
-      <!-- ========== TOP SUMMARY CARDS ========== -->
-      <section class="flex gap-[22px] w-full">
-        <!-- Card 1 -->
-        <article class="bg-white rounded-[12px] border border-bx-stroke px-[20px] py-[18px] flex gap-[16px] w-[346px] interactive-card">
-          <div class="w-[40px] h-[40px] rounded-[5.45px] bg-[rgba(102,30,185,0.05)] border-[0.8px] border-[rgba(102,30,185,0.5)] flex items-center justify-center shrink-0">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#661eb9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          </div>
-          <div class="flex flex-col gap-[10px] items-start">
-            <div class="flex flex-col gap-[8px]">
-              <div class="flex items-center gap-[4px]">
-                <span class="font-medium text-[12px] text-bx-subtext tracking-[-0.24px] leading-[14px]">Total Carbon Portfolio Value</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#aab0bd" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-              </div>
-              <h2 class="font-semibold text-[20px] text-bx-purple tracking-[-0.2px] leading-[22px]">354,236 USDC</h2>
-            </div>
-            <p class="font-medium text-[12px] text-bx-heading tracking-[-0.24px] leading-[14px]">$96600.896</p>
-          </div>
+      <!-- Hero -->
+      <section class="mt-4 grid grid-cols-1 gap-5 min-[1200px]:grid-cols-[528px_528px] min-[1200px]:gap-[18px]">
+        <!-- Hero Image -->
+        <article class="overflow-hidden rounded-[10.219px] border border-transparent bg-white">
+          <img
+            src="./Image/portfolio-hero.png"
+            alt="Amazon Rainforest Carbon Offset Project in Brazil"
+            class="aspect-[528/441.135] w-full object-cover min-[1200px]:h-[441.135px]"
+          >
         </article>
 
-        <!-- Card 2 -->
-        <article class="bg-white rounded-[12px] border border-bx-stroke px-[20px] py-[18px] flex gap-[16px] w-[346px] interactive-card">
-          <div class="w-[40px] h-[40px] rounded-[5.45px] bg-[rgba(102,30,185,0.05)] border-[0.8px] border-[rgba(102,30,185,0.5)] flex items-center justify-center shrink-0">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#661eb9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div class="flex flex-col gap-[10px] items-start">
-            <div class="flex flex-col gap-[8px]">
-              <div class="flex items-center gap-[4px]">
-                <span class="font-medium text-[12px] text-bx-subtext tracking-[-0.24px] leading-[14px]">Total CO₂ Offset Achieved</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#aab0bd" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-              </div>
-              <h2 class="font-semibold text-[20px] text-bx-heading tracking-[-0.2px] leading-[22px]">3,324 Tonnes CO₂</h2>
+        <!-- Project Summary Card -->
+        <article class="flex flex-col gap-6 rounded-[12px] border border-border bg-white p-5 min-[1200px]:h-[450px]">
+          <div class="flex flex-1 flex-col gap-5">
+            <div class="flex flex-col gap-[10px]">
+              <span class="inline-flex h-[26px] w-fit items-center rounded-[5.774px] bg-pill px-2 py-1 text-[12px] font-medium capitalize leading-[18px] text-heading">
+                Reforestation
+              </span>
+              <h1 class="text-[20px] font-medium leading-[26px] text-heading">
+                Amazon Rainforest Carbon Offset Project &ndash; Brazil
+              </h1>
             </div>
-            <p class="font-medium text-[12px] text-bx-heading tracking-[-0.24px] leading-[14px]">$96600.896</p>
-          </div>
-        </article>
 
-        <!-- Card 3 -->
-        <article class="bg-white rounded-[12px] border border-bx-stroke px-[20px] py-[18px] flex gap-[16px] w-[346px] interactive-card relative group cursor-pointer">
-          <div class="w-[40px] h-[40px] rounded-[6px] bg-[rgba(102,30,185,0.05)] border-[0.8px] border-[rgba(102,30,185,0.5)] flex items-center justify-center shrink-0">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#661eb9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <div class="flex flex-col gap-[10px] items-start w-full">
-            <div class="flex justify-between items-end w-full">
-              <div class="flex flex-col gap-[8px]">
-                <div class="flex items-center gap-[3px]">
-                  <span class="font-medium text-[12px] text-bx-subtext tracking-[-0.24px] leading-[14px]">Available Credits to Retire</span>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#aab0bd" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-                </div>
-                <h2 class="font-semibold text-[20px] text-bx-heading tracking-[-0.2px] leading-[22px]">165 CO₂ Credits</h2>
+            <div class="flex flex-col gap-[10px]">
+              <p class="text-[16px] font-medium leading-[20px] text-subtext">Total Project Value</p>
+              <div class="flex flex-wrap items-center gap-2">
+                <p class="text-[30.206px] font-semibold leading-[32px] tracking-[-0.3px] text-heading">$800,000</p>
+                <p class="text-[18px] font-medium leading-[27px] text-heading">($2,390,100)</p>
               </div>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111928" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-[3px]"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </div>
-            <p class="font-medium text-[12px] text-bx-heading tracking-[-0.24px] leading-[14px]">$96600.896</p>
+
+            <div class="rounded-[10px] border border-border">
+              <div class="flex items-center justify-between px-4 pb-[14px] pt-4">
+                <p class="text-[14px] font-normal leading-[18px] tracking-[-0.14px] text-subtext">Credits Value Change</p>
+                <p class="text-[14px] font-medium leading-[20px] tracking-[-0.14px] text-heading">+450 USDC</p>
+              </div>
+              <div class="flex items-center justify-between px-4 py-[14px]">
+                <p class="text-[14px] font-normal leading-[18px] tracking-[-0.14px] text-subtext">Total CO&#8322; Offset Achieved</p>
+                <p class="text-[14px] font-medium leading-[20px] tracking-[-0.14px] text-heading">620 CO&#8322; Credits</p>
+              </div>
+              <div class="flex items-center justify-between px-4 pb-4 pt-[14px]">
+                <p class="text-[14px] font-normal leading-[18px] tracking-[-0.14px] text-subtext">Estimated Annual Offset</p>
+                <p class="text-[14px] font-medium leading-[20px] tracking-[-0.14px] text-heading">820 CO&#8322; / year</p>
+              </div>
+            </div>
           </div>
+
+          <button
+            type="button"
+            class="flex h-12 w-full items-center justify-center rounded-[6px] bg-purple text-[16px] font-semibold leading-6 text-white transition hover:bg-[#5b18a9] focus:outline-none focus:ring-2 focus:ring-purple/30"
+          >
+            View Project Details
+          </button>
         </article>
       </section>
 
-      <!-- ========== MIDDLE CARDS ROW ========== -->
-      <section class="flex gap-[18px] w-full">
-        
-        <!-- Quick Insights -->
-        <article class="flex flex-col gap-[10px] w-[528px]">
-          <div class="flex items-center justify-between w-full">
-            <h3 class="font-semibold text-[16px] text-bx-heading tracking-[-0.32px] leading-[20px]">Quick Insights</h3>
-          </div>
-          
-          <div class="bg-white border border-bx-stroke rounded-[12px] p-[20px] h-[200px] flex flex-col w-full">
-            <div class="flex items-center justify-between border-b border-bx-stroke flex-1">
-              <div class="flex items-center gap-[16px] w-[210px] h-[44px]">
-                <div class="w-[44px] h-[44px] rounded-[6px] bg-[rgba(102,30,185,0.05)] border-[0.8px] border-[rgba(102,30,185,0.5)] flex items-center justify-center shrink-0">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#661eb9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
-                </div>
-                <div class="flex flex-col gap-[4px]">
-                  <span class="font-medium text-[14px] text-bx-heading tracking-[-0.14px] leading-[18px]">04</span>
-                  <span class="font-medium text-[12px] text-bx-subtext tracking-[-0.36px] leading-[16px]">Active Carbon Projects</span>
+      <!-- My Investment -->
+      <section class="mt-5">
+        <div class="flex flex-col gap-[10px]">
+          <h2 class="text-[16px] font-semibold leading-[20px] tracking-[-0.32px] text-heading">My Investment</h2>
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2 min-[1200px]:grid-cols-3 min-[1200px]:gap-[18px]">
+            <article class="flex h-[84px] items-center gap-4 rounded-[12px] border-[0.839px] border-border bg-white p-5">
+              <div class="flex h-[44px] w-[44px] items-center justify-center rounded-[6.6px] border-[0.8px] border-purpleStroke bg-purpleTint text-purple">
+                <svg class="h-[20.9px] w-[20.9px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="8.5"></circle>
+                  <path d="M12 8.2v7.6"></path>
+                  <path d="M14.6 9.8c-.5-1-1.7-1.6-2.9-1.6-1.4 0-2.6.8-2.6 2 0 3 5.8 1.2 5.8 4 0 1.2-1.1 2-2.6 2-1.2 0-2.4-.6-3-1.5"></path>
+                </svg>
+              </div>
+              <div class="flex flex-col gap-[6px]">
+                <p class="text-[20px] font-semibold leading-[20px] tracking-[-0.2px] text-heading">1,649,450 USDC</p>
+                <div class="flex items-center gap-[6px]">
+                  <span class="text-[12px] font-medium tracking-[-0.24px] text-subtext">Total Invested</span>
+                  <svg class="h-3 w-3 text-subtext/80" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+                    <circle cx="6" cy="6" r="4.75"></circle>
+                    <path d="M6 5.2v2"></path>
+                    <path d="M6 3.5h.01"></path>
+                  </svg>
                 </div>
               </div>
-              <div class="flex items-center gap-[16px] w-[210px] h-[44px]">
-                <div class="w-[44px] h-[44px] rounded-[6px] bg-[rgba(102,30,185,0.05)] border-[0.8px] border-[rgba(102,30,185,0.5)] flex items-center justify-center shrink-0">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#661eb9" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
-                </div>
-                <div class="flex flex-col gap-[4px]">
-                  <span class="font-medium text-[14px] text-bx-heading tracking-[-0.14px] leading-[18px]">3,000 CO₂ Credits</span>
-                  <span class="font-medium text-[12px] text-bx-subtext tracking-[-0.36px] leading-[16px]">Total Credits Held</span>
-                </div>
-              </div>
-            </div>
-            
-            <div class="flex items-center justify-between flex-1 relative">
-              <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[1px] h-[160px] bg-bx-stroke hidden"></div>
-              <div class="flex items-center gap-[16px] w-[210px] h-[44px]">
-                <div class="w-[44px] h-[44px] rounded-[6px] bg-[rgba(102,30,185,0.05)] border-[0.8px] border-[rgba(102,30,185,0.5)] flex items-center justify-center shrink-0">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#661eb9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                </div>
-                <div class="flex flex-col gap-[4px]">
-                  <span class="font-medium text-[14px] text-bx-heading tracking-[-0.14px] leading-[18px]">500 Tonnes CO₂/year</span>
-                  <span class="font-medium text-[12px] text-bx-subtext tracking-[-0.36px] leading-[16px]">Annual Offset Contribution</span>
-                </div>
-              </div>
-              <div class="flex items-center gap-[16px] w-[210px] h-[44px]">
-                <div class="w-[44px] h-[44px] rounded-[6px] bg-[rgba(102,30,185,0.05)] border-[0.8px] border-[rgba(102,30,185,0.5)] flex items-center justify-center shrink-0">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#661eb9" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                </div>
-                <div class="flex flex-col gap-[4px]">
-                  <span class="font-medium text-[14px] text-bx-heading tracking-[-0.14px] leading-[18px]">1,200 CO₂ Credits</span>
-                  <span class="font-medium text-[12px] text-bx-subtext tracking-[-0.36px] leading-[16px]">Credits Retired</span>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Vertical divider -->
-            <div class="absolute left-1/2 top-0 bottom-0 w-[1px] bg-bx-stroke"></div>
-          </div>
-        </article>
+            </article>
 
-        <!-- Last 4 Months Activity -->
-        <article class="flex flex-col gap-[10px] w-[528px]">
-          <div class="flex justify-between items-center w-full">
-            <h3 class="font-semibold text-[16px] text-bx-heading tracking-[-0.32px] leading-[20px]">Last 4 Months CO₂ Offset Activity</h3>
-            <div class="border border-bx-purple rounded-[5px] px-[16px] py-[5px] flex items-center justify-center bg-[rgba(102,30,185,0.05)]">
-              <span class="font-semibold text-[12px] text-bx-purple tracking-[-0.12px]">View All</span>
-            </div>
+            <article class="flex h-[84px] items-center gap-4 rounded-[12px] border-[0.839px] border-border bg-white p-5">
+              <div class="flex h-[44px] w-[44px] items-center justify-center rounded-[6.6px] border-[0.8px] border-purpleStroke bg-purpleTint text-purple">
+                <svg class="h-[13.86px] w-[19.8px]" viewBox="0 0 22 16" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1.25" y="1.25" width="19.5" height="13.5" rx="3"></rect>
+                  <circle cx="11" cy="8" r="2.6"></circle>
+                  <path d="M4 8h1.2"></path>
+                  <path d="M16.8 8H18"></path>
+                </svg>
+              </div>
+              <div class="flex flex-col gap-[6px]">
+                <p class="text-[20px] font-semibold leading-[20px] tracking-[-0.2px] text-heading">1,234,900 USDC</p>
+                <div class="flex items-center gap-[6px]">
+                  <span class="text-[12px] font-medium tracking-[-0.24px] text-subtext">Current Credit Value</span>
+                  <svg class="h-3 w-3 text-subtext/80" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+                    <circle cx="6" cy="6" r="4.75"></circle>
+                    <path d="M6 5.2v2"></path>
+                    <path d="M6 3.5h.01"></path>
+                  </svg>
+                </div>
+              </div>
+            </article>
+
+            <article class="flex h-[84px] items-center gap-4 rounded-[12px] border-[0.839px] border-border bg-white p-5">
+              <div class="flex h-[44px] w-[44px] items-center justify-center rounded-[6px] border-[0.88px] border-purpleStroke bg-purpleTint text-purple">
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3.5 4.5h7.5l5.5 4v7.5H9l-5.5-4z"></path>
+                  <path d="M11 4.5V12"></path>
+                  <circle cx="7.25" cy="8" r="1.55"></circle>
+                  <circle cx="13.5" cy="11.5" r="3"></circle>
+                  <path d="M12.2 11.5h2.6"></path>
+                  <path d="M13.5 10.2v2.6"></path>
+                </svg>
+              </div>
+              <div class="flex flex-col gap-[6px]">
+                <p class="text-[20px] font-semibold leading-[20px] tracking-[-0.2px] text-heading">4.23%</p>
+                <div class="flex items-center gap-[6px]">
+                  <span class="text-[12px] font-medium tracking-[-0.24px] text-subtext">My Portfolio Share</span>
+                  <svg class="h-3 w-3 text-subtext/80" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+                    <circle cx="6" cy="6" r="4.75"></circle>
+                    <path d="M6 5.2v2"></path>
+                    <path d="M6 3.5h.01"></path>
+                  </svg>
+                </div>
+              </div>
+            </article>
           </div>
-          
-          <div class="bg-white border border-bx-stroke rounded-[12px] p-[20px] h-[200px] flex flex-col justify-between w-full">
-            <div class="flex justify-between items-center pb-[16px] border-b border-bx-stroke">
-              <span class="font-medium text-[14px] text-bx-subtext tracking-[-0.42px]">May, 2025</span>
-              <span class="font-medium text-[14px] text-bx-heading tracking-[-0.14px]">242 CO₂</span>
-            </div>
-            <div class="flex justify-between items-center py-[16px] border-b border-bx-stroke">
-              <span class="font-medium text-[14px] text-bx-subtext tracking-[-0.42px]">April, 2025</span>
-              <span class="font-medium text-[14px] text-bx-heading tracking-[-0.14px]">187 CO₂</span>
-            </div>
-            <div class="flex justify-between items-center py-[16px] border-b border-bx-stroke">
-              <span class="font-medium text-[14px] text-bx-subtext tracking-[-0.42px]">March, 2025</span>
-              <span class="font-medium text-[14px] text-bx-heading tracking-[-0.14px]">187 CO₂</span>
-            </div>
-            <div class="flex justify-between items-center pt-[16px]">
-              <span class="font-medium text-[14px] text-bx-subtext tracking-[-0.42px]">Feb, 2025</span>
-              <span class="font-medium text-[14px] text-bx-heading tracking-[-0.14px]">162 CO₂</span>
-            </div>
-          </div>
-        </article>
+        </div>
       </section>
 
-      <!-- ========== CHART PANELS ========== -->
-      <section class="flex gap-[18px] w-full">
-        
-        <!-- Area Chart: Portfolio Growth -->
-        <article class="flex flex-col gap-[10px] w-[526px]">
-          <div class="flex justify-between items-center w-full">
-            <h3 class="font-semibold text-[16px] text-bx-heading tracking-[-0.32px] leading-[20px]">Carbon Portfolio Growth</h3>
-            <div class="bg-white px-[12px] py-[5px] rounded-[5px] flex items-center gap-[6px] shrink-0">
-              <span class="font-medium text-[12px] text-bx-subtext tracking-[-0.24px]">Jan 2024 - Dec 2024</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#72798b" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      <!-- Investment Summary and Documents -->
+      <section class="mt-[23px] grid grid-cols-1 gap-6 min-[1200px]:grid-cols-[528px_528px] min-[1200px]:gap-[18px]">
+        <!-- Investment Summary -->
+        <article class="flex flex-col gap-[10px]">
+          <h2 class="text-[16px] font-semibold leading-[20px] tracking-[-0.32px] text-heading">Investment Summary</h2>
+          <div class="rounded-[12px] border border-border bg-white">
+            <div class="grid grid-cols-1 min-[640px]:grid-cols-2">
+              <div class="flex h-[100px] items-center gap-4 px-5 py-7 min-[640px]:border-r min-[640px]:border-border">
+                <div class="flex h-[44px] w-[44px] items-center justify-center rounded-[6px] border-[0.8px] border-purpleStroke bg-purpleTint text-purple">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3v9h8"></path>
+                    <path d="M20 12a8 8 0 1 1-8-8"></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <p class="text-[14px] font-medium leading-[18px] tracking-[-0.14px] text-heading">123,490 CO&#8322; Credits</p>
+                  <p class="text-[12px] font-medium leading-[16px] tracking-[-0.36px] text-subtext">Total Credits Purchased</p>
+                </div>
+              </div>
+
+              <div class="flex h-[100px] items-center gap-4 px-5 py-7">
+                <div class="flex h-[44px] w-[44px] items-center justify-center rounded-[6.6px] border-[0.8px] border-purpleStroke bg-purpleTint text-purple">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3.5" y="5" width="17" height="15.5" rx="2.5"></rect>
+                    <path d="M7.5 3.5v3"></path>
+                    <path d="M16.5 3.5v3"></path>
+                    <path d="M3.5 9.5h17"></path>
+                    <path d="M8 13h3"></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <p class="text-[14px] font-medium leading-[18px] tracking-[-0.14px] text-heading">5 Years</p>
+                  <p class="text-[12px] font-medium leading-[16px] tracking-[-0.36px] text-subtext">Credit Validity Period</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="h-px w-full bg-border"></div>
+
+            <div class="grid grid-cols-1 min-[640px]:grid-cols-2">
+              <div class="flex h-[100px] items-center gap-4 px-5 py-7 min-[640px]:border-r min-[640px]:border-border">
+                <div class="flex h-[44px] w-[44px] items-center justify-center rounded-[6.6px] border-[0.8px] border-purpleStroke bg-purpleTint text-purple">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3.5" y="5" width="17" height="15.5" rx="2.5"></rect>
+                    <path d="M7.5 3.5v3"></path>
+                    <path d="M16.5 3.5v3"></path>
+                    <path d="M3.5 9.5h17"></path>
+                    <path d="M16.5 13.5 14.8 15.2l-.8-.8"></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <p class="text-[14px] font-medium leading-[18px] tracking-[-0.14px] text-heading">28 March 2025</p>
+                  <p class="text-[12px] font-medium leading-[16px] tracking-[-0.36px] text-subtext">Allocation Date</p>
+                </div>
+              </div>
+
+              <div class="flex h-[100px] items-center gap-4 px-5 py-7">
+                <div class="flex h-[44px] w-[44px] items-center justify-center rounded-[6.6px] border-[0.8px] border-purpleStroke bg-purpleTint text-purple">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3.5" y="5" width="17" height="15.5" rx="2.5"></rect>
+                    <path d="M7.5 3.5v3"></path>
+                    <path d="M16.5 3.5v3"></path>
+                    <path d="M3.5 9.5h17"></path>
+                    <path d="M12 12v5"></path>
+                    <path d="M9.5 14.5H14.5"></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <p class="text-[14px] font-medium leading-[18px] tracking-[-0.14px] text-heading">21 June 2025</p>
+                  <p class="text-[12px] font-medium leading-[16px] tracking-[-0.36px] text-subtext">Next Credit Availability</p>
+                </div>
+              </div>
             </div>
           </div>
-          
-          <div class="bg-white rounded-[12px] border border-bx-stroke h-[320px] w-full relative overflow-clip font-poppins">
-            <!-- Y Axis Lines -->
-            <div class="absolute inset-0 flex flex-col justify-between z-0 pointer-events-none">
-              <div class="w-full h-[1px] bg-bx-stroke border-dashed"></div>
-              <div class="w-full h-[1px] bg-bx-stroke border-dashed"></div>
-              <div class="w-full h-[1px] bg-bx-stroke border-dashed"></div>
-              <div class="w-full h-[1px] bg-bx-stroke border-dashed"></div>
-              <div class="w-full h-[1px] bg-bx-stroke border-dashed"></div>
-            </div>
-            
-            <!-- Y Axis Labels -->
-            <div class="absolute left-0 top-0 bottom-[30px] flex flex-col justify-between items-start text-[12px] text-bx-subtext font-medium z-10 pointer-events-none bg-white pr-[8px]">
-              <span>$40k</span>
-              <span>$30k</span>
-              <span>$20k</span>
-              <span>$10k</span>
-              <span>$0</span>
-            </div>
-            
-            <!-- X Axis Labels -->
-            <div class="absolute bottom-[-5px] left-[50px] right-0 flex justify-between text-[12px] text-bx-subtext font-medium pl-[10px] pr-[10px]">
-              <span>Dec</span>
-              <span>Jan</span>
-              <span>Feb</span>
-              <span>Mar</span>
-              <span>Apr</span>
-              <span>May</span>
-            </div>
-            
-            <!-- SVG Line and Area Chart -->
-            <div class="absolute left-[50px] right-0 top-0 bottom-[30px] z-10">
-              <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 500 200">
-                <defs>
-                  <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#661eb9" stop-opacity="0.15" />
-                    <stop offset="100%" stop-color="#661eb9" stop-opacity="0.01" />
-                  </linearGradient>
-                </defs>
-                <path d="M 0,180 C 100,160 150,110 200,80 C 250,50 300,90 400,40 C 450,15 500,20 500,20 L 500,200 L 0,200 Z" fill="url(#areaGradient)" />
-                <path d="M 0,180 C 100,160 150,110 200,80 C 250,50 300,90 400,40 C 450,15 500,20 500,20" fill="none" stroke="#661eb9" stroke-width="3" stroke-linecap="round" />
-                
-                <!-- Highlight Point -->
-                <circle cx="400" cy="40" r="5" fill="#fff" stroke="#661eb9" stroke-width="3" />
-                <line x1="400" y1="40" x2="400" y2="200" stroke="#661eb9" stroke-width="1.5" stroke-dasharray="4" />
+        </article>
+
+        <!-- Documents -->
+        <article class="flex flex-col gap-[10px]">
+          <h2 class="text-[16px] font-semibold leading-[20px] tracking-[-0.32px] text-heading">Documents</h2>
+          <div class="flex h-[200px] flex-col justify-between rounded-[12px] border border-border bg-white p-5">
+            <a href="#" class="flex items-center justify-between gap-4 text-[14px] font-normal leading-[20px] tracking-[-0.42px] text-heading transition hover:text-purple">
+              <span>Carbon Verification Report (Verra)</span>
+              <svg class="h-5 w-5 shrink-0 text-purple" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 3v8"></path>
+                <path d="m6.8 8.8 3.2 3.2 3.2-3.2"></path>
+                <path d="M4 15.5h12"></path>
               </svg>
-              
-              <!-- Tooltip Mock -->
-              <div class="absolute top-0 right-[40px] bg-white border border-bx-stroke rounded-[6px] px-[12px] py-[8px] chart-tooltip flex flex-col gap-[2px]">
-                <span class="font-medium text-[12px] text-bx-subtext">Apr 2024</span>
-                <span class="font-bold text-[14px] text-bx-heading">$31,200</span>
-              </div>
-            </div>
+            </a>
+
+            <a href="#" class="flex items-center justify-between gap-4 text-[14px] font-normal leading-[20px] tracking-[-0.42px] text-heading transition hover:text-purple">
+              <span>Project Impact Assessment</span>
+              <svg class="h-5 w-5 shrink-0 text-purple" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 3v8"></path>
+                <path d="m6.8 8.8 3.2 3.2 3.2-3.2"></path>
+                <path d="M4 15.5h12"></path>
+              </svg>
+            </a>
+
+            <a href="#" class="flex items-center justify-between gap-4 text-[14px] font-normal leading-[20px] tracking-[-0.42px] text-heading transition hover:text-purple">
+              <span>Carbon Credit Issuance Certificate</span>
+              <svg class="h-5 w-5 shrink-0 text-purple" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 3v8"></path>
+                <path d="m6.8 8.8 3.2 3.2 3.2-3.2"></path>
+                <path d="M4 15.5h12"></path>
+              </svg>
+            </a>
+
+            <a href="#" class="flex items-center justify-between gap-4 text-[14px] font-normal leading-[20px] tracking-[-0.42px] text-heading transition hover:text-purple">
+              <span>ESG &amp; Compliance Report</span>
+              <svg class="h-5 w-5 shrink-0 text-purple" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 3v8"></path>
+                <path d="m6.8 8.8 3.2 3.2 3.2-3.2"></path>
+                <path d="M4 15.5h12"></path>
+              </svg>
+            </a>
           </div>
         </article>
+      </section>
 
-        <!-- Bar Chart: CO2 Credits Retired -->
-        <article class="flex flex-col gap-[10px] w-[526px]">
-          <div class="flex justify-between items-center w-full">
-            <h3 class="font-semibold text-[16px] text-bx-heading tracking-[-0.32px] leading-[20px]">CO₂ Credits Retired</h3>
-            <div class="bg-white px-[12px] py-[5px] rounded-[5px] flex items-center gap-[6px] shrink-0">
-              <span class="font-medium text-[12px] text-bx-subtext tracking-[-0.24px]">Jan 2024 - Dec 2024</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#72798b" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      <!-- Summary Tables -->
+      <section class="mt-[23px] grid grid-cols-1 gap-6 min-[1200px]:grid-cols-[528px_528px] min-[1200px]:gap-[18px]">
+        <!-- Left Column -->
+        <div class="flex flex-col gap-[26px]">
+          <!-- Carbon Credit Summary -->
+          <article class="flex flex-col gap-[10px]">
+            <h2 class="text-[16px] font-semibold leading-[20px] tracking-[-0.32px] text-heading">Carbon Credit Summary</h2>
+            <div class="overflow-x-auto rounded-[10px] border border-border bg-white">
+              <table class="min-w-[528px] table-fixed border-separate border-spacing-0">
+                <colgroup>
+                  <col class="w-[244px]">
+                  <col class="w-[244px]">
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-normal leading-[18px] tracking-[-0.42px] text-subtext">Credits Generated (Monthly)</td>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">105 CO&#8322; Credits</td>
+                  </tr>
+                  <tr>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-normal leading-[18px] tracking-[-0.42px] text-subtext">Credits Generated (Yearly)</td>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">1,023 CO&#8322; Credits</td>
+                  </tr>
+                  <tr>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-normal leading-[18px] tracking-[-0.42px] text-subtext">Net Verified Credits</td>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">903 CO&#8322; Credits</td>
+                  </tr>
+                  <tr>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-normal leading-[18px] tracking-[-0.42px] text-subtext">Annual Offset Contribution</td>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">903 CO&#8322; / year</td>
+                  </tr>
+                  <tr>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-normal leading-[18px] tracking-[-0.42px] text-subtext">Total Credits Over Project</td>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">5,000 CO&#8322; Credits</td>
+                  </tr>
+                  <tr>
+                    <td class="px-5 py-3 text-[14px] font-normal leading-[18px] tracking-[-0.42px] text-subtext">Total CO&#8322; Offset</td>
+                    <td class="px-5 py-3 text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">2,500 CO&#8322; Credits</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+          </article>
+
+          <!-- Transaction Details -->
+          <article class="flex flex-col gap-[10px]">
+            <h2 class="text-[16px] font-semibold leading-[20px] tracking-[-0.32px] text-heading">Transaction Details</h2>
+            <div class="overflow-x-auto rounded-[10px] border border-border bg-white">
+              <table class="min-w-[528px] table-fixed border-separate border-spacing-0">
+                <colgroup>
+                  <col class="w-[244px]">
+                  <col class="w-[244px]">
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-normal leading-[18px] tracking-[-0.42px] text-subtext">Allocation Amount</td>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">1,025,000 USDC</td>
+                  </tr>
+                  <tr>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-normal leading-[18px] tracking-[-0.42px] text-subtext">Platform Fee</td>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">85,000 USDC</td>
+                  </tr>
+                  <tr>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-normal leading-[18px] tracking-[-0.42px] text-subtext">Blockchain Fee</td>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">16,143 USDC</td>
+                  </tr>
+                  <tr class="bg-muted">
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">Total Allocation Cost</td>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-semibold leading-[18px] tracking-[-0.42px] text-heading">1,161,143 USDC</td>
+                  </tr>
+                  <tr>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-normal leading-[18px] tracking-[-0.42px] text-subtext">Total Credits Allocated</td>
+                    <td class="border-b border-border px-5 py-3 text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">80,000 CO&#8322; Credits</td>
+                  </tr>
+                  <tr>
+                    <td class="px-5 py-3 text-[14px] font-normal leading-[18px] tracking-[-0.42px] text-subtext">Credit Price</td>
+                    <td class="px-5 py-3 text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">10 USDC</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+
+        <!-- Carbon Activity Statement -->
+        <article class="flex flex-col gap-[10px]">
+          <div class="flex items-center justify-between gap-4">
+            <h2 class="text-[16px] font-semibold leading-[20px] tracking-[-0.32px] text-heading">Carbon Activity Statement</h2>
+            <button
+              type="button"
+              class="flex h-[28px] items-center gap-[6px] rounded-[5px] bg-white px-3 py-[5px] text-[12px] font-medium tracking-[-0.24px] text-subtext"
+              aria-label="Activity date range"
+            >
+              <span>Jan 2024 - Dec 2024</span>
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3.5" y="5" width="17" height="15.5" rx="2.5"></rect>
+                <path d="M7.5 3.5v3"></path>
+                <path d="M16.5 3.5v3"></path>
+                <path d="M3.5 9.5h17"></path>
+              </svg>
+            </button>
           </div>
-          
-          <div class="bg-white border border-bx-stroke h-[320px] w-full relative overflow-clip font-poppins rounded-[12px]">
-            <!-- Chart Drawing area -->
-            <div class="w-full flex-1 flex items-end justify-between px-[10px]">
-              <div class="w-[24px] bg-[rgba(102,30,185,0.15)] rounded-t-[4px]" style="height: 30%"></div>
-              <div class="w-[24px] bg-[rgba(102,30,185,0.15)] rounded-t-[4px]" style="height: 45%"></div>
-              <div class="w-[24px] bg-[rgba(102,30,185,0.15)] rounded-t-[4px]" style="height: 25%"></div>
-              <div class="w-[24px] bg-[rgba(102,30,185,0.15)] rounded-t-[4px]" style="height: 60%"></div>
-              <div class="w-[24px] bg-bx-purple rounded-t-[4px] relative" style="height: 85%">
-                <!-- Tooltip for active bar -->
-                <div class="absolute -top-[35px] left-1/2 -translate-x-1/2 bg-[#111928] text-white text-[11px] font-medium px-[8px] py-[4px] rounded-[4px] whitespace-nowrap">
-                  120 Credits
-                  <div class="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[4px] border-r-[4px] border-t-[4px] border-transparent border-t-[#111928]"></div>
-                </div>
-              </div>
-              <div class="w-[24px] bg-[rgba(102,30,185,0.15)] rounded-t-[4px]" style="height: 50%"></div>
-            </div>
-            
-            <div class="w-full h-[1px] bg-bx-stroke"></div>
-            
-            <div class="w-full flex justify-between text-[11px] text-bx-subtext font-medium px-[10px]">
-              <span>Jan</span>
-              <span>Feb</span>
-              <span>Mar</span>
-              <span>Apr</span>
-              <span class="text-bx-heading">May</span>
-              <span>Jun</span>
-            </div>
+
+          <div class="overflow-x-auto rounded-[12px] border border-border bg-white">
+            <table class="min-w-[528px] table-fixed border-separate border-spacing-0">
+              <colgroup>
+                <col class="w-[179px]">
+                <col class="w-[179px]">
+                <col class="w-[170px]">
+              </colgroup>
+              <thead>
+                <tr class="bg-muted">
+                  <th scope="col" class="rounded-tl-[12px] px-5 py-4 text-left text-[14px] font-medium leading-[18px] text-subtext">Month</th>
+                  <th scope="col" class="px-5 py-4 text-left text-[14px] font-medium leading-[18px] text-subtext">Date Credited</th>
+                  <th scope="col" class="rounded-tr-[12px] px-5 py-4 text-left text-[14px] font-medium leading-[18px] text-subtext">Credits Retired</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">January</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">1 Jan 2024</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">170 CO&#8322; Retired</td>
+                </tr>
+                <tr>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">February</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">1 Feb 2024</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">170 CO&#8322; Retired</td>
+                </tr>
+                <tr>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">March</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">1 Mar 2024</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">170 CO&#8322; Retired</td>
+                </tr>
+                <tr>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">April</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">1 Apr 2024</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">170 CO&#8322; Retired</td>
+                </tr>
+                <tr>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">May</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">1 May 2024</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">170 CO&#8322; Retired</td>
+                </tr>
+                <tr>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">June</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">1 Jun 2024</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">170 CO&#8322; Retired</td>
+                </tr>
+                <tr>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">July</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">1 Jul 2024</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">170 CO&#8322; Retired</td>
+                </tr>
+                <tr>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">August</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">1 Aug 2024</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">170 CO&#8322; Retired</td>
+                </tr>
+                <tr>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">September</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">1 Sep 2024</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">170 CO&#8322; Retired</td>
+                </tr>
+                <tr>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">October</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">1 Oct 2024</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">170 CO&#8322; Retired</td>
+                </tr>
+                <tr>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">November</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">1 Nov 2024</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">170 CO&#8322; Retired</td>
+                </tr>
+                <tr>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">December</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-subtext">1 Dec 2024</td>
+                  <td class="border-b border-border px-5 py-[10px] text-[14px] font-medium leading-[18px] tracking-[-0.42px] text-heading">170 CO&#8322; Retired</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr class="bg-muted">
+                  <td class="rounded-bl-[12px] px-5 py-4 text-[14px] font-semibold leading-[22px] tracking-[-0.42px] text-heading">Total</td>
+                  <td class="px-5 py-4 text-[14px] leading-[22px] tracking-[-0.42px] text-transparent">.</td>
+                  <td class="rounded-br-[12px] px-5 py-4 text-[14px] font-semibold leading-[22px] tracking-[-0.42px] text-heading">2,028 CO&#8322; Credits Retired</td>
+                </tr>
+              </tfoot>
+            </table>
           </div>
         </article>
-
       </section>
-
-      <!-- ========== MY HOLDINGS SECTION ========== -->
-      <section class="flex flex-col gap-[20px] items-start w-full mt-[10px]">
-        
-        <!-- Section Header & Tabs -->
-        <div class="flex items-center justify-between w-full">
-          <h3 class="font-semibold text-[16px] text-bx-heading tracking-[-0.32px] leading-[20px]">My Holdings</h3>
-          
-          <div class="flex gap-[14px] items-center relative shrink-0">
-            <button class="bg-gradient-to-r from-[rgba(78,31,163,0.1)] to-[rgba(102,30,185,0.1)] border border-[#4e1fa3] flex items-center justify-center px-[16px] py-[8px] rounded-[6px] shrink-0">
-              <span class="font-semibold text-[12px] text-bx-purple tracking-[-0.12px]">Active Credits</span>
-            </button>
-            <button class="bg-bx-pill flex items-center justify-center px-[16px] py-[8px] rounded-[6px] shrink-0">
-              <span class="font-normal text-[12px] text-bx-heading tracking-[-0.12px]">Retired Credits</span>
-            </button>
-            <button class="bg-bx-pill flex items-center justify-center px-[16px] py-[8px] rounded-[6px] shrink-0">
-              <span class="font-normal text-[12px] text-bx-heading tracking-[-0.12px]">Project Updates</span>
-            </button>
-          </div>
-        </div>
-        
-        <!-- Table -->
-        <div class="w-full bg-white border border-bx-stroke rounded-[12px] flex flex-col items-start overflow-hidden">
-          <div class="bg-bx-bg flex items-center justify-between w-full px-[20px] py-[16px] rounded-t-[12px] font-medium text-[14px] text-bx-subtext leading-[18px]">
-            <p class="w-[300px] shrink-0">Carbon Project</p>
-            <p class="w-[140px] shrink-0">Credits Purchased </p>
-            <p class="w-[122px] shrink-0">Credits Owned</p>
-            <p class="w-[80px] shrink-0">Share</p>
-            <p class="w-[140px] shrink-0">Credits Retired</p>
-            <p class="w-[86px] shrink-0">Action</p>
-          </div>
-          <!-- Row 1 -->
-          <div class="border-b border-bx-stroke flex items-center justify-between p-[20px] w-full hover:bg-gray-50 transition-colors">
-            <div class="flex gap-[16px] items-center w-[300px]">
-              <div class="w-[64px] h-[40px] bg-gray-200 rounded-[2px]"></div>
-              <p class="font-normal text-[14px] text-bx-heading whitespace-nowrap overflow-hidden text-ellipsis flex-1">Amazon Rainforest Project – Brazil</p>
-            </div>
-            <p class="font-normal text-[14px] text-bx-heading w-[140px]">1,996 USDC</p>
-            <p class="font-normal text-[14px] text-bx-heading w-[122px]">302 CO₂ Credits</p>
-            <p class="font-normal text-[14px] text-bx-heading w-[80px]">1.26%</p>
-            <p class="font-normal text-[14px] text-bx-heading w-[140px]">120 CO₂ Retired</p>
-            <p class="font-medium text-[14px] text-bx-purple underline w-[86px] cursor-pointer">View Details</p>
-          </div>
-          
-          <!-- Row 2 -->
-          <div class="border-b border-bx-stroke flex items-center justify-between p-[20px] w-full hover:bg-gray-50 transition-colors">
-            <div class="flex gap-[16px] items-center w-[300px]">
-              <div class="w-[64px] h-[40px] bg-gray-200 rounded-[2px]"></div>
-              <p class="font-normal text-[14px] text-bx-heading whitespace-nowrap overflow-hidden text-ellipsis flex-1">Mangrove Restoration Project – Indonesia</p>
-            </div>
-            <p class="font-normal text-[14px] text-bx-heading w-[140px]">2,450 USDC</p>
-            <p class="font-normal text-[14px] text-bx-heading w-[122px]">245 CO₂ Credits</p>
-            <p class="font-normal text-[14px] text-bx-heading w-[80px]">1.78%</p>
-            <p class="font-normal text-[14px] text-bx-heading w-[140px]">80 CO₂ Retired</p>
-            <p class="font-medium text-[14px] text-bx-purple underline w-[86px] cursor-pointer">View Details</p>
-          </div>
-          
-          <!-- Row 3 -->
-          <div class="border-b border-bx-stroke flex items-center justify-between p-[20px] w-full hover:bg-gray-50 transition-colors">
-            <div class="flex gap-[16px] items-center w-[300px]">
-              <div class="w-[64px] h-[40px] bg-gray-200 rounded-[2px]"></div>
-              <p class="font-normal text-[14px] text-bx-heading whitespace-nowrap overflow-hidden text-ellipsis flex-1">Wind Energy Carbon Offset – India</p>
-            </div>
-            <p class="font-normal text-[14px] text-bx-heading w-[140px]">1,200 USDC</p>
-            <p class="font-normal text-[14px] text-bx-heading w-[122px]">120 CO₂ Credits</p>
-            <p class="font-normal text-[14px] text-bx-heading w-[80px]">0.95%</p>
-            <p class="font-normal text-[14px] text-bx-heading w-[140px]">40 CO₂ Retired</p>
-            <p class="font-medium text-[14px] text-bx-purple underline w-[86px] cursor-pointer">View Details</p>
-          </div>
-          
-          <!-- Row 4 -->
-          <div class="flex items-center justify-between p-[20px] w-full hover:bg-gray-50 transition-colors border-b border-bx-stroke">
-            <div class="flex gap-[16px] items-center w-[300px]">
-              <div class="w-[64px] h-[40px] bg-gray-200 rounded-[2px]"></div>
-              <p class="font-normal text-[14px] text-bx-heading whitespace-nowrap overflow-hidden text-ellipsis flex-1">Solar Energy Carbon Credits – UAE</p>
-            </div>
-            <p class="font-normal text-[14px] text-bx-heading w-[140px]">3,000 USDC</p>
-            <p class="font-normal text-[14px] text-bx-heading w-[122px]">300 CO₂ Credits</p>
-            <p class="font-normal text-[14px] text-bx-heading w-[80px]">2.10%</p>
-            <p class="font-normal text-[14px] text-bx-heading w-[140px]">150 CO₂ Retired</p>
-            <p class="font-medium text-[14px] text-bx-purple underline w-[86px] cursor-pointer">View Details</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- ========== PENDING ALLOCATIONS SECTION ========== -->
-      <section class="flex flex-col gap-[20px] items-start w-full mt-[10px]">
-        
-        <div class="flex items-center justify-between w-full">
-          <h3 class="font-semibold text-[16px] text-bx-heading tracking-[-0.32px] leading-[20px]">Pending Allocations</h3>
-          
-          <div class="flex gap-[14px] items-center relative shrink-0">
-            <button class="bg-gradient-to-r from-[rgba(78,31,163,0.1)] to-[rgba(102,30,185,0.1)] border border-[#4e1fa3] flex items-center justify-center px-[16px] py-[8px] rounded-[6px] shrink-0">
-              <span class="font-semibold text-[12px] text-bx-purple tracking-[-0.12px]">Current Holds</span>
-            </button>
-            <button class="bg-bx-pill flex items-center justify-center px-[16px] py-[8px] rounded-[6px] shrink-0">
-              <span class="font-normal text-[12px] text-bx-heading tracking-[-0.12px]">Sold Properties</span>
-            </button>
-            <button class="bg-bx-pill flex items-center justify-center px-[16px] py-[8px] rounded-[6px] shrink-0">
-              <span class="font-normal text-[12px] text-bx-heading tracking-[-0.12px]">Property Updates</span>
-            </button>
-          </div>
-        </div>
-        
-        <!-- Table -->
-        <div class="w-full bg-white border border-bx-stroke rounded-[12px] flex flex-col items-start overflow-hidden">
-          <div class="bg-bx-bg flex items-center justify-between w-full px-[20px] py-[16px] rounded-t-[12px] font-medium text-[14px] text-bx-subtext leading-[18px]">
-            <p class="w-[300px] shrink-0">Carbon Project</p>
-            <p class="w-[200px] shrink-0">Project Region</p>
-            <p class="w-[150px] shrink-0">Allocation Amount</p>
-            <p class="w-[150px] shrink-0">Estimated Credits</p>
-            <p class="w-[86px] shrink-0">Action</p>
-          </div>
-          
-          <!-- Row 1 -->
-          <div class="border-b border-bx-stroke flex items-center justify-between p-[20px] w-full hover:bg-gray-50 transition-colors">
-            <div class="flex gap-[16px] items-center w-[300px]">
-              <div class="w-[64px] h-[40px] bg-gray-200 rounded-[2px]"></div>
-              <p class="font-normal text-[14px] text-bx-heading whitespace-nowrap overflow-hidden text-ellipsis flex-1">Mangrove Restoration Project – Indonesia</p>
-            </div>
-            <div class="flex gap-[8px] items-center w-[200px]">
-              <span class="text-[16px]">🇮🇩</span>
-              <p class="font-normal text-[14px] text-bx-heading">Indonesia</p>
-            </div>
-            <p class="font-normal text-[14px] text-bx-heading w-[150px]">2,752,996 USDC</p>
-            <p class="font-normal text-[14px] text-bx-heading w-[150px]">2,748 CO₂ Credits</p>
-            <p class="font-medium text-[14px] text-bx-purple underline w-[86px] cursor-pointer">View Details</p>
-          </div>
-          
-          <!-- Row 2 -->
-          <div class="border-b border-bx-stroke flex items-center justify-between p-[20px] w-full hover:bg-gray-50 transition-colors">
-            <div class="flex gap-[16px] items-center w-[300px]">
-              <div class="w-[64px] h-[40px] bg-gray-200 rounded-[2px]"></div>
-              <p class="font-normal text-[14px] text-bx-heading whitespace-nowrap overflow-hidden text-ellipsis flex-1">Amazon Rainforest Conservation – Brazil</p>
-            </div>
-            <div class="flex gap-[8px] items-center w-[200px]">
-              <span class="text-[16px]">🇧🇷</span>
-              <p class="font-normal text-[14px] text-bx-heading">Brazil</p>
-            </div>
-            <p class="font-normal text-[14px] text-bx-heading w-[150px]">1,985,430 USDC</p>
-            <p class="font-normal text-[14px] text-bx-heading w-[150px]">1,970 CO₂ Credits</p>
-            <p class="font-medium text-[14px] text-bx-purple underline w-[86px] cursor-pointer">View Details</p>
-          </div>
-
-          <!-- Row 3 -->
-          <div class="border-b border-bx-stroke flex items-center justify-between p-[20px] w-full hover:bg-gray-50 transition-colors">
-            <div class="flex gap-[16px] items-center w-[300px]">
-              <div class="w-[64px] h-[40px] bg-gray-200 rounded-[2px]"></div>
-              <div class="flex flex-col">
-                <p class="font-normal text-[14px] text-bx-heading leading-[20px]">Solar Farm Carbon Offset –</p>
-                <p class="font-normal text-[14px] text-bx-heading leading-[20px]">UAE</p>
-              </div>
-            </div>
-            <div class="flex gap-[8px] items-center w-[200px]">
-              <span class="text-[16px]">🇦🇪</span>
-              <p class="font-normal text-[14px] text-bx-heading">UAE</p>
-            </div>
-            <p class="font-normal text-[14px] text-bx-heading w-[150px]">3,120,000 USDC</p>
-            <p class="font-normal text-[14px] text-bx-heading w-[150px]">3,050 CO₂ Credits</p>
-            <p class="font-medium text-[14px] text-bx-purple underline w-[86px] cursor-pointer">View Details</p>
-          </div>
-        </div>
-      </section>
-
     </div>
   </main>
 
+  <script>
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileMenuClose = document.getElementById("mobile-menu-close");
+    const mobileSidebar = document.getElementById("mobile-sidebar");
+    const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
+
+    function setMenuState(isOpen) {
+      mobileSidebar.classList.toggle("hidden", !isOpen);
+      mobileSidebar.classList.toggle("flex", isOpen);
+      mobileMenuOverlay.classList.toggle("hidden", !isOpen);
+      mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
+      document.body.classList.toggle("overflow-hidden", isOpen);
+    }
+
+    mobileMenuButton.addEventListener("click", () => setMenuState(true));
+    mobileMenuClose.addEventListener("click", () => setMenuState(false));
+    mobileMenuOverlay.addEventListener("click", () => setMenuState(false));
+  </script>
 </body>
 </html>
