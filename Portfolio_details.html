@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Carbon Portfolio - BlockchainX</title>
+  <meta name="description" content="Portfolio level carbon project detail view for BlockchainX.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { poppins: ["Poppins", "sans-serif"] },
+          colors: {
+            page: "#f5f7f9",
+            heading: "#111928",
+            subtext: "#72798b",
+            border: "#d8dfeb",
+            sidebar: "#d1d1d6",
+            control: "#e5e5ea",
+            purple: "#661eb9",
+            purpleSoft: "rgba(102,30,185,0.1)",
+            purpleTint: "rgba(102,30,185,0.05)",
+            purpleStroke: "rgba(102,30,185,0.5)",
+            card: "#ffffff",
+            tableHead: "#f8f8f8",
+            pill: "#ececec"
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-page font-poppins text-heading antialiased">
+  <!-- Mobile Header -->
+  <header class="border-b border-sidebar bg-white px-4 py-4 min-[1200px]:hidden">
+    <div class="mx-auto flex max-w-[1074px] items-center justify-between">
+      <a href="index.html" aria-label="BlockchainX home">
+        <img src="./Image/Blockchain%20Logo%20White.png" alt="BlockchainX" class="h-[43px] w-[138px] object-contain">
+      </a>
+      <button id="mobile-menu-button" type="button" aria-expanded="false" aria-controls="mobile-sidebar" class="flex h-10 w-10 items-center justify-center rounded-[10px] border border-border bg-white text-heading">
+        <span class="sr-only">Open navigation</span>
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Sidebar -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 z-40 hidden bg-heading/20 min-[1200px]:hidden"></div>
+  <aside id="mobile-sidebar" class="fixed left-0 top-0 z-50 hidden h-full w-[286px] flex-col border-r border-sidebar bg-white px-6 py-8 min-[1200px]:hidden" aria-label="Mobile navigation">
+    <div class="flex items-center justify-between">
+      <a href="index.html" aria-label="BlockchainX home">
+        <img src="./Image/Blockchain%20Logo%20White.png" alt="BlockchainX" class="h-[56px] w-[180px] object-contain">
+      </a>
+      <button id="mobile-menu-close" type="button" class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-border bg-white text-heading">
+        <span class="sr-only">Close navigation</span>
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M6 6l12 12"></path><path d="M18 6l-12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <nav class="mt-11 flex flex-col gap-6 text-[18px] leading-[22px] tracking-[-0.54px]" aria-label="Primary">
+      <div class="flex flex-col gap-2">
+        <a href="projects.html" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext"><svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a15.5 15.5 0 0 1 0 18"></path><path d="M12 3a15.5 15.5 0 0 0 0 18"></path></svg><span class="font-medium">Marketplace</span></a>
+        <a href="dashboard.html" aria-current="page" class="flex h-[52px] items-center gap-3 rounded-[8px] bg-purpleSoft px-4 py-[14px] text-purple"><svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 18.5V8.75L12 4l7.5 4.75v9.75"></path><path d="M8 18.5h8"></path><path d="M8 11.5h8"></path><path d="M10 18.5v-7"></path><path d="M14 18.5v-7"></path></svg><span class="font-medium">My Carbon Portfolio</span></a>
+        <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext"><svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H18a2 2 0 0 1 2 2v9.5A2.5 2.5 0 0 1 17.5 19H5.5A2.5 2.5 0 0 1 3 16.5z"></path><path d="M3 9.5h17"></path><circle cx="16.5" cy="14.5" r="1"></circle></svg><span class="font-medium">Carbon Wallet</span></a>
+      </div>
+      <div class="h-px w-full bg-[#e8edf5]"></div>
+      <div class="flex flex-col gap-2">
+        <a href="#" class="flex h-[52px] items-center justify-between rounded-[12px] px-4 py-[14px] text-subtext"><span class="flex items-center gap-3"><svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c1.8-3.9 4.5-5.8 8-5.8S18.2 16.1 20 20"></path></svg><span class="font-medium">Profile</span></span><svg class="h-4 w-4 shrink-0 text-[#aab0bd]" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"></path></svg></a>
+        <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext"><svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0v5l2 3H4l2-3z"></path><path d="M10 19a2 2 0 0 0 4 0"></path></svg><span class="font-medium">Notifications</span></a>
+        <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext"><svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9.25 9.4a2.8 2.8 0 1 1 5.18 1.46c-.59.92-1.54 1.42-1.93 2.39"></path><path d="M12 16.7h.01"></path></svg><span class="font-medium">Help &amp; Support</span></a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Desktop Sidebar -->
+  <aside class="fixed left-0 top-0 hidden h-screen w-[286px] border-r border-sidebar bg-white min-[1200px]:block" aria-label="Sidebar">
+    <div class="flex h-full flex-col gap-[44px] px-6 py-8">
+      <div class="h-[60px] w-[220px]">
+        <a href="index.html" aria-label="BlockchainX home">
+          <img src="./Image/Blockchain%20Logo%20White.png" alt="BlockchainX" class="h-[56px] w-[180px] object-contain">
+        </a>
+      </div>
+      <div class="flex flex-col gap-6">
+        <nav class="flex w-[237px] flex-col gap-2 text-[18px] leading-[22px] tracking-[-0.54px]" aria-label="Primary">
+          <a href="projects.html" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page"><svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a15.5 15.5 0 0 1 0 18"></path><path d="M12 3a15.5 15.5 0 0 0 0 18"></path></svg><span class="font-medium">Marketplace</span></a>
+          <a href="dashboard.html" aria-current="page" class="flex h-[52px] items-center gap-3 rounded-[8px] bg-purpleSoft px-4 py-[14px] text-purple"><svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 18.5V8.75L12 4l7.5 4.75v9.75"></path><path d="M8 18.5h8"></path><path d="M8 11.5h8"></path><path d="M10 18.5v-7"></path><path d="M14 18.5v-7"></path></svg><span class="font-medium">My Carbon Portfolio</span></a>
+          <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page"><svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H18a2 2 0 0 1 2 2v9.5A2.5 2.5 0 0 1 17.5 19H5.5A2.5 2.5 0 0 1 3 16.5z"></path><path d="M3 9.5h17"></path><circle cx="16.5" cy="14.5" r="1"></circle></svg><span class="font-medium">Carbon Wallet</span></a>
+        </nav>
+        <div class="h-px w-[238px] bg-[#e8edf5]"></div>
+        <nav class="flex w-[237px] flex-col gap-2 text-[18px] leading-[22px] tracking-[-0.54px]" aria-label="Secondary">
+          <a href="#" class="flex h-[52px] items-center justify-between rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page"><span class="flex items-center gap-3"><svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c1.8-3.9 4.5-5.8 8-5.8S18.2 16.1 20 20"></path></svg><span class="font-medium">Profile</span></span><svg class="h-4 w-4 shrink-0 text-[#aab0bd]" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"></path></svg></a>
+          <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page"><svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0v5l2 3H4l2-3z"></path><path d="M10 19a2 2 0 0 0 4 0"></path></svg><span class="font-medium">Notifications</span></a>
+          <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page"><svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9.25 9.4a2.8 2.8 0 1 1 5.18 1.46c-.59.92-1.54 1.42-1.93 2.39"></path><path d="M12 16.7h.01"></path></svg><span class="font-medium">Help &amp; Support</span></a>
+        </nav>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="pb-14 pt-6 min-[1200px]:ml-[326px] min-[1200px]:w-[calc(100%-326px)] min-[1200px]:pb-[96px] min-[1200px]:pt-[60px] min-[1200px]:pr-10">
+    <div class="mx-auto max-w-[1074px] px-4 md:px-8 min-[1200px]:px-0">
+      <section class="flex items-center justify-between">
+        <a href="dashboard.html" class="flex items-center gap-3 text-subtext transition hover:text-heading">
+          <span class="flex h-[30px] w-[36px] items-center justify-center rounded-[4.5px] bg-control"><svg class="h-[15px] w-[15px]" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.25 7.5H3.75"></path><path d="M6.875 4.375 3.75 7.5l3.125 3.125"></path></svg></span>
+          <span class="text-[16px] font-medium leading-[22px] tracking-[-0.16px]">Back to Portfolio</span>
+        </a>
+        <button type="button" class="hidden h-[30px] w-[30px] items-center justify-center rounded-[4.5px] bg-control text-subtext min-[1200px]:flex" aria-label="Share project">
+          <svg class="h-[15px] w-[15px]" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.9375" cy="2.8125" r="1.5625"></circle><circle cx="4.0625" cy="7.5" r="1.5625"></circle><circle cx="10.9375" cy="12.1875" r="1.5625"></circle><path d="M5.41406 8.27344 9.57812 11.4141"></path><path d="M9.57031 3.58594 5.41406 6.72656"></path></svg>
+        </button>
+      </section>
+
+      <section class="mt-4 grid gap-[18px] min-[1200px]:grid-cols-[528px_528px] min-[1200px]:items-start">
+        <div class="overflow-hidden rounded-[10.219px] border border-border bg-white min-[1200px]:h-[441px]"><img src="./Image/portfolio-hero.png" alt="Amazon Rainforest project" class="h-full w-full object-cover"></div>
+        <article class="rounded-[12px] border border-border bg-white p-5">
+          <div class="space-y-6">
+            <div class="space-y-[10px]">
+              <span class="inline-flex items-center rounded-[5.774px] bg-pill px-2 py-1 text-[12px] font-medium leading-normal text-heading">Reforestation</span>
+              <h1 class="max-w-[360px] text-[20px] font-medium leading-[26px] tracking-[-0.2px] text-heading">Amazon Rainforest Carbon Offset Project - Brazil</h1>
+            </div>
+            <div class="space-y-[10px]">
+              <p class="text-[16px] font-medium leading-5 text-subtext">Total Project Value</p>
+              <div class="flex items-center gap-2">
+                <p class="text-[30.206px] font-semibold leading-[32px] tracking-[-0.3px] text-heading">$800,000</p>
+                <p class="text-[18px] font-medium leading-normal text-heading">($2,390,100)</p>
+              </div>
+            </div>
+            <div class="overflow-hidden rounded-[10px] border border-border text-[14px] tracking-[-0.14px]">
+              <div class="flex items-center justify-between px-4 pb-[14px] pt-4"><span class="font-normal leading-[18px] text-subtext">Credits Value Change</span><span class="font-medium leading-5 text-heading">+450 USDC</span></div>
+              <div class="flex items-center justify-between px-4 py-[14px]"><span class="font-normal leading-[18px] text-subtext">Total CO2 Offset Achieved</span><span class="font-medium leading-5 text-heading">620 CO2 Credits</span></div>
+              <div class="flex items-center justify-between px-4 pb-4 pt-[14px]"><span class="font-normal leading-[18px] text-subtext">Estimated Annual Offset</span><span class="font-medium leading-5 text-heading">820 CO2 / year</span></div>
+            </div>
+            <button type="button" class="flex h-12 w-full items-center justify-center rounded-[6px] bg-purple text-[16px] font-semibold leading-normal text-white transition hover:bg-purple/95">View Project Details</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="mt-[14px] space-y-[10px]">
+        <h2 class="text-[16px] font-semibold leading-5 tracking-[-0.32px] text-heading">My Investment</h2>
+        <div class="grid gap-[20px] md:grid-cols-2 min-[1200px]:grid-cols-3">
+          <article class="rounded-[12px] border border-border bg-white p-5"><div class="flex items-center gap-4"><span class="flex h-11 w-11 items-center justify-center rounded-[6.6px] border border-purpleStroke bg-purpleTint text-purple"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"></circle><path d="M12 8v8"></path><path d="M9 10.5c0-1 1-1.75 2.5-1.75S14 9.4 14 10.35c0 2-5 1-5 3 0 .95 1 1.65 2.5 1.65S14 14.25 14 13.2"></path></svg></span><div class="space-y-[6px]"><p class="text-[20px] font-semibold leading-5 tracking-[-0.2px] text-heading">1,649,450 USDC</p><div class="flex items-center gap-[6px] text-[12px] font-medium leading-4 tracking-[-0.36px] text-subtext"><span>Total Invested</span><span class="inline-flex h-4 w-4 items-center justify-center rounded-full border border-subtext/40 text-[10px]">i</span></div></div></div></article>
+          <article class="rounded-[12px] border border-border bg-white p-5"><div class="flex items-center gap-4"><span class="flex h-11 w-11 items-center justify-center rounded-[6.6px] border border-purpleStroke bg-purpleTint text-purple"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="7" width="16" height="10" rx="2"></rect><circle cx="12" cy="12" r="1.5"></circle></svg></span><div class="space-y-[6px]"><p class="text-[20px] font-semibold leading-5 tracking-[-0.2px] text-heading">1,234,900 USDC</p><div class="flex items-center gap-[6px] text-[12px] font-medium leading-4 tracking-[-0.36px] text-subtext"><span>Current Credit Value</span><span class="inline-flex h-4 w-4 items-center justify-center rounded-full border border-subtext/40 text-[10px]">i</span></div></div></div></article>
+          <article class="rounded-[12px] border border-border bg-white p-5"><div class="flex items-center gap-4"><span class="flex h-11 w-11 items-center justify-center rounded-[6.6px] border border-purpleStroke bg-purpleTint text-purple"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h8v8H4z"></path><path d="M14 4h6v6h-6z"></path><path d="M15 15h5v5h-5z"></path></svg></span><div class="space-y-[6px]"><p class="text-[20px] font-semibold leading-5 tracking-[-0.2px] text-heading">4.23%</p><div class="flex items-center gap-[6px] text-[12px] font-medium leading-4 tracking-[-0.36px] text-subtext"><span>My Portfolio Share</span><span class="inline-flex h-4 w-4 items-center justify-center rounded-full border border-subtext/40 text-[10px]">i</span></div></div></div></article>
+        </div>
+      </section>
+
+      <section class="mt-[12px] grid gap-[18px] min-[1200px]:grid-cols-[528px_528px]">
+        <div class="space-y-[10px]">
+          <h2 class="text-[16px] font-semibold leading-5 tracking-[-0.32px] text-heading">Investment Summary</h2>
+          <article class="rounded-[12px] border border-border bg-white px-5">
+            <div class="grid sm:grid-cols-2">
+              <div class="flex h-[100px] items-center gap-4 border-b border-border sm:border-r"><span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-[6px] border border-purpleStroke bg-purpleTint text-purple"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 4a8 8 0 1 0 8 8h-8z"></path><path d="M12 4v8h8"></path></svg></span><div class="space-y-1"><p class="text-[14px] font-medium leading-[18px] tracking-[-0.14px] text-heading">123,490 CO2 Credits</p><p class="text-[12px] font-medium leading-4 tracking-[-0.36px] text-subtext">Total Credits Purchased</p></div></div>
+              <div class="flex h-[100px] items-center gap-4 border-b border-border sm:pl-5"><span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-[6px] border border-purpleStroke bg-purpleTint text-purple"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg></span><div class="space-y-1"><p class="text-[14px] font-medium leading-[18px] tracking-[-0.14px] text-heading">5 Years</p><p class="text-[12px] font-medium leading-4 tracking-[-0.36px] text-subtext">Credit Validity Period</p></div></div>
+              <div class="flex h-[99px] items-center gap-4 sm:border-r"><span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-[6px] border border-purpleStroke bg-purpleTint text-purple"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M7 13l2 2 4-4"></path></svg></span><div class="space-y-1"><p class="text-[14px] font-medium leading-[18px] tracking-[-0.14px] text-heading">28 March 2025</p><p class="text-[12px] font-medium leading-4 tracking-[-0.36px] text-subtext">Allocation Date</p></div></div>
+              <div class="flex h-[99px] items-center gap-4 sm:pl-5"><span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-[6px] border border-purpleStroke bg-purpleTint text-purple"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M12 12v5"></path><path d="M9.5 14.5H14.5"></path></svg></span><div class="space-y-1"><p class="text-[14px] font-medium leading-[18px] tracking-[-0.14px] text-heading">21 June 2025</p><p class="text-[12px] font-medium leading-4 tracking-[-0.36px] text-subtext">Next Credit Availability</p></div></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="space-y-[10px]">
+          <h2 class="text-[16px] font-semibold leading-5 tracking-[-0.32px] text-heading">Documents</h2>
+          <article class="flex h-[200px] flex-col justify-between rounded-[12px] border border-border bg-white p-5">
+            <div class="flex items-center justify-between gap-4"><p class="text-[14px] leading-5 tracking-[-0.42px] text-heading">Carbon Verification Report (Verra)</p><button type="button" class="text-purple" aria-label="Download Carbon Verification Report"><svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v9"></path><path d="m6.5 8.5 3.5 3.5 3.5-3.5"></path><path d="M4 15.5h12"></path></svg></button></div>
+            <div class="flex items-center justify-between gap-4"><p class="text-[14px] leading-5 tracking-[-0.42px] text-heading">Project Impact Assessment</p><button type="button" class="text-purple" aria-label="Download Project Impact Assessment"><svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v9"></path><path d="m6.5 8.5 3.5 3.5 3.5-3.5"></path><path d="M4 15.5h12"></path></svg></button></div>
+            <div class="flex items-center justify-between gap-4"><p class="text-[14px] leading-5 tracking-[-0.42px] text-heading">Carbon Credit Issuance Certificate</p><button type="button" class="text-purple" aria-label="Download Carbon Credit Issuance Certificate"><svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v9"></path><path d="m6.5 8.5 3.5 3.5 3.5-3.5"></path><path d="M4 15.5h12"></path></svg></button></div>
+            <div class="flex items-center justify-between gap-4"><p class="text-[14px] leading-5 tracking-[-0.42px] text-heading">ESG &amp; Compliance Report</p><button type="button" class="text-purple" aria-label="Download ESG and Compliance Report"><svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v9"></path><path d="m6.5 8.5 3.5 3.5 3.5-3.5"></path><path d="M4 15.5h12"></path></svg></button></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="mt-[12px] grid gap-[18px] min-[1200px]:grid-cols-[528px_528px]">
+        <div class="space-y-[18px]">
+          <div class="space-y-[10px]">
+            <h2 class="text-[16px] font-semibold leading-5 tracking-[-0.32px] text-heading">Carbon Credit Summary</h2>
+            <div class="overflow-hidden rounded-[10px] border border-border bg-white">
+              <table class="w-full border-collapse text-[14px] tracking-[-0.42px]"><tbody>
+                <tr class="border-b border-border"><th class="px-5 py-3 text-left font-normal text-subtext">Credits Generated (Monthly)</th><td class="px-5 py-3 font-medium text-heading">105 CO2 Credits</td></tr>
+                <tr class="border-b border-border"><th class="px-5 py-3 text-left font-normal text-subtext">Credits Generated (Yearly)</th><td class="px-5 py-3 font-medium text-heading">1,023 CO2 Credits</td></tr>
+                <tr class="border-b border-border"><th class="px-5 py-3 text-left font-normal text-subtext">Net Verified Credits</th><td class="px-5 py-3 font-medium text-heading">903 CO2 Credits</td></tr>
+                <tr class="border-b border-border"><th class="px-5 py-3 text-left font-normal text-subtext">Annual Offset Contribution</th><td class="px-5 py-3 font-medium text-heading">903 CO2 / year</td></tr>
+                <tr class="border-b border-border"><th class="px-5 py-3 text-left font-normal text-subtext">Total Credits Over Project</th><td class="px-5 py-3 font-medium text-heading">5,000 CO2 Credits</td></tr>
+                <tr><th class="px-5 py-3 text-left font-normal text-subtext">Total CO2 Offset</th><td class="px-5 py-3 font-medium text-heading">2,500 CO2 Credits</td></tr>
+              </tbody></table>
+            </div>
+          </div>
+
+          <div class="space-y-[10px]">
+            <h2 class="text-[16px] font-semibold leading-5 tracking-[-0.32px] text-heading">Transaction Details</h2>
+            <div class="overflow-hidden rounded-[10px] border border-border bg-white">
+              <table class="w-full border-collapse text-[14px] tracking-[-0.42px]"><tbody>
+                <tr class="border-b border-border"><th class="px-5 py-3 text-left font-normal text-subtext">Allocation Amount</th><td class="px-5 py-3 font-medium text-heading">1,025,000 USDC</td></tr>
+                <tr class="border-b border-border"><th class="px-5 py-3 text-left font-normal text-subtext">Platform Fee</th><td class="px-5 py-3 font-medium text-heading">85,000 USDC</td></tr>
+                <tr class="border-b border-border"><th class="px-5 py-3 text-left font-normal text-subtext">Blockchain Fee</th><td class="px-5 py-3 font-medium text-heading">16,143 USDC</td></tr>
+                <tr class="border-b border-border bg-tableHead"><th class="px-5 py-3 text-left font-medium text-heading">Total Allocation Cost</th><td class="px-5 py-3 font-semibold text-heading">1,161,143 USDC</td></tr>
+                <tr class="border-b border-border"><th class="px-5 py-3 text-left font-normal text-subtext">Total Credits Allocated</th><td class="px-5 py-3 font-medium text-heading">80,000 CO2 Credits</td></tr>
+                <tr><th class="px-5 py-3 text-left font-normal text-subtext">Credit Price</th><td class="px-5 py-3 font-medium text-heading">10 USDC</td></tr>
+              </tbody></table>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-[10px]">
+          <div class="flex items-center justify-between gap-4">
+            <h2 class="text-[16px] font-semibold leading-5 tracking-[-0.32px] text-heading">Carbon Activity Statement</h2>
+            <button type="button" class="inline-flex items-center gap-2 rounded-[6px] bg-white px-3 py-1.5 text-[12px] font-medium leading-normal text-subtext border border-transparent"><span>Jan 2024 - Dec 2024</span><svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="13" height="12" rx="2"></rect><path d="M6.5 2.5v4"></path><path d="M13.5 2.5v4"></path><path d="M3.5 8.5h13"></path></svg></button>
+          </div>
+          <div class="overflow-x-auto rounded-[12px] border border-border bg-white">
+            <table class="min-w-full border-collapse text-[14px] tracking-[-0.42px]">
+              <thead class="bg-tableHead text-subtext"><tr><th class="px-5 py-[14px] text-left font-medium">Month</th><th class="px-5 py-[14px] text-left font-medium">Date Credited</th><th class="px-5 py-[14px] text-left font-medium">Credits Retired</th></tr></thead>
+              <tbody>
+                <tr class="border-t border-border"><td class="px-5 py-[10px] text-subtext">January</td><td class="px-5 py-[10px] text-subtext">1 Jan 2024</td><td class="px-5 py-[10px] font-medium text-heading">170 CO2 Retired</td></tr>
+                <tr class="border-t border-border"><td class="px-5 py-[10px] text-subtext">February</td><td class="px-5 py-[10px] text-subtext">1 Feb 2024</td><td class="px-5 py-[10px] font-medium text-heading">170 CO2 Retired</td></tr>
+                <tr class="border-t border-border"><td class="px-5 py-[10px] text-subtext">March</td><td class="px-5 py-[10px] text-subtext">1 Mar 2024</td><td class="px-5 py-[10px] font-medium text-heading">170 CO2 Retired</td></tr>
+                <tr class="border-t border-border"><td class="px-5 py-[10px] text-subtext">April</td><td class="px-5 py-[10px] text-subtext">1 Apr 2024</td><td class="px-5 py-[10px] font-medium text-heading">170 CO2 Retired</td></tr>
+                <tr class="border-t border-border"><td class="px-5 py-[10px] text-subtext">May</td><td class="px-5 py-[10px] text-subtext">1 May 2024</td><td class="px-5 py-[10px] font-medium text-heading">170 CO2 Retired</td></tr>
+                <tr class="border-t border-border"><td class="px-5 py-[10px] text-subtext">June</td><td class="px-5 py-[10px] text-subtext">1 Jun 2024</td><td class="px-5 py-[10px] font-medium text-heading">170 CO2 Retired</td></tr>
+                <tr class="border-t border-border"><td class="px-5 py-[10px] text-subtext">July</td><td class="px-5 py-[10px] text-subtext">1 Jul 2024</td><td class="px-5 py-[10px] font-medium text-heading">170 CO2 Retired</td></tr>
+                <tr class="border-t border-border"><td class="px-5 py-[10px] text-subtext">August</td><td class="px-5 py-[10px] text-subtext">1 Aug 2024</td><td class="px-5 py-[10px] font-medium text-heading">170 CO2 Retired</td></tr>
+                <tr class="border-t border-border"><td class="px-5 py-[10px] text-subtext">September</td><td class="px-5 py-[10px] text-subtext">1 Sep 2024</td><td class="px-5 py-[10px] font-medium text-heading">170 CO2 Retired</td></tr>
+                <tr class="border-t border-border"><td class="px-5 py-[10px] text-subtext">October</td><td class="px-5 py-[10px] text-subtext">1 Oct 2024</td><td class="px-5 py-[10px] font-medium text-heading">170 CO2 Retired</td></tr>
+                <tr class="border-t border-border"><td class="px-5 py-[10px] text-subtext">November</td><td class="px-5 py-[10px] text-subtext">1 Nov 2024</td><td class="px-5 py-[10px] font-medium text-heading">170 CO2 Retired</td></tr>
+                <tr class="border-t border-border"><td class="px-5 py-[10px] text-subtext">December</td><td class="px-5 py-[10px] text-subtext">1 Dec 2024</td><td class="px-5 py-[10px] font-medium text-heading">170 CO2 Retired</td></tr>
+                <tr class="border-t border-border bg-tableHead"><td class="px-5 py-4 font-semibold text-heading">Total</td><td class="px-5 py-4 opacity-0">0</td><td class="px-5 py-4 font-semibold text-heading">2,028 CO2 Credits Retired</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const menuButton = document.getElementById("mobile-menu-button");
+      const menuClose = document.getElementById("mobile-menu-close");
+      const mobileSidebar = document.getElementById("mobile-sidebar");
+      const mobileOverlay = document.getElementById("mobile-menu-overlay");
+
+      function openMenu() {
+        mobileSidebar.classList.remove("hidden");
+        mobileSidebar.classList.add("flex");
+        mobileOverlay.classList.remove("hidden");
+        menuButton.setAttribute("aria-expanded", "true");
+      }
+
+      function closeMenu() {
+        mobileSidebar.classList.add("hidden");
+        mobileSidebar.classList.remove("flex");
+        mobileOverlay.classList.add("hidden");
+        menuButton.setAttribute("aria-expanded", "false");
+      }
+
+      menuButton?.addEventListener("click", openMenu);
+      menuClose?.addEventListener("click", closeMenu);
+      mobileOverlay?.addEventListener("click", closeMenu);
+    })();
+  </script>
+</body>
+</html>

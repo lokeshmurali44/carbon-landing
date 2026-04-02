@@ -687,6 +687,24 @@
       btn.dataset.label = btn.textContent.trim();
     });
 
+    // Make every marketplace card open the project detail screen.
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.setAttribute('role', 'link');
+      card.setAttribute('tabindex', '0');
+
+      const openProjectDetail = () => {
+        window.location.href = 'project.html';
+      };
+
+      card.addEventListener('click', openProjectDetail);
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openProjectDetail();
+        }
+      });
+    });
+
     // Init: apply active filter
     filterCards();
   </script>
