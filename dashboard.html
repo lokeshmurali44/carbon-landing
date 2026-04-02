@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carbon Portfolio Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            purple: '#661eb9',
+            heading: '#111928',
+            dark: '#191a1e',
+            subtext: '#72798b',
+            muted: '#959fac',
+            stroke: '#d8dfeb',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { font-family: 'Poppins', sans-serif; }
+    body { background: #f5f7f9; margin: 0; }
+
+    /* Sidebar transition */
+    #sidebar { transition: transform 0.3s ease; }
+    #sidebar-overlay { display: none; }
+
+    @media (max-width: 1023px) {
+      #sidebar { transform: translateX(-100%); position: fixed; z-index: 50; }
+      #sidebar.open { transform: translateX(0); }
+      #sidebar-overlay.open { display: block; }
+      #main-content { margin-left: 0 !important; }
+    }
+
+    /* Chart tooltip */
+    .chart-tooltip {
+      border: 0.8px solid #d8dfeb;
+      border-radius: 6px;
+      padding: 8px 10px;
+      background: white;
+    }
+
+    /* Bar chart grid lines */
+    .bar-chart-area { position: relative; }
+    .bar-chart-area::before,
+    .bar-chart-area::after { content: ''; position: absolute; left: 0; right: 0; border-top: 0.8px solid #f0f0f4; }
+
+    /* Active pill styling */
+    .pill-active {
+      background: linear-gradient(to right, rgba(78,31,163,0.1), rgba(102,30,185,0.1));
+      border: 0.8px solid #4e1fa3;
+      color: #661eb9;
+    }
+    .pill-inactive {
+      background: #edeef0;
+      color: #111928;
+    }
+
+    /* Table row hover */
+    tbody tr:hover { background: #fafafa; }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: #f5f7f9; }
+    ::-webkit-scrollbar-thumb { background: #d8dfeb; border-radius: 2px; }
+  </style>
+</head>
+<body class="bg-[#f5f7f9]">
+
+<!-- ===================== SIDEBAR OVERLAY (mobile) ===================== -->
+<div id="sidebar-overlay" class="fixed inset-0 bg-black/30 z-40" onclick="toggleSidebar()"></div>
+
+<!-- ===================== SIDEBAR ===================== -->
+<aside id="sidebar" class="fixed top-0 left-0 h-screen w-[286px] bg-white border-r border-[#d1d1d6] flex flex-col px-6 py-8 overflow-y-auto z-50">
+
+  <!-- Logo -->
+  <div class="mb-11 shrink-0">
+    <a href="index.html" class="block w-[180px] h-14">
+      <img src="https://www.figma.com/api/mcp/asset/13038fa1-c64d-4a75-8f59-f79465fc8eed" alt="BlockchainX" class="w-full h-full object-contain">
+    </a>
+  </div>
+
+  <!-- Primary Nav -->
+  <nav class="flex flex-col gap-2">
+    <!-- Marketplace -->
+    <a href="projects.html" class="flex items-center gap-3 px-4 py-[14px] rounded-xl text-subtext hover:bg-[rgba(102,30,185,0.06)] transition-colors">
+      <img src="https://www.figma.com/api/mcp/asset/395b0078-e621-4b2b-85b6-1edc061237db" alt="" class="w-6 h-6 shrink-0">
+      <span class="text-lg font-medium leading-[22px]">Marketplace</span>
+    </a>
+    <!-- Active: My Carbon Portfolio -->
+    <a href="dashboard.html" class="flex items-center gap-3 px-4 py-[14px] rounded-lg bg-[rgba(102,30,185,0.1)] text-purple">
+      <img src="https://www.figma.com/api/mcp/asset/7b479b01-049e-46d5-8d3a-887d4932ecc6" alt="" class="w-6 h-6 shrink-0">
+      <span class="text-lg font-medium leading-[22px] tracking-[-0.54px]">My Carbon Portfolio</span>
+    </a>
+    <!-- Carbon Wallet -->
+    <a href="#" class="flex items-center gap-3 px-4 py-[14px] rounded-xl text-subtext hover:bg-[rgba(102,30,185,0.06)] transition-colors">
+      <img src="https://www.figma.com/api/mcp/asset/984798be-9b54-4243-9c9b-bcaad69319f2" alt="" class="w-6 h-6 shrink-0">
+      <span class="text-lg font-medium leading-[22px]">Carbon Wallet</span>
+    </a>
+  </nav>
+
+  <!-- Divider -->
+  <div class="h-px bg-stroke my-6"></div>
+
+  <!-- Secondary Nav -->
+  <nav class="flex flex-col gap-2">
+    <!-- Profile -->
+    <a href="#" class="flex items-center justify-between px-4 py-[14px] rounded-xl text-subtext hover:text-dark transition-colors">
+      <div class="flex items-center gap-3">
+        <img src="https://www.figma.com/api/mcp/asset/e42b1d2e-59e0-4967-90c7-6cd39c4fd647" alt="" class="w-6 h-6 shrink-0">
+        <span class="text-lg font-medium leading-[22px]">Profile</span>
+      </div>
+      <img src="https://www.figma.com/api/mcp/asset/6b760430-ae5c-4df4-b813-9b70c8e790d6" alt="" class="w-6 h-6 shrink-0">
+    </a>
+    <!-- Notifications -->
+    <a href="#" class="flex items-center gap-3 px-4 py-[14px] rounded-xl text-subtext hover:text-dark transition-colors">
+      <img src="https://www.figma.com/api/mcp/asset/b60f522f-6c3b-4d91-ae72-38ac34987dcf" alt="" class="w-6 h-6 shrink-0">
+      <span class="text-lg font-medium leading-[22px]">Notifications</span>
+    </a>
+    <!-- Help & Support -->
+    <a href="#" class="flex items-center gap-3 px-4 py-[14px] rounded-xl text-subtext hover:text-dark transition-colors">
+      <img src="https://www.figma.com/api/mcp/asset/994f4135-c800-4f60-9ccc-0185a4d98b62" alt="" class="w-6 h-6 shrink-0">
+      <span class="text-lg font-medium leading-[22px]">Help &amp; Support</span>
+    </a>
+  </nav>
+</aside>
+
+<!-- ===================== MAIN CONTENT ===================== -->
+<div id="main-content" class="ml-[286px] min-h-screen">
+
+  <!-- Mobile Top Bar -->
+  <div class="lg:hidden flex items-center justify-between px-5 py-4 bg-white border-b border-stroke sticky top-0 z-30">
+    <img src="https://www.figma.com/api/mcp/asset/13038fa1-c64d-4a75-8f59-f79465fc8eed" alt="BlockchainX" class="h-9 w-auto">
+    <button onclick="toggleSidebar()" class="p-2 text-dark">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+
+  <div class="px-4 sm:px-8 lg:px-10 py-6 lg:py-[60px]">
+
+    <!-- ===================== PAGE HEADER ===================== -->
+    <header class="mb-[29px]">
+      <h1 class="text-[28px] font-bold text-dark leading-8 tracking-[-0.28px] mb-1.5">Carbon Portfolio Dashboard</h1>
+      <p class="text-lg text-[#6d6d6d] leading-[22px]">Track, manage, and monitor your carbon credits, impact, and allocation activity.</p>
+    </header>
+
+    <!-- ===================== STAT CARDS ROW ===================== -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-[22px] mb-[29px]">
+
+      <!-- Card 1: Total Carbon Portfolio Value -->
+      <article class="bg-white border border-stroke rounded-xl px-5 py-[18px] flex gap-4 items-start">
+        <div class="w-10 h-10 rounded-[5.455px] bg-[rgba(102,30,185,0.05)] border border-[rgba(102,30,185,0.5)] flex items-center justify-center shrink-0">
+          <img src="https://www.figma.com/api/mcp/asset/560e8897-e954-4052-a117-253102cf2f30" alt="" class="w-[18px] h-[18px] object-contain">
+        </div>
+        <div class="flex flex-col gap-2.5">
+          <div>
+            <div class="flex items-center gap-1 mb-2">
+              <span class="text-[12px] font-medium text-subtext tracking-[-0.24px] leading-[14px]">Total Carbon Portfolio Value</span>
+              <img src="https://www.figma.com/api/mcp/asset/5dcbfb73-3f70-4059-a478-4f3c4dd58f96" alt="info" class="w-3 h-3 shrink-0">
+            </div>
+            <p class="text-xl font-semibold text-purple leading-[22px] tracking-[-0.2px] whitespace-nowrap">354,236 USDC</p>
+          </div>
+          <p class="text-[12px] font-medium text-heading tracking-[-0.24px] leading-[14px]">$96600.896</p>
+        </div>
+      </article>
+
+      <!-- Card 2: Total CO₂ Offset Achieved -->
+      <article class="bg-white border border-stroke rounded-xl px-5 py-[18px] flex gap-4 items-start">
+        <div class="w-10 h-10 rounded-[5.455px] bg-[rgba(102,30,185,0.05)] border border-[rgba(102,30,185,0.5)] flex items-center justify-center shrink-0">
+          <img src="https://www.figma.com/api/mcp/asset/68914a84-451f-44fb-a711-515d22eea745" alt="" class="w-[17px] h-[19px] object-contain">
+        </div>
+        <div class="flex flex-col gap-2.5">
+          <div>
+            <div class="flex items-center gap-1 mb-2">
+              <span class="text-[12px] font-medium text-subtext tracking-[-0.24px] leading-[14px]">Total CO₂ Offset Achieved</span>
+              <img src="https://www.figma.com/api/mcp/asset/5dcbfb73-3f70-4059-a478-4f3c4dd58f96" alt="info" class="w-3 h-3 shrink-0">
+            </div>
+            <p class="text-xl font-semibold text-heading leading-[22px] tracking-[-0.2px] whitespace-nowrap">3,324 Tonnes CO₂</p>
+          </div>
+          <p class="text-[12px] font-medium text-heading tracking-[-0.24px] leading-[14px]">$96600.896</p>
+        </div>
+      </article>
+
+      <!-- Card 3: Available Credits to Retire -->
+      <article class="bg-white border border-stroke rounded-xl px-5 py-[18px] flex gap-4 items-start">
+        <div class="w-10 h-10 rounded-lg bg-[rgba(102,30,185,0.05)] border border-[rgba(102,30,185,0.5)] flex items-center justify-center shrink-0">
+          <img src="https://www.figma.com/api/mcp/asset/b4b25404-b473-48f6-9e25-4e341f0713f1" alt="" class="w-6 h-6 object-contain">
+        </div>
+        <div class="flex flex-col gap-2.5 flex-1 min-w-0">
+          <div class="flex items-end justify-between">
+            <div>
+              <div class="flex items-center gap-[3px] mb-2">
+                <span class="text-[12px] font-medium text-subtext tracking-[-0.24px] leading-[14px] whitespace-nowrap">Available Credits to Retire</span>
+                <img src="https://www.figma.com/api/mcp/asset/5dcbfb73-3f70-4059-a478-4f3c4dd58f96" alt="info" class="w-3 h-3 shrink-0">
+              </div>
+              <p class="text-xl font-semibold text-heading leading-[22px] tracking-[-0.2px] whitespace-nowrap">165 CO₂ Credits</p>
+            </div>
+            <img src="https://www.figma.com/api/mcp/asset/9b3ab3bf-f60a-44af-947c-72d12b7cc164" alt="→" class="w-[18px] h-[18px] shrink-0">
+          </div>
+          <p class="text-[12px] font-medium text-heading tracking-[-0.24px] leading-[14px]">$96600.896</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===================== QUICK INSIGHTS + ACTIVITY ===================== -->
+    <section class="flex flex-col lg:flex-row gap-[18px] mb-[29px]">
+
+      <!-- Quick Insights -->
+      <div class="flex flex-col gap-2.5 flex-1 min-w-0">
+        <div class="flex items-center justify-between">
+          <h2 class="text-base font-semibold text-heading tracking-[-0.32px] leading-5">Quick Insights</h2>
+        </div>
+        <div class="bg-white border border-stroke rounded-xl h-[200px] flex flex-col px-5 relative overflow-hidden">
+          <!-- Top row -->
+          <div class="flex items-center justify-between flex-1 border-b border-stroke min-h-0">
+            <!-- Active Carbon Projects -->
+            <div class="flex items-center gap-4 h-11">
+              <div class="w-11 h-11 rounded-lg bg-[rgba(102,30,185,0.05)] border border-[rgba(102,30,185,0.5)] flex items-center justify-center shrink-0">
+                <img src="https://www.figma.com/api/mcp/asset/307cd7fc-cd9d-4fcb-bd63-cc2ebc73b37a" alt="" class="w-6 h-6 object-contain">
+              </div>
+              <div class="flex flex-col gap-1">
+                <p class="text-[14px] font-medium text-heading tracking-[-0.14px] leading-[18px]">04</p>
+                <p class="text-[12px] font-medium text-subtext tracking-[-0.36px] leading-4 whitespace-nowrap">Active Carbon Projects</p>
+              </div>
+            </div>
+            <!-- Total Credits Held -->
+            <div class="flex items-center gap-4 h-11">
+              <div class="w-11 h-11 rounded-lg bg-[rgba(102,30,185,0.05)] border border-[rgba(102,30,185,0.5)] flex items-center justify-center shrink-0">
+                <img src="https://www.figma.com/api/mcp/asset/6c721248-ae3b-4785-893e-e046eec080d6" alt="" class="w-5 h-5 object-contain">
+              </div>
+              <div class="flex flex-col gap-1">
+                <p class="text-[14px] font-medium text-heading tracking-[-0.14px] leading-[18px] whitespace-nowrap">3,000 CO₂ Credits</p>
+                <p class="text-[12px] font-medium text-subtext tracking-[-0.36px] leading-4 whitespace-nowrap">Total Credits Held</p>
+              </div>
+            </div>
+          </div>
+          <!-- Bottom row -->
+          <div class="flex items-center justify-between flex-1 min-h-0">
+            <!-- Annual Offset -->
+            <div class="flex items-center gap-4 h-11">
+              <div class="w-11 h-11 rounded-lg bg-[rgba(102,30,185,0.05)] border border-[rgba(102,30,185,0.5)] flex items-center justify-center shrink-0">
+                <img src="https://www.figma.com/api/mcp/asset/296c7969-7ffe-4505-a461-8291b370b71c" alt="" class="w-5 h-5 object-contain">
+              </div>
+              <div class="flex flex-col gap-1">
+                <p class="text-[14px] font-medium text-heading tracking-[-0.14px] leading-[18px] whitespace-nowrap">500 Tonnes CO₂/year</p>
+                <p class="text-[12px] font-medium text-subtext tracking-[-0.36px] leading-4 whitespace-nowrap">Annual Offset Contribution</p>
+              </div>
+            </div>
+            <!-- Credits Retired -->
+            <div class="flex items-center gap-4 h-11">
+              <div class="w-11 h-11 rounded-lg bg-[rgba(102,30,185,0.05)] border border-[rgba(102,30,185,0.5)] flex items-center justify-center shrink-0">
+                <img src="https://www.figma.com/api/mcp/asset/1cca6a25-3daa-4c64-9c20-f24e71f0fce4" alt="" class="w-5 h-5 object-contain">
+              </div>
+              <div class="flex flex-col gap-1">
+                <p class="text-[14px] font-medium text-heading tracking-[-0.14px] leading-[18px] whitespace-nowrap">1,200 CO₂ Credits</p>
+                <p class="text-[12px] font-medium text-subtext tracking-[-0.36px] leading-4 whitespace-nowrap">Credits Retired</p>
+              </div>
+            </div>
+          </div>
+          <!-- Vertical center divider -->
+          <div class="absolute top-0 bottom-0 left-1/2 w-px bg-stroke -translate-x-1/2"></div>
+        </div>
+      </div>
+
+      <!-- Last 4 Months Activity -->
+      <div class="flex flex-col gap-2.5 flex-1 min-w-0">
+        <div class="flex items-center justify-between">
+          <h2 class="text-base font-semibold text-heading tracking-[-0.32px] leading-5">Last 4 Months CO₂ Offset Activity</h2>
+          <button class="bg-[rgba(102,30,185,0.05)] border border-purple text-purple text-[12px] font-semibold px-4 py-[5px] rounded-[5px] leading-normal tracking-[-0.12px] whitespace-nowrap hover:bg-[rgba(102,30,185,0.1)] transition-colors">View All</button>
+        </div>
+        <div class="bg-white border border-stroke rounded-xl h-[200px] flex flex-col justify-between p-5 text-[14px] leading-[18px] whitespace-nowrap">
+          <div class="flex items-center justify-between border-b border-stroke pb-4">
+            <span class="font-medium text-subtext tracking-[-0.42px]">May, 2025</span>
+            <span class="font-medium text-heading tracking-[-0.14px]">242 CO₂</span>
+          </div>
+          <div class="flex items-center justify-between border-b border-stroke py-4">
+            <span class="font-medium text-subtext tracking-[-0.42px]">April, 2025</span>
+            <span class="font-medium text-heading tracking-[-0.14px]">187 CO₂</span>
+          </div>
+          <div class="flex items-center justify-between border-b border-stroke py-4">
+            <span class="font-medium text-subtext tracking-[-0.42px]">March, 2025</span>
+            <span class="font-medium text-heading tracking-[-0.14px]">187 CO₂</span>
+          </div>
+          <div class="flex items-center justify-between pt-4">
+            <span class="font-medium text-subtext tracking-[-0.42px]">Feb, 2025</span>
+            <span class="font-medium text-heading tracking-[-0.14px]">162 CO₂</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CHARTS ROW ===================== -->
+    <section class="flex flex-col lg:flex-row gap-[22px] mb-[29px]">
+
+      <!-- Carbon Portfolio Growth (Line Chart) -->
+      <div class="flex flex-col gap-2.5 flex-1 min-w-0">
+        <div class="flex items-center justify-between">
+          <h2 class="text-base font-semibold text-heading tracking-[-0.32px] leading-5">Carbon Portfolio Growth</h2>
+          <div class="bg-white flex items-center gap-1.5 px-3 py-[5px] rounded-[5px]">
+            <span class="text-[12px] font-medium text-subtext tracking-[-0.24px] leading-normal whitespace-nowrap">Jan 2024 - Dec 2024</span>
+            <img src="https://www.figma.com/api/mcp/asset/82f74956-f6d4-442f-864b-1ff817679403" alt="" class="w-4 h-4 shrink-0">
+          </div>
+        </div>
+
+        <!-- Line Chart Card -->
+        <div class="bg-white border border-stroke rounded-xl overflow-hidden" style="height:320px; position:relative; min-height:280px;">
+          <!-- Y-axis labels -->
+          <div class="absolute top-[36px] left-0 w-[46px] flex flex-col justify-between h-[234px] items-end pr-1.5 text-[10px] font-medium text-muted tracking-[-0.1px] leading-[10px]">
+            <span>400K</span>
+            <span>300K</span>
+            <span>200K</span>
+            <span>100K</span>
+            <span>0</span>
+          </div>
+          <!-- Y axis vertical line -->
+          <div class="absolute left-[51px] top-[19px] w-px bg-stroke" style="height:250px;"></div>
+          <!-- X axis horizontal line -->
+          <div class="absolute left-[51px] right-0 h-px bg-stroke" style="top:269px;"></div>
+          <!-- Grid lines (horizontal) -->
+          <div class="absolute left-[51px] right-0 h-px" style="top:210px; background:rgba(208,215,227,0.5);"></div>
+          <div class="absolute left-[51px] right-0 h-px" style="top:151px; background:rgba(208,215,227,0.5);"></div>
+          <div class="absolute left-[51px] right-0 h-px" style="top:92px; background:rgba(208,215,227,0.5);"></div>
+
+          <!-- Chart line & fill images -->
+          <div class="absolute" style="left:52px; top:53px; width:calc(100% - 62px); height:198px;">
+            <img src="https://www.figma.com/api/mcp/asset/bfbb424a-06ee-4ba4-b930-0f5c2fdf4dcd" alt="" class="absolute inset-0 w-full h-full object-fill">
+          </div>
+          <div class="absolute" style="left:52px; top:53px; width:calc(100% - 62px); height:83px;">
+            <img src="https://www.figma.com/api/mcp/asset/db95b827-49a5-4a4d-8b71-fa8c40205900" alt="" class="absolute inset-0 w-full h-full object-fill">
+          </div>
+
+          <!-- Dashed vertical guide line at ~June -->
+          <div class="absolute flex items-center justify-center" style="left:252px; top:91px; height:176px;">
+            <div class="w-px h-full" style="border-left: 1.5px dashed rgba(102,30,185,0.4);"></div>
+          </div>
+          <!-- Highlight dot -->
+          <div class="absolute w-2 h-2 rounded-full bg-purple border-2 border-white shadow" style="left:248px; top:84px;"></div>
+
+          <!-- Tooltip -->
+          <div class="chart-tooltip absolute" style="left:195px; top:30px;">
+            <p class="text-[10px] font-medium text-subtext tracking-[-0.1px] leading-[10px] mb-1.5">June Holdings</p>
+            <p class="text-[12px] font-semibold text-purple tracking-[-0.12px] leading-[14px] whitespace-nowrap">2,186 CO₂ Credits</p>
+          </div>
+
+          <!-- X-axis labels -->
+          <div class="absolute flex items-center justify-between text-[10px] font-medium text-muted tracking-[-0.1px] leading-3 text-center" style="left:33px; right:0; top:277px; padding: 8px 0;">
+            <span class="w-9">Jan</span><span class="w-9">Feb</span><span class="w-9">Mar</span><span class="w-9">Apr</span><span class="w-9">May</span>
+            <span class="w-9">June</span><span class="w-9">July</span><span class="w-9">Aug</span><span class="w-9">Sep</span><span class="w-9">Oct</span>
+            <span class="w-9">Nov</span><span class="w-9">Dec</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CO₂ Credits Retired (Bar Chart) -->
+      <div class="flex flex-col gap-2.5 flex-1 min-w-0">
+        <div class="flex items-center justify-between">
+          <h2 class="text-base font-semibold text-heading tracking-[-0.32px] leading-5">CO₂ Credits Retired</h2>
+          <div class="bg-white flex items-center gap-1.5 px-3 py-[5px] rounded-[5px]">
+            <span class="text-[12px] font-medium text-subtext tracking-[-0.24px] leading-normal whitespace-nowrap">Jan 2024 - Dec 2024</span>
+            <img src="https://www.figma.com/api/mcp/asset/82f74956-f6d4-442f-864b-1ff817679403" alt="" class="w-4 h-4 shrink-0">
+          </div>
+        </div>
+
+        <!-- Bar Chart Card -->
+        <div class="bg-white border border-stroke rounded-xl overflow-hidden" style="height:320px; position:relative;">
+          <!-- Y-axis labels -->
+          <div class="absolute top-[37px] left-0 w-[38px] flex flex-col justify-between h-[239px] items-end pr-1.5 text-[10px] font-medium text-muted tracking-[-0.1px] leading-[10px]">
+            <span>30K</span>
+            <span>25K</span>
+            <span>20K</span>
+            <span>15K</span>
+            <span>10K</span>
+            <span>5k</span>
+          </div>
+          <!-- Y axis line -->
+          <div class="absolute left-[43px] top-[24px] w-px bg-stroke" style="height:251px;"></div>
+          <!-- X axis line -->
+          <div class="absolute left-[43px] right-0 h-px bg-stroke" style="top:275px;"></div>
+          <!-- Grid lines -->
+          <div class="absolute left-[43px] right-0 h-px" style="top:230px; background:rgba(208,215,227,0.5);"></div>
+          <div class="absolute left-[43px] right-0 h-px" style="top:183px; background:rgba(208,215,227,0.5);"></div>
+          <div class="absolute left-[43px] right-0 h-px" style="top:137px; background:rgba(208,215,227,0.5);"></div>
+          <div class="absolute left-[43px] right-0 h-px" style="top:91px; background:rgba(208,215,227,0.5);"></div>
+          <div class="absolute left-[43px] right-0 h-px" style="top:45px; background:rgba(208,215,227,0.5);"></div>
+
+          <!-- Bars — rendered as divs; positioned bottom-up from y=275 -->
+          <!-- Jan --> <div class="absolute rounded-t-[1.678px] bg-[#a183e0]" style="left:61px;top:235px;width:20px;height:40px;"></div>
+          <!-- Feb --> <div class="absolute rounded-t-[1.678px] bg-[#a183e0]" style="left:99px;top:231px;width:20px;height:44px;"></div>
+          <!-- Mar --> <div class="absolute rounded-t-[1.678px] bg-[#a183e0]" style="left:137px;top:220px;width:20px;height:55px;"></div>
+          <!-- Apr --> <div class="absolute rounded-t-[1.678px] bg-[#a183e0]" style="left:175px;top:186px;width:20px;height:89px;"></div>
+          <!-- May HIGHLIGHTED --> <div class="absolute rounded-t-[1.678px] bg-[#661eb9]" style="left:213px;top:150px;width:20px;height:125px;"></div>
+          <!-- June --> <div class="absolute rounded-t-[1.678px] bg-[#a183e0]" style="left:251px;top:160px;width:20px;height:115px;"></div>
+          <!-- July --> <div class="absolute rounded-t-[1.678px] bg-[#a183e0]" style="left:290px;top:196px;width:20px;height:79px;"></div>
+          <!-- Aug --> <div class="absolute rounded-t-[1.678px] bg-[#a183e0]" style="left:328px;top:154px;width:20px;height:121px;"></div>
+          <!-- Sep --> <div class="absolute rounded-t-[1.678px] bg-[#a183e0]" style="left:366px;top:110px;width:20px;height:165px;"></div>
+          <!-- Oct --> <div class="absolute rounded-t-[1.678px] bg-[#a183e0]" style="left:404px;top:175px;width:20px;height:100px;"></div>
+          <!-- Nov --> <div class="absolute rounded-t-[1.678px] bg-[#a183e0]" style="left:442px;top:137px;width:20px;height:138px;"></div>
+          <!-- Dec --> <div class="absolute rounded-t-[1.678px] bg-[#a183e0]" style="left:481px;top:150px;width:20px;height:125px;"></div>
+
+          <!-- Dashed vertical line at May -->
+          <div class="absolute" style="left:222px; top:102px; height:65px;">
+            <div class="w-px h-full" style="border-left:1.5px dashed rgba(102,30,185,0.4);"></div>
+          </div>
+
+          <!-- Tooltip -->
+          <div class="chart-tooltip absolute" style="left:185px; top:49px;">
+            <p class="text-[10px] font-medium text-subtext tracking-[-0.1px] leading-[10px] mb-1.5">May Offset</p>
+            <p class="text-[12px] font-semibold text-purple tracking-[-0.12px] leading-[14px] whitespace-nowrap">1,765 CO₂</p>
+          </div>
+
+          <!-- X-axis labels -->
+          <div class="absolute flex items-center justify-between text-[10px] font-medium text-muted tracking-[-0.1px] leading-3 text-center" style="left:43px; right:0; top:283px; padding:8px 0;">
+            <span class="w-9">Jan</span><span class="w-9">Feb</span><span class="w-9">Mar</span><span class="w-9">Apr</span><span class="w-9">May</span>
+            <span class="w-9">June</span><span class="w-9">July</span><span class="w-9">Aug</span><span class="w-9">Sep</span><span class="w-9">Oct</span>
+            <span class="w-9">Nov</span><span class="w-9">Dec</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MY HOLDINGS ===================== -->
+    <section class="flex flex-col gap-5 mb-[29px]">
+      <div class="flex items-center justify-between flex-wrap gap-3">
+        <h2 class="text-base font-semibold text-heading tracking-[-0.32px] leading-5">My Holdings</h2>
+        <div class="flex items-center gap-[14px] flex-wrap">
+          <button class="pill-active text-[12px] font-semibold px-4 py-2 rounded-[6px] leading-normal tracking-[-0.12px]">Active Credits</button>
+          <button class="pill-inactive text-[12px] font-normal px-4 py-2 rounded-[6px] leading-normal tracking-[-0.12px]">Retired Credits</button>
+          <button class="pill-inactive text-[12px] font-normal px-4 py-2 rounded-[6px] leading-normal tracking-[-0.12px]">Project Updates</button>
+        </div>
+      </div>
+
+      <!-- Holdings Table -->
+      <div class="bg-white border border-stroke rounded-xl overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[700px]">
+            <thead>
+              <tr class="bg-[#f5f5f5] text-[14px] font-medium text-subtext leading-[18px]">
+                <th class="text-left px-5 py-4 w-[300px] font-medium">Carbon Project</th>
+                <th class="text-left px-0 py-4 w-[140px] font-medium">Credits Purchased</th>
+                <th class="text-left px-0 py-4 w-[122px] font-medium">Credits Owned</th>
+                <th class="text-left px-0 py-4 w-20 font-medium">Share</th>
+                <th class="text-left px-0 py-4 w-[140px] font-medium">Credits Retired</th>
+                <th class="text-left px-0 py-4 w-[86px] font-medium">Action</th>
+              </tr>
+            </thead>
+            <tbody class="text-[14px] text-heading leading-5 divide-y divide-stroke">
+              <!-- Row 1 -->
+              <tr>
+                <td class="px-5 py-5">
+                  <div class="flex items-center gap-4">
+                    <div class="w-16 h-10 rounded-[2px] overflow-hidden shrink-0">
+                      <img src="https://www.figma.com/api/mcp/asset/5f4001bb-4c30-45bc-b890-119fb29bdc8d" alt="Amazon" class="w-full h-full object-cover">
+                    </div>
+                    <span class="font-normal overflow-hidden text-ellipsis">Amazon Rainforest Project – Brazil</span>
+                  </div>
+                </td>
+                <td class="py-5 font-normal">1,996 USDC</td>
+                <td class="py-5 font-normal">302 CO₂ Credits</td>
+                <td class="py-5 font-normal">1.26%</td>
+                <td class="py-5 font-normal">120 CO₂ Retired</td>
+                <td class="py-5"><a href="#" class="text-purple font-medium underline">View Details</a></td>
+              </tr>
+              <!-- Row 2 -->
+              <tr>
+                <td class="px-5 py-5">
+                  <div class="flex items-center gap-4">
+                    <div class="w-16 h-10 rounded-[2px] overflow-hidden shrink-0">
+                      <img src="https://www.figma.com/api/mcp/asset/e43cd0e9-09d9-46ee-ac13-3387b8162092" alt="Mangrove" class="w-full h-full object-cover">
+                    </div>
+                    <span class="font-normal overflow-hidden text-ellipsis">Mangrove Restoration Project – Indonesia</span>
+                  </div>
+                </td>
+                <td class="py-5 font-normal">2,450 USDC</td>
+                <td class="py-5 font-normal">245 CO₂ Credits</td>
+                <td class="py-5 font-normal">1.78%</td>
+                <td class="py-5 font-normal">80 CO₂ Retired</td>
+                <td class="py-5"><a href="#" class="text-purple font-medium underline">View Details</a></td>
+              </tr>
+              <!-- Row 3 -->
+              <tr>
+                <td class="px-5 py-5">
+                  <div class="flex items-center gap-4">
+                    <div class="w-16 h-10 rounded-[2px] overflow-hidden shrink-0">
+                      <img src="https://www.figma.com/api/mcp/asset/3aa435b2-0bbd-4177-824c-1e02d78f236f" alt="Wind Energy" class="w-full h-full object-cover">
+                    </div>
+                    <span class="font-normal overflow-hidden text-ellipsis">Wind Energy Carbon Offset – India</span>
+                  </div>
+                </td>
+                <td class="py-5 font-normal">1,200 USDC</td>
+                <td class="py-5 font-normal">120 CO₂ Credits</td>
+                <td class="py-5 font-normal">0.95%</td>
+                <td class="py-5 font-normal">40 CO₂ Retired</td>
+                <td class="py-5"><a href="#" class="text-purple font-medium underline">View Details</a></td>
+              </tr>
+              <!-- Row 4 -->
+              <tr>
+                <td class="px-5 py-5">
+                  <div class="flex items-center gap-4">
+                    <div class="w-16 h-10 rounded-[2px] overflow-hidden shrink-0">
+                      <img src="https://www.figma.com/api/mcp/asset/b2f613ac-6d4d-4971-90f1-831ec87f5689" alt="Solar UAE" class="w-full h-full object-cover">
+                    </div>
+                    <span class="font-normal overflow-hidden text-ellipsis">Solar Energy Carbon Credits – UAE</span>
+                  </div>
+                </td>
+                <td class="py-5 font-normal">3,000 USDC</td>
+                <td class="py-5 font-normal">300 CO₂ Credits</td>
+                <td class="py-5 font-normal">2.10%</td>
+                <td class="py-5 font-normal">150 CO₂ Retired</td>
+                <td class="py-5"><a href="#" class="text-purple font-medium underline">View Details</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PENDING ALLOCATIONS ===================== -->
+    <section class="flex flex-col gap-5 pb-10">
+      <div class="flex items-center justify-between">
+        <h2 class="text-base font-semibold text-heading tracking-[-0.32px] leading-5">Pending Allocations</h2>
+      </div>
+
+      <!-- Allocations Table -->
+      <div class="bg-white border border-stroke rounded-xl overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[700px]">
+            <thead>
+              <tr class="bg-[#f5f5f5] text-[14px] font-medium text-subtext leading-[18px]">
+                <th class="text-left px-5 py-4 w-[300px] font-medium">Carbon Project</th>
+                <th class="text-left px-0 py-4 w-[200px] font-medium">Project Region</th>
+                <th class="text-left px-0 py-4 w-[150px] font-medium">Allocation Amount</th>
+                <th class="text-left px-0 py-4 w-[150px] font-medium">Estimated Credits</th>
+                <th class="text-left px-0 py-4 w-[86px] font-medium">Action</th>
+              </tr>
+            </thead>
+            <tbody class="text-[14px] text-heading leading-5 divide-y divide-stroke">
+              <!-- Row 1 -->
+              <tr>
+                <td class="px-5 py-5">
+                  <div class="flex items-center gap-4">
+                    <div class="w-16 h-10 rounded-[2px] overflow-hidden shrink-0">
+                      <img src="https://www.figma.com/api/mcp/asset/97322db6-243d-4bec-8c39-073cff70b191" alt="Mangrove" class="w-full h-full object-cover">
+                    </div>
+                    <span class="font-normal">Mangrove Restoration Project – Indonesia</span>
+                  </div>
+                </td>
+                <td class="py-5">
+                  <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-full overflow-hidden shrink-0 flex items-center justify-center">
+                      <img src="https://www.figma.com/api/mcp/asset/7eb4344e-1f7a-44ef-8280-25649050b743" alt="Indonesia" class="w-full h-full object-cover">
+                    </div>
+                    <span class="font-normal">Indonesia</span>
+                  </div>
+                </td>
+                <td class="py-5 font-normal">2,752,996 USDC</td>
+                <td class="py-5 font-normal">2,748 CO₂ Credits</td>
+                <td class="py-5"><a href="#" class="text-purple font-medium underline">View Details</a></td>
+              </tr>
+              <!-- Row 2 -->
+              <tr>
+                <td class="px-5 py-5">
+                  <div class="flex items-center gap-4">
+                    <div class="w-16 h-10 rounded-[2px] overflow-hidden shrink-0">
+                      <img src="https://www.figma.com/api/mcp/asset/5f4001bb-4c30-45bc-b890-119fb29bdc8d" alt="Amazon" class="w-full h-full object-cover">
+                    </div>
+                    <span class="font-normal">Amazon Rainforest Conservation – Brazil</span>
+                  </div>
+                </td>
+                <td class="py-5">
+                  <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-full overflow-hidden shrink-0">
+                      <img src="https://www.figma.com/api/mcp/asset/d746c1d0-9714-43d9-9f49-13077549f7b0" alt="Brazil" class="w-full h-full object-cover">
+                    </div>
+                    <span class="font-normal">Brazil</span>
+                  </div>
+                </td>
+                <td class="py-5 font-normal">1,985,430 USDC</td>
+                <td class="py-5 font-normal">1,970 CO₂ Credits</td>
+                <td class="py-5"><a href="#" class="text-purple font-medium underline">View Details</a></td>
+              </tr>
+              <!-- Row 3 -->
+              <tr>
+                <td class="px-5 py-5">
+                  <div class="flex items-center gap-4">
+                    <div class="w-16 h-10 rounded-[2px] overflow-hidden shrink-0">
+                      <img src="https://www.figma.com/api/mcp/asset/b2f613ac-6d4d-4971-90f1-831ec87f5689" alt="Solar UAE" class="w-full h-full object-cover">
+                    </div>
+                    <div class="font-normal">
+                      <p class="leading-5">Solar Farm Carbon Offset –</p>
+                      <p class="leading-5">UAE</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-5">
+                  <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-full overflow-hidden shrink-0">
+                      <img src="https://www.figma.com/api/mcp/asset/e0e6246c-cb09-4cd5-b425-63f1460b37cf" alt="UAE" class="w-full h-full object-cover">
+                    </div>
+                    <span class="font-normal">UAE</span>
+                  </div>
+                </td>
+                <td class="py-5 font-normal">3,120,000 USDC</td>
+                <td class="py-5 font-normal">3,050 CO₂ Credits</td>
+                <td class="py-5"><a href="#" class="text-purple font-medium underline">View Details</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /px-10 container -->
+</div><!-- /main-content -->
+
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('open');
+  }
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebar-overlay').classList.remove('open');
+    }
+  });
+</script>
+</body>
+</html>
