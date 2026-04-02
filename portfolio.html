@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Detail - BlockchainX</title>
+  <meta
+    name="description"
+    content="BlockchainX carbon project detail page with overview, carbon details, and project information tabs."
+  >
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            poppins: ["Poppins", "sans-serif"],
+          },
+          colors: {
+            page: "#f5f7f9",
+            heading: "#111928",
+            subtext: "#72798b",
+            border: "#d8dfeb",
+            sidebar: "#d1d1d6",
+            control: "#eceff3",
+            purple: "#6d28d9",
+            purpleSoft: "#f3e8ff",
+            purpleStroke: "#d8b4fe",
+            purpleTint: "#faf5ff",
+            card: "#ffffff",
+            light: "#f8fafc",
+            muted: "#f3f4f6",
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-page font-poppins text-heading antialiased">
+  <!-- Mobile Header -->
+  <header class="border-b border-border bg-white px-4 py-4 min-[1200px]:hidden">
+    <div class="mx-auto flex max-w-[1074px] items-center justify-between gap-4">
+      <a href="index.html" aria-label="BlockchainX home">
+        <img src="./Image/Blockchain%20Logo%20White.png" alt="BlockchainX" class="h-[43px] w-[138px] object-contain">
+      </a>
+      <button
+        id="mobile-menu-button"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-sidebar"
+        class="flex h-10 w-10 items-center justify-center rounded-[10px] border border-border bg-white text-heading transition hover:bg-page focus:outline-none focus:ring-2 focus:ring-purple/20"
+      >
+        <span class="sr-only">Open navigation</span>
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M4 7h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 17h16"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Sidebar -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 z-40 hidden bg-heading/20 min-[1200px]:hidden"></div>
+  <aside
+    id="mobile-sidebar"
+    class="fixed left-0 top-0 z-50 hidden h-full w-[286px] flex-col border-r border-sidebar bg-white px-6 py-8 min-[1200px]:hidden"
+    aria-label="Mobile navigation"
+  >
+    <div class="flex items-center justify-between">
+      <a href="index.html" aria-label="BlockchainX home">
+        <img src="./Image/Blockchain%20Logo%20White.png" alt="BlockchainX" class="h-[56px] w-[180px] object-contain">
+      </a>
+      <button
+        id="mobile-menu-close"
+        type="button"
+        class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-border bg-white text-heading"
+      >
+        <span class="sr-only">Close navigation</span>
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M6 6l12 12"></path>
+          <path d="M18 6l-12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="mt-11 flex flex-col gap-6 text-[18px] leading-[22px] tracking-[-0.54px]" aria-label="Primary">
+      <div class="flex flex-col gap-2">
+        <a href="projects.html" aria-current="page" class="flex h-[52px] items-center gap-3 rounded-[8px] bg-purpleSoft px-4 py-[14px] text-purple">
+          <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.5 18.5V8.75L12 4l7.5 4.75v9.75"></path>
+            <path d="M8 18.5h8"></path>
+            <path d="M8 11.5h8"></path>
+            <path d="M10 18.5v-7"></path>
+            <path d="M14 18.5v-7"></path>
+          </svg>
+          <span class="font-medium">Marketplace</span>
+        </a>
+        <a href="portfolio.html" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+          <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.5 18.5V8.75L12 4l7.5 4.75v9.75"></path>
+            <path d="M8 18.5h8"></path>
+            <path d="M8 11.5h8"></path>
+            <path d="M10 18.5v-7"></path>
+            <path d="M14 18.5v-7"></path>
+          </svg>
+          <span class="font-medium">My Carbon Portfolio</span>
+        </a>
+        <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+          <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.5 18.5V8.75L12 4l7.5 4.75v9.75"></path>
+            <path d="M8 18.5h8"></path>
+            <path d="M8 11.5h8"></path>
+            <path d="M10 18.5v-7"></path>
+            <path d="M14 18.5v-7"></path>
+          </svg>
+          <span class="font-medium">Carbon Wallet</span>
+        </a>
+      </div>
+
+      <div class="h-px w-full bg-[#e8edf5]"></div>
+
+      <div class="flex flex-col gap-2">
+        <a href="#" class="flex h-[52px] items-center justify-between rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+          <span class="flex items-center gap-3">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+              <circle cx="12" cy="8" r="4"></circle>
+              <path d="M4 20c1.8-3.9 4.5-5.8 8-5.8S18.2 16.1 20 20"></path>
+            </svg>
+            <span class="font-medium">Profile</span>
+          </span>
+          <svg class="h-4 w-4 shrink-0 text-[#aab0bd]" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 4l4 4-4 4"></path>
+          </svg>
+        </a>
+        <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+          <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 8a6 6 0 1 1 12 0v5l2 3H4l2-3z"></path>
+            <path d="M10 19a2 2 0 0 0 4 0"></path>
+          </svg>
+          <span class="font-medium">Notifications</span>
+        </a>
+        <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+          <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M9.25 9.4a2.8 2.8 0 1 1 5.18 1.46c-.59.92-1.54 1.42-1.93 2.39"></path>
+            <path d="M12 16.7h.01"></path>
+          </svg>
+          <span class="font-medium">Help &amp; Support</span>
+        </a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Desktop Sidebar -->
+  <aside class="fixed left-0 top-0 hidden h-screen w-[286px] border-r border-sidebar bg-white min-[1200px]:block" aria-label="Sidebar">
+    <div class="flex h-full flex-col gap-[44px] px-6 py-8">
+      <div class="h-[60px] w-[220px]">
+        <a href="index.html" aria-label="BlockchainX home">
+          <img src="./Image/Blockchain%20Logo%20White.png" alt="BlockchainX" class="h-[56px] w-[180px] object-contain">
+        </a>
+      </div>
+
+      <div class="flex flex-col gap-6">
+        <nav class="flex w-[237px] flex-col gap-2 text-[18px] leading-[22px] tracking-[-0.54px]" aria-label="Primary">
+          <a href="projects.html" aria-current="page" class="flex h-[52px] items-center gap-3 rounded-[8px] bg-purpleSoft px-4 py-[14px] text-purple">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 18.5V8.75L12 4l7.5 4.75v9.75"></path>
+              <path d="M8 18.5h8"></path>
+              <path d="M8 11.5h8"></path>
+              <path d="M10 18.5v-7"></path>
+              <path d="M14 18.5v-7"></path>
+            </svg>
+            <span class="font-medium">Marketplace</span>
+          </a>
+          <a href="portfolio.html" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 18.5V8.75L12 4l7.5 4.75v9.75"></path>
+              <path d="M8 18.5h8"></path>
+              <path d="M8 11.5h8"></path>
+              <path d="M10 18.5v-7"></path>
+              <path d="M14 18.5v-7"></path>
+            </svg>
+            <span class="font-medium">My Carbon Portfolio</span>
+          </a>
+          <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 18.5V8.75L12 4l7.5 4.75v9.75"></path>
+              <path d="M8 18.5h8"></path>
+              <path d="M8 11.5h8"></path>
+              <path d="M10 18.5v-7"></path>
+              <path d="M14 18.5v-7"></path>
+            </svg>
+            <span class="font-medium">Carbon Wallet</span>
+          </a>
+        </nav>
+
+        <div class="h-px w-[238px] bg-[#e8edf5]"></div>
+
+        <nav class="flex w-[237px] flex-col gap-2 text-[18px] leading-[22px] tracking-[-0.54px]" aria-label="Secondary">
+          <a href="#" class="flex h-[52px] items-center justify-between rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+            <span class="flex items-center gap-3">
+              <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                <circle cx="12" cy="8" r="4"></circle>
+                <path d="M4 20c1.8-3.9 4.5-5.8 8-5.8S18.2 16.1 20 20"></path>
+              </svg>
+              <span class="font-medium">Profile</span>
+            </span>
+            <svg class="h-4 w-4 shrink-0 text-[#aab0bd]" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 4l4 4-4 4"></path>
+            </svg>
+          </a>
+          <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 8a6 6 0 1 1 12 0v5l2 3H4l2-3z"></path>
+              <path d="M10 19a2 2 0 0 0 4 0"></path>
+            </svg>
+            <span class="font-medium">Notifications</span>
+          </a>
+          <a href="#" class="flex h-[52px] items-center gap-3 rounded-[12px] px-4 py-[14px] text-subtext transition hover:bg-page">
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M9.25 9.4a2.8 2.8 0 1 1 5.18 1.46c-.59.92-1.54 1.42-1.93 2.39"></path>
+              <path d="M12 16.7h.01"></path>
+            </svg>
+            <span class="font-medium">Help &amp; Support</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="pb-16 pt-6 min-[1200px]:ml-[326px] min-[1200px]:w-[calc(100%-326px)] min-[1200px]:pb-20 min-[1200px]:pt-[60px] min-[1200px]:pr-10">
+    <div class="mx-auto max-w-[1074px] px-4 md:px-8 min-[1200px]:px-0">
+      <section class="flex items-center justify-between">
+        <a href="projects.html" class="flex items-center gap-3 text-subtext transition hover:text-heading">
+          <span class="flex h-[30px] w-[36px] items-center justify-center rounded-[4px] bg-control">
+            <svg class="h-[15px] w-[15px]" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11.25 7.5H3.75"></path>
+              <path d="M6.875 4.375 3.75 7.5l3.125 3.125"></path>
+            </svg>
+          </span>
+          <span class="text-[16px] font-medium leading-[22px] tracking-[-0.48px]">Back to Projects</span>
+        </a>
+        <button type="button" class="hidden h-[30px] w-[30px] items-center justify-center rounded-[4px] bg-control text-subtext transition hover:text-heading min-[1200px]:flex" aria-label="Share project">
+          <svg class="h-[15px] w-[15px]" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="10.9375" cy="2.8125" r="1.5625"></circle>
+            <circle cx="4.0625" cy="7.5" r="1.5625"></circle>
+            <circle cx="10.9375" cy="12.1875" r="1.5625"></circle>
+            <path d="M5.41406 8.27344 9.57812 11.4141"></path>
+            <path d="M9.57031 3.58594 5.41406 6.72656"></path>
+          </svg>
+        </button>
+      </section>
+
+      <!-- Project Layout -->
+      <div class="mt-4 grid gap-6 min-[1200px]:grid-cols-[620px_436px] min-[1200px]:gap-[18px] min-[1200px]:items-start">
+        <section class="space-y-8">
+          <!-- Hero Image -->
+          <figure class="overflow-hidden rounded-[12px] border border-border bg-white min-[1200px]:h-[426px] min-[1200px]:w-[620px]">
+            <img src="./Image/project-detail-hero.png" alt="Amazon Rainforest carbon offset project" class="h-full w-full object-cover">
+          </figure>
+
+          <!-- Tab Card -->
+          <article class="overflow-hidden rounded-[12px] border border-border bg-card min-[1200px]:w-[620px]">
+            <div class="overflow-x-auto border-b border-border">
+              <div class="flex min-w-max items-center gap-8 px-[26px] pt-4">
+                <button type="button" role="tab" id="tab-overview" aria-selected="true" aria-controls="panel-overview" data-tab-target="overview" class="tab-trigger relative pb-4 text-[14px] font-medium leading-6 tracking-[-0.28px] text-heading">
+                  <span>Overview</span>
+                  <span class="pointer-events-none absolute bottom-0 left-0 h-[2px] w-full rounded-full bg-purple"></span>
+                </button>
+                <button type="button" role="tab" id="tab-carbon-details" aria-selected="false" aria-controls="panel-carbon-details" data-tab-target="carbon-details" tabindex="-1" class="tab-trigger relative pb-4 text-[14px] font-medium leading-6 tracking-[-0.28px] text-subtext">
+                  <span>Carbon Details</span>
+                  <span class="pointer-events-none absolute bottom-0 left-0 hidden h-[2px] w-full rounded-full bg-purple"></span>
+                </button>
+                <button type="button" role="tab" id="tab-project-information" aria-selected="false" aria-controls="panel-project-information" data-tab-target="project-information" tabindex="-1" class="tab-trigger relative pb-4 text-[14px] font-medium leading-6 tracking-[-0.28px] text-subtext">
+                  <span>Project Information</span>
+                  <span class="pointer-events-none absolute bottom-0 left-0 hidden h-[2px] w-full rounded-full bg-purple"></span>
+                </button>
+                <button type="button" role="tab" id="tab-support" aria-selected="false" aria-controls="panel-support" aria-disabled="true" disabled class="cursor-not-allowed pb-4 text-[14px] font-medium leading-6 tracking-[-0.28px] text-subtext/80">
+                  Support
+                </button>
+              </div>
+            </div>
+
+            <!-- Overview Panel -->
+            <div id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" data-tab-panel="overview" class="space-y-[26px] px-[26px] pb-[34px] pt-5">
+              <section class="space-y-[10px]">
+                <h2 class="text-[20px] font-semibold leading-[27px] tracking-[-0.6px] text-heading">Description</h2>
+                <p class="text-[14px] leading-[21px] tracking-[-0.28px] text-subtext">
+                  This carbon offset project focuses on preserving and restoring sections of the Amazon rainforest.
+                  Verified carbon credits are generated through reforestation, conservation activities, ensuring
+                  measurable CO2 reduction and long-term environmental impact.
+                </p>
+              </section>
+
+              <section class="space-y-[10px]">
+                <h2 class="text-[20px] font-semibold leading-[27px] tracking-[-0.6px] text-heading">Carbon Details</h2>
+                <div class="overflow-hidden rounded-[10px] border border-border">
+                  <table class="w-full border-collapse text-left">
+                    <tbody class="text-[14px] leading-[18px] tracking-[-0.28px]">
+                      <tr class="h-[42px] border-b border-border">
+                        <th scope="row" class="w-1/2 border-r border-border px-5 font-medium text-subtext">Project Type</th>
+                        <td class="px-5 font-medium text-heading">Reforestation</td>
+                      </tr>
+                      <tr class="h-[42px] border-b border-border">
+                        <th scope="row" class="border-r border-border px-5 font-medium text-subtext">Country</th>
+                        <td class="px-5 font-medium text-heading">Brazil (Amazon Region)</td>
+                      </tr>
+                      <tr class="h-[42px] border-b border-border">
+                        <th scope="row" class="border-r border-border px-5 font-medium text-subtext">Project Area</th>
+                        <td class="px-5 font-medium text-heading">1,200 Hectares</td>
+                      </tr>
+                      <tr class="h-[42px] border-b border-border">
+                        <th scope="row" class="border-r border-border px-5 font-medium text-subtext">Credit Standard</th>
+                        <td class="px-5 font-medium text-heading">Verified Carbon Standard (VCS)</td>
+                      </tr>
+                      <tr class="h-[42px] border-b border-border">
+                        <th scope="row" class="border-r border-border px-5 font-medium text-subtext">Status</th>
+                        <td class="px-5 font-medium text-heading">Active</td>
+                      </tr>
+                      <tr class="h-[42px]">
+                        <th scope="row" class="border-r border-border px-5 font-medium text-subtext">Registry</th>
+                        <td class="px-5 font-medium text-heading">Verra Registry</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section class="space-y-[10px]">
+                <h2 class="text-[20px] font-semibold leading-[27px] tracking-[-0.6px] text-heading">Participation Details</h2>
+                <div class="overflow-hidden rounded-[10px] border border-border">
+                  <table class="w-full border-collapse text-left">
+                    <tbody class="text-[14px] leading-[18px] tracking-[-0.28px]">
+                      <tr class="h-[42px] border-b border-border">
+                        <th scope="row" class="w-1/2 border-r border-border px-5 font-medium text-subtext">Total Participants</th>
+                        <td class="px-5 font-medium text-heading">510+</td>
+                      </tr>
+                      <tr class="h-[42px] border-b border-border">
+                        <th scope="row" class="border-r border-border px-5 font-medium text-subtext">Credit Lifecycle</th>
+                        <td class="px-5 font-medium text-heading">36 Months</td>
+                      </tr>
+                      <tr class="h-[42px]">
+                        <th scope="row" class="border-r border-border px-5 font-medium text-subtext">Tokenized Ownership</th>
+                        <td class="px-5 font-medium text-heading">Yes</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section class="space-y-[10px]">
+                <h2 class="text-[20px] font-semibold leading-[27px] tracking-[-0.6px] text-heading">Key Benefits</h2>
+                <div class="overflow-hidden rounded-[10px] border border-border">
+                  <div class="divide-y divide-border">
+                    <div class="flex items-start gap-4 px-5 py-4">
+                      <span class="mt-1 flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[8px] border border-purpleStroke bg-purpleTint text-purple">
+                        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 3v18"></path>
+                          <path d="M7 8.5c0-2 1.8-3.5 4.5-3.5s4.5 1.3 4.5 3.2c0 4-9 2-9 6 0 1.9 1.8 3.3 4.5 3.3s4.5-1.5 4.5-3.5"></path>
+                        </svg>
+                      </span>
+                      <div class="space-y-1">
+                        <h3 class="text-[14px] font-medium leading-5 tracking-[-0.28px] text-heading">Verified Carbon Offset</h3>
+                        <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">Each token represents 1 tonne of CO2 offset, verified &amp; tracked on-chain.</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start gap-4 px-5 py-4">
+                      <span class="mt-1 flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[8px] border border-purpleStroke bg-purpleTint text-purple">
+                        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M4 14l4-4 4 4 8-8"></path>
+                          <path d="M20 10V4h-6"></path>
+                        </svg>
+                      </span>
+                      <div class="space-y-1">
+                        <h3 class="text-[14px] font-medium leading-5 tracking-[-0.28px] text-heading">Transparent Pricing</h3>
+                        <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">Real-time carbon pricing based on global demand and supply.</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start gap-4 px-5 py-4">
+                      <span class="mt-1 flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[8px] border border-purpleStroke bg-purpleTint text-purple">
+                        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M3 17h4l3-5 4 3 7-8"></path>
+                          <path d="M17 7h4v4"></path>
+                        </svg>
+                      </span>
+                      <div class="space-y-1">
+                        <h3 class="text-[14px] font-medium leading-5 tracking-[-0.28px] text-heading">Market-Driven Value Growth</h3>
+                        <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">Carbon credits may appreciate based on regulatory demand and ESG adoption.</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start gap-4 px-5 py-4">
+                      <span class="mt-1 flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[8px] border border-purpleStroke bg-purpleTint text-purple">
+                        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M4 7h16"></path>
+                          <path d="M6 12h12"></path>
+                          <path d="M8 17h8"></path>
+                        </svg>
+                      </span>
+                      <div class="space-y-1">
+                        <h3 class="text-[14px] font-medium leading-5 tracking-[-0.28px] text-heading">Environmental Impact</h3>
+                        <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">Direct contribution to global CO2 reduction and sustainability goals.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <!-- Carbon Details Panel -->
+            <div id="panel-carbon-details" role="tabpanel" aria-labelledby="tab-carbon-details" data-tab-panel="carbon-details" hidden class="space-y-[30px] px-[26px] pb-[34px] pt-5">
+              <section class="space-y-[10px]">
+                <h2 class="text-[20px] font-semibold leading-[27px] tracking-[-0.6px] text-heading">Environmental Impact Metrics</h2>
+                <div class="overflow-hidden rounded-[10px] border border-border">
+                  <div class="grid sm:grid-cols-2">
+                    <article class="flex items-center gap-4 border-b border-border px-5 py-[18px] sm:border-r">
+                      <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[8px] border border-purpleStroke bg-purpleTint text-purple">
+                        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M4 12c2.5-4.5 5.17-6.75 8-6.75S17.5 7.5 20 12c-2.5 4.5-5.17 6.75-8 6.75S6.5 16.5 4 12Z"></path>
+                          <path d="M12 9v6"></path>
+                          <path d="M9 12h6"></path>
+                        </svg>
+                      </span>
+                      <div>
+                        <h3 class="text-[14px] font-medium leading-5 tracking-[-0.28px] text-heading">25,000 Tonnes CO2/h3>
+                        <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">Verified CO2 Offset Capacity</p>
+                      </div>
+                    </article>
+                    <article class="flex items-center gap-4 border-b border-border px-5 py-[18px]">
+                      <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[8px] border border-purpleStroke bg-purpleTint text-purple">
+                        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 3v7"></path>
+                          <path d="M12 21V10"></path>
+                          <path d="m7.5 6.5 4.5-3.5 4.5 3.5"></path>
+                          <path d="m16.5 17.5-4.5 3.5-4.5-3.5"></path>
+                        </svg>
+                      </span>
+                      <div>
+                        <h3 class="text-[14px] font-medium leading-5 tracking-[-0.28px] text-heading">5,000 Tonnes CO2/year</h3>
+                        <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">Estimated Annual Offset</p>
+                      </div>
+                    </article>
+                    <article class="flex items-center gap-4 border-b border-border px-5 py-[18px] sm:border-b-0 sm:border-r">
+                      <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[8px] border border-purpleStroke bg-purpleTint text-purple">
+                        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="4" y="5" width="16" height="15" rx="3"></rect>
+                          <path d="M8 3v4"></path>
+                          <path d="M16 3v4"></path>
+                          <path d="M4 10h16"></path>
+                        </svg>
+                      </span>
+                      <div>
+                        <h3 class="text-[14px] font-medium leading-5 tracking-[-0.28px] text-heading">5 Years</h3>
+                        <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">Project Duration</p>
+                      </div>
+                    </article>
+                    <article class="flex items-center gap-4 px-5 py-[18px]">
+                      <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[8px] border border-purpleStroke bg-purpleTint text-purple">
+                        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M4 12h5l2-4 2 8 2-4h5"></path>
+                        </svg>
+                      </span>
+                      <div>
+                        <h3 class="text-[14px] font-medium leading-5 tracking-[-0.28px] text-heading">Removing 10,800 cars/year</h3>
+                        <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">Impact Equivalence</p>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </section>
+
+              <section class="space-y-[10px]">
+                <h2 class="text-[20px] font-semibold leading-[27px] tracking-[-0.6px] text-heading">Carbon Credit Allocation Details</h2>
+                <div class="overflow-hidden rounded-[10px] border border-border">
+                  <table class="w-full border-collapse text-left">
+                    <tbody class="text-[14px] leading-[18px] tracking-[-0.28px]">
+                      <tr class="h-[42px] border-b border-border">
+                        <th scope="row" class="w-1/2 border-r border-border px-5 font-medium text-subtext">Total Credits Issued</th>
+                        <td class="px-5 font-medium text-heading">25,000 CO2 Credits</td>
+                      </tr>
+                      <tr class="h-[42px] border-b border-border">
+                        <th scope="row" class="border-r border-border px-5 font-medium text-subtext">Credits Allocated</th>
+                        <td class="px-5 font-medium text-heading">17,648 CO2 Credits</td>
+                      </tr>
+                      <tr class="h-[42px] border-b border-border">
+                        <th scope="row" class="border-r border-border px-5 font-medium text-subtext">Remaining Credits</th>
+                        <td class="px-5 font-medium text-heading">7,352 CO2 Credits</td>
+                      </tr>
+                      <tr class="h-[42px] border-b border-border">
+                        <th scope="row" class="border-r border-border px-5 font-medium text-subtext">Price per Credit</th>
+                        <td class="px-5 font-medium text-heading">10 USDC</td>
+                      </tr>
+                      <tr class="h-[42px] border-b border-border">
+                        <th scope="row" class="border-r border-border px-5 font-medium text-subtext">Minimum Allocation</th>
+                        <td class="px-5 font-medium text-heading">100 CO2 Credits</td>
+                      </tr>
+                      <tr class="h-[42px]">
+                        <th scope="row" class="border-r border-border px-5 font-medium text-subtext">Credit Price</th>
+                        <td class="px-5 font-medium text-heading">10 USDC</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section class="space-y-[10px]">
+                <h2 class="text-[20px] font-semibold leading-[27px] tracking-[-0.6px] text-heading">Verification &amp; Registry Details</h2>
+                <div class="overflow-hidden rounded-[10px] border border-border">
+                  <table class="w-full border-collapse text-left">
+                    <tbody class="text-[14px] leading-[18px] tracking-[-0.28px]">
+                      <tr class="h-[42px] border-b border-border">
+                        <th scope="row" class="w-1/2 border-r border-border px-5 font-medium text-subtext">Verification Standard</th>
+                        <td class="px-5 font-medium text-heading">Verra (VCS)</td>
+                      </tr>
+                      <tr class="h-[42px] border-b border-border">
+                        <th scope="row" class="border-r border-border px-5 font-medium text-subtext">Registry ID</th>
+                        <td class="px-5 font-medium text-heading">VCS-2093-BR</td>
+                      </tr>
+                      <tr class="h-[42px] border-b border-border">
+                        <th scope="row" class="border-r border-border px-5 font-medium text-subtext">Audit Frequency</th>
+                        <td class="px-5 font-medium text-heading">Annual Third-Party Verification</td>
+                      </tr>
+                      <tr class="h-[42px]">
+                        <th scope="row" class="border-r border-border px-5 font-medium text-subtext">Blockchain Record</th>
+                        <td class="px-5 font-medium text-heading">Ethereum (ERC-3643 compliant)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section class="space-y-[10px]">
+                <h2 class="text-[20px] font-semibold leading-[27px] tracking-[-0.6px] text-heading">Project Lifecycle</h2>
+                <div class="relative rounded-[10px] border border-border p-5">
+                  <div class="absolute left-[28px] top-[84px] hidden h-[283px] w-[3px] rounded-full bg-purpleSoft sm:block"></div>
+                  <div class="space-y-6">
+                    <article class="relative pl-0 sm:pl-8">
+                      <div class="absolute left-0 top-1 hidden h-[18px] w-[18px] rounded-full bg-purple sm:block"></div>
+                      <div class="space-y-[10px]">
+                        <h3 class="text-[15px] font-medium leading-5 tracking-[-0.3px] text-purple">Project Initiation</h3>
+                        <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">May 30 2025</p>
+                        <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">Baseline carbon assessment and rainforest conservation activities initiated.</p>
+                      </div>
+                    </article>
+                    <article class="relative pl-0 sm:pl-8">
+                      <div class="absolute left-0 top-1 hidden h-[18px] w-[18px] rounded-full border border-purple bg-white sm:block"></div>
+                      <div class="space-y-[10px]">
+                        <h3 class="text-[15px] font-medium leading-5 tracking-[-0.3px] text-purple">Allocation Phase</h3>
+                        <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">Closes in June 12 2025</p>
+                        <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">Participants are allocating verified carbon credits from this project.</p>
+                      </div>
+                    </article>
+                    <article class="relative pl-0 sm:pl-8">
+                      <div class="absolute left-0 top-1 hidden h-[18px] w-[18px] rounded-full border border-purple bg-white sm:block"></div>
+                      <div class="space-y-[10px]">
+                        <h3 class="text-[15px] font-medium leading-5 tracking-[-0.3px] text-heading">Credit Issuance</h3>
+                        <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">June 24 2025</p>
+                        <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">Carbon credits are verified &amp; issued through global registries (e.g., Verra).</p>
+                      </div>
+                    </article>
+                    <article class="relative pl-0 sm:pl-8">
+                      <div class="absolute left-0 top-1 hidden h-[18px] w-[18px] rounded-full border border-purple bg-white sm:block"></div>
+                      <div class="space-y-[10px]">
+                        <h3 class="text-[15px] font-medium leading-5 tracking-[-0.3px] text-heading">Carbon Offset Delivery</h3>
+                        <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">July 12 2025</p>
+                        <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">Allocated credits can be retired to offset emissions, traded in marketplace.</p>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </section>
+
+              <section class="space-y-[10px]">
+                <h2 class="text-[20px] font-semibold leading-[27px] tracking-[-0.6px] text-heading">About the Project</h2>
+                <p class="text-[14px] leading-[18px] tracking-[-0.28px] text-subtext">This project protects the Amazon rainforest by preventing deforestation and preserving natural carbon sinks.</p>
+              </section>
+
+              <section class="space-y-[10px]">
+                <h2 class="text-[20px] font-semibold leading-[27px] tracking-[-0.6px] text-heading">Impact Highlights</h2>
+                <div class="overflow-hidden rounded-[10px] border border-border">
+                  <div class="grid sm:grid-cols-2">
+                    <div class="flex items-center gap-4 border-b border-border px-5 py-5 sm:border-r">
+                      <span class="flex h-[34px] w-[34px] items-center justify-center rounded-[8px] border border-purpleStroke bg-purpleTint text-purple">
+                        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M6 18V9"></path>
+                          <path d="M12 18V5"></path>
+                          <path d="M18 18v-7"></path>
+                        </svg>
+                      </span>
+                      <span class="text-[13px] font-medium leading-[18px] tracking-[-0.26px] text-subtext">Prevents deforestation</span>
+                    </div>
+                    <div class="flex items-center gap-4 border-b border-border px-5 py-5">
+                      <span class="flex h-[34px] w-[34px] items-center justify-center rounded-[8px] border border-purpleStroke bg-purpleTint text-purple">
+                        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 3c3 4 4 6.5 4 9a4 4 0 0 1-8 0c0-2.5 1-5 4-9Z"></path>
+                          <path d="M9 17c1.1-1 1.8-2 2.1-3"></path>
+                        </svg>
+                      </span>
+                      <span class="text-[13px] font-medium leading-[18px] tracking-[-0.26px] text-subtext">Supports biodiversity</span>
+                    </div>
+                    <div class="flex items-center gap-4 border-b border-border px-5 py-5 sm:border-b-0 sm:border-r">
+                      <span class="flex h-[34px] w-[34px] items-center justify-center rounded-[8px] border border-purpleStroke bg-purpleTint text-purple">
+                        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M8 12a4 4 0 1 1 8 0"></path>
+                          <path d="M4 20a8 8 0 1 1 16 0"></path>
+                        </svg>
+                      </span>
+                      <span class="text-[13px] font-medium leading-[18px] tracking-[-0.26px] text-subtext">Helps local communities</span>
+                    </div>
+                    <div class="flex items-center gap-4 px-5 py-5">
+                      <span class="flex h-[34px] w-[34px] items-center justify-center rounded-[8px] border border-purpleStroke bg-purpleTint text-purple">
+                        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M8 12.5 10.5 15 16 9.5"></path>
+                          <path d="M12 3 5 6v6c0 5 3.5 7.5 7 9 3.5-1.5 7-4 7-9V6l-7-3Z"></path>
+                        </svg>
+                      </span>
+                      <span class="text-[13px] font-medium leading-[18px] tracking-[-0.26px] text-subtext">Verified global standards</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="space-y-[10px]">
+                <h2 class="text-[20px] font-semibold leading-[27px] tracking-[-0.6px] text-heading">Carbon calculator</h2>
+                <div class="rounded-[10px] border border-border p-5">
+                  <div class="space-y-6">
+                    <div class="space-y-5">
+                      <h3 class="text-[14px] font-medium leading-5 tracking-[-0.28px] text-heading">Estimated Growth Over 5 Year Holding Period</h3>
+
+                      <div class="rounded-[8px] border border-border">
+                        <label for="carbon-calculator-investment" class="block px-4 pt-[18px] text-[13px] font-medium leading-[18px] tracking-[-0.26px] text-subtext">Enter allocation amount (USDC)</label>
+                        <input id="carbon-calculator-investment" type="text" value="25,000 USDC" readonly class="h-[50px] w-full border-0 bg-transparent px-4 pb-4 pt-2 text-[16px] font-medium leading-6 tracking-[-0.48px] text-purple focus:outline-none">
+                      </div>
+
+                      <div class="space-y-5">
+                        <div class="space-y-3">
+                          <div class="flex items-center justify-between text-[13px] leading-[18px] tracking-[-0.26px]">
+                            <span class="font-medium text-heading">Carbon Yield (%)</span>
+                            <span class="flex h-[34px] min-w-[56px] items-center justify-center rounded-[8px] border border-border bg-white px-[10px] font-medium text-heading">5.0%</span>
+                          </div>
+                          <div class="space-y-[10px]">
+                            <div class="relative h-4">
+                              <div class="absolute left-0 top-1/2 h-[7px] w-full -translate-y-1/2 rounded-full bg-[#eceff4]"></div>
+                              <div class="absolute left-0 top-1/2 h-[7px] w-[40.34%] -translate-y-1/2 rounded-full bg-purple"></div>
+                              <div class="absolute left-[40.34%] top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-purple bg-white"></div>
+                            </div>
+                            <div class="flex items-center justify-between text-[11px] font-medium leading-[18px] tracking-[-0.22px] text-subtext">
+                              <span>2.00%</span>
+                              <span>10.00%</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="space-y-3">
+                          <div class="flex items-center justify-between text-[13px] leading-[18px] tracking-[-0.26px]">
+                            <span class="font-medium text-heading">Carbon Credit Appreciation (%)</span>
+                            <span class="flex h-[34px] min-w-[56px] items-center justify-center rounded-[8px] border border-border bg-white px-[10px] font-medium text-heading">3.0%</span>
+                          </div>
+                          <div class="space-y-[10px]">
+                            <div class="relative h-4">
+                              <div class="absolute left-0 top-1/2 h-[7px] w-full -translate-y-1/2 rounded-full bg-[#eceff4]"></div>
+                              <div class="absolute left-0 top-1/2 h-[7px] w-[26%] -translate-y-1/2 rounded-full bg-purple"></div>
+                              <div class="absolute left-[26%] top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-purple bg-white"></div>
+                            </div>
+                            <div class="flex items-center justify-between text-[11px] font-medium leading-[18px] tracking-[-0.22px] text-subtext">
+                              <span>2.00%</span>
+                              <span>8.00%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="overflow-hidden rounded-[10px] border border-border">
+                      <div class="flex h-[50px] items-center justify-between border-b border-border px-4 text-[13px] leading-[18px] tracking-[-0.26px]">
+                        <span class="font-medium text-subtext">Total Carbon Yield Value</span>
+                        <span class="text-[14px] font-medium text-heading">6,200 USDC</span>
+                      </div>
+                      <div class="flex h-12 items-center justify-between border-b border-border px-4 text-[13px] leading-[18px] tracking-[-0.26px]">
+                        <span class="font-medium text-subtext">Total Asset Appreciation</span>
+                        <span class="text-[14px] font-medium text-heading">4,500 USDC</span>
+                      </div>
+                      <div class="flex h-[50px] items-center justify-between px-4 text-[13px] leading-[18px] tracking-[-0.26px]">
+                        <span class="font-medium text-subtext">Total CO2 Offset (Tonnes)</span>
+                        <span class="text-[14px] font-medium text-heading">8,100 Tonnes CO2</span>
+                      </div>
+                    </div>
+
+                    <button type="button" class="flex h-12 w-full items-center justify-center rounded-[6px] bg-purple text-[15px] font-semibold leading-6 tracking-[-0.3px] text-white transition hover:bg-purple/95">
+                      Invest Carbon Credits Now
+                    </button>
+                  </div>
+                </div>
+              </section>
+
+              <section class="space-y-[10px]">
+                <h2 class="text-[20px] font-semibold leading-[27px] tracking-[-0.6px] text-heading">How it works</h2>
+                <div class="rounded-[10px] border border-border p-5">
+                  <div class="space-y-5">
+                    <article class="space-y-[14px]">
+                      <span class="text-[13px] font-medium leading-[18px] tracking-[-0.26px] text-heading">Step 1</span>
+                      <div class="flex gap-4">
+                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] border border-purpleStroke bg-purpleTint text-purple">
+                          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H17a2 2 0 0 1 2 2v10"></path>
+                            <path d="M4 9.5h15"></path>
+                            <path d="M8 14.5h3"></path>
+                            <path d="M6 19h6"></path>
+                          </svg>
+                        </span>
+                        <div class="space-y-[10px]">
+                          <div class="space-y-1">
+                            <h3 class="text-[14px] font-medium leading-[18px] tracking-[-0.28px] text-heading">Acquire Carbon Tokens</h3>
+                            <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">Review project verification, registry details, and carbon standards.</p>
+                          </div>
+                          <a href="#" class="inline-flex items-center gap-1 text-[13px] font-medium leading-[18px] tracking-[-0.26px] text-purple">
+                            <span>View Documents</span>
+                            <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M5 3h8v8"></path>
+                              <path d="M13 3 3 13"></path>
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                    </article>
+
+                    <div class="h-px w-full bg-border"></div>
+
+                    <article class="space-y-[14px]">
+                      <span class="text-[13px] font-medium leading-[18px] tracking-[-0.26px] text-heading">Step 2</span>
+                      <div class="flex gap-4">
+                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] border border-purpleStroke bg-purpleTint text-purple">
+                          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 14l4-4 4 4 8-8"></path>
+                            <path d="M20 10V4h-6"></path>
+                          </svg>
+                        </span>
+                        <div class="space-y-1">
+                          <h3 class="text-[14px] font-medium leading-[18px] tracking-[-0.28px] text-heading">Track Carbon Asset Value</h3>
+                          <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">Monitor carbon credit value and environmental impact in real-time.</p>
+                        </div>
+                      </div>
+                    </article>
+
+                    <div class="h-px w-full bg-border"></div>
+
+                    <article class="space-y-[14px]">
+                      <span class="text-[13px] font-medium leading-[18px] tracking-[-0.26px] text-heading">Step 3</span>
+                      <div class="flex gap-4">
+                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] border border-purpleStroke bg-purpleTint text-purple">
+                          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 7h10v10H7z"></path>
+                            <path d="M4 10h3"></path>
+                            <path d="M17 10h3"></path>
+                          </svg>
+                        </span>
+                        <div class="space-y-1">
+                          <h3 class="text-[14px] font-medium leading-[18px] tracking-[-0.28px] text-heading">Trade or Retire Credits</h3>
+                          <p class="text-[13px] leading-[18px] tracking-[-0.26px] text-subtext">Trade carbon tokens or retire them to offset emissions permanently.</p>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </section>
+
+              <section class="space-y-[10px]">
+                <h2 class="text-[20px] font-semibold leading-[27px] tracking-[-0.6px] text-heading">Project Location</h2>
+                <div class="space-y-[14px]">
+                  <div class="flex items-center gap-[6px] text-[16px] font-medium leading-[18px] tracking-[-0.48px] text-subtext">
+                    <svg class="h-5 w-5 shrink-0" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+                      <path d="M10 18s5.25-4.93 5.25-9A5.25 5.25 0 0 0 4.75 9C4.75 13.07 10 18 10 18Z"></path>
+                      <circle cx="10" cy="9" r="2.25"></circle>
+                    </svg>
+                    <span>Amazon Rainforest, Brazil</span>
+                  </div>
+                  <div class="relative h-[286px] overflow-hidden rounded-[10px] border border-border bg-white">
+                    <img src="./Image/project-location-overlay.png" alt="Project location map for the Amazon Rainforest, Brazil" class="h-full w-full object-cover">
+                    <div class="absolute left-1/2 top-[49.65%] flex h-[50px] w-[50px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full">
+                      <span class="flex h-[24px] w-[24px] items-center justify-center rounded-full bg-white p-[3px]">
+                        <img src="./Image/project-detail-hero.png" alt="" class="h-full w-full rounded-full object-cover">
+                      </span>
+                    </div>
+                    <div class="absolute right-[18px] top-[187px] flex h-[27px] w-[27px] items-center justify-center rounded-[5px] bg-[#191a1e] text-white">
+                      <svg class="h-[13px] w-[13px]" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="8" cy="8" r="2.5"></circle>
+                        <path d="M8 1.5v2"></path>
+                        <path d="M8 12.5v2"></path>
+                        <path d="M1.5 8h2"></path>
+                        <path d="M12.5 8h2"></path>
+                      </svg>
+                    </div>
+                    <div class="absolute right-[18px] top-[220px] overflow-hidden rounded-[5px] bg-[#191a1e] text-white">
+                      <button type="button" class="flex h-[25px] w-[27px] items-center justify-center border-b border-white/10" aria-label="Zoom in">
+                        <svg class="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                          <path d="M6 2v8"></path>
+                          <path d="M2 6h8"></path>
+                        </svg>
+                      </button>
+                      <button type="button" class="flex h-[25px] w-[27px] items-center justify-center" aria-label="Zoom out">
+                        <svg class="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                          <path d="M2 6h8"></path>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <!-- Project Information Panel -->
+            <div id="panel-project-information" role="tabpanel" aria-labelledby="tab-project-information" data-tab-panel="project-information" hidden class="space-y-10 px-[26px] pb-[34px] pt-[26px]">
+              <section class="space-y-[10px]">
+                <h2 class="text-[20px] font-semibold leading-[27px] tracking-[-0.6px] text-heading">About the Carbon Project</h2>
+                <p class="text-[14px] leading-[21px] tracking-[-0.28px] text-subtext">
+                  This verified carbon offset project in the Amazon Rainforest, Brazil enables participants to own
+                  fractional carbon credits backed by real environmental impact. The project preserves forest land,
+                  prevents deforestation, and generates measurable CO2 reductions verified by global standards.
+                </p>
+              </section>
+
+              <section class="space-y-[10px]">
+                <h2 class="text-[20px] font-semibold leading-[27px] tracking-[-0.6px] text-heading">Why Participate in Carbon Credits?</h2>
+                <div class="space-y-5">
+                  <article class="space-y-2">
+                    <h3 class="text-[15px] font-medium leading-5 tracking-[-0.3px] text-heading">1. Verified Environmental Impact</h3>
+                    <p class="text-[14px] leading-[21px] tracking-[-0.28px] text-subtext">
+                      This project is located in a high-impact rainforest region where carbon sequestration is
+                      maximized. Each credit represents verified CO2 reduction, contributing directly to global climate action.
+                    </p>
+                  </article>
+                  <article class="space-y-2">
+                    <h3 class="text-[15px] font-medium leading-5 tracking-[-0.3px] text-heading">2. Globally Verified &amp; Audited Credits</h3>
+                    <p class="text-[14px] leading-[21px] tracking-[-0.28px] text-subtext">
+                      Carbon credits are verified under global standards such as Verra (VCS), ensuring transparency,
+                      auditability, and credibility for every issued credit.
+                    </p>
+                  </article>
+                  <article class="space-y-2">
+                    <h3 class="text-[15px] font-medium leading-5 tracking-[-0.3px] text-heading">3. Growing Global Carbon Market</h3>
+                    <p class="text-[14px] leading-[21px] tracking-[-0.28px] text-subtext">
+                      The global carbon market is rapidly expanding as companies and governments seek to offset emissions,
+                      driving increasing demand and long-term value for verified carbon credits.
+                    </p>
+                  </article>
+                  <article class="space-y-2">
+                    <h3 class="text-[15px] font-medium leading-5 tracking-[-0.3px] text-heading">4. Flexible Carbon Credit Utility</h3>
+                    <p class="text-[14px] leading-[21px] tracking-[-0.28px] text-subtext">
+                      Blockchain-backed carbon credits enable transparent ownership, allowing users to trade, hold, or retire credits
+                      to offset emissions without managing physical assets.
+                    </p>
+                  </article>
+                </div>
+              </section>
+            </div>
+          </article>
+        </section>
+
+        <!-- Summary Card -->
+        <aside class="min-[1200px]:sticky min-[1200px]:top-[106px]">
+          <article class="rounded-[12px] border border-border bg-card px-6 pb-6 pt-6 min-[1200px]:h-[702px] min-[1200px]:w-[436px]">
+            <div class="flex h-full flex-col justify-between">
+              <div class="space-y-6">
+                <div class="space-y-[10px]">
+                  <span class="inline-flex h-[26px] items-center rounded-[6px] bg-muted px-[15px] text-[12px] font-medium leading-[18px] tracking-[-0.24px] text-heading">Active</span>
+                  <h1 class="max-w-[388px] text-[16px] font-medium leading-[26px] tracking-[-0.48px] text-heading">Amazon Rainforest Carbon Offset Project - Brazil</h1>
+                </div>
+
+                <div class="space-y-[18px]">
+                  <div class="space-y-[10px]">
+                    <p class="text-[14px] font-medium leading-5 tracking-[-0.28px] text-subtext">Total Project Value</p>
+                    <p class="text-[30px] font-semibold leading-[32px] tracking-[-0.9px] text-heading">$560,000</p>
+                  </div>
+                  <div class="space-y-[14px]">
+                    <div class="h-[6px] overflow-hidden rounded-full bg-[#e5e7eb]">
+                      <div class="h-full w-[74.2%] rounded-full bg-purple"></div>
+                    </div>
+                    <div class="flex items-center justify-between text-[12px] font-medium leading-[18px] tracking-[-0.24px]">
+                      <span class="text-heading">70% Allocated</span>
+                      <span class="text-heading">17,648 / 25,000 CO2 Credits</span>
+                    </div>
+                  </div>
+                </div>
+
+                <section class="rounded-[10px] bg-light px-5 py-5">
+                  <div class="space-y-3">
+                    <p class="text-center text-[13px] font-medium leading-[18px] tracking-[-0.26px] text-subtext">Allocation Ends In</p>
+                    <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-[14px]">
+                      <div class="flex h-[68px] flex-col items-center justify-center rounded-[8px] border border-purpleStroke bg-white">
+                        <span class="text-[14px] font-semibold leading-[18px] tracking-[-0.28px] text-heading">22</span>
+                        <span class="mt-2 text-[10px] font-medium leading-3 tracking-[-0.2px] text-subtext">Days</span>
+                      </div>
+                      <div class="flex h-[68px] flex-col items-center justify-center rounded-[8px] border border-purpleStroke bg-white">
+                        <span class="text-[14px] font-semibold leading-[18px] tracking-[-0.28px] text-heading">23</span>
+                        <span class="mt-2 text-[10px] font-medium leading-3 tracking-[-0.2px] text-subtext">Hours</span>
+                      </div>
+                      <div class="flex h-[68px] flex-col items-center justify-center rounded-[8px] border border-purpleStroke bg-white">
+                        <span class="text-[14px] font-semibold leading-[18px] tracking-[-0.28px] text-heading">08</span>
+                        <span class="mt-2 text-[10px] font-medium leading-3 tracking-[-0.2px] text-subtext">Minutes</span>
+                      </div>
+                      <div class="flex h-[68px] flex-col items-center justify-center rounded-[8px] border border-purpleStroke bg-white">
+                        <span class="text-[14px] font-semibold leading-[18px] tracking-[-0.28px] text-heading">24</span>
+                        <span class="mt-2 text-[10px] font-medium leading-3 tracking-[-0.2px] text-subtext">Seconds</span>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-0">
+                  <div class="space-y-1">
+                    <p class="text-[12px] font-medium leading-[14px] tracking-[-0.24px] text-subtext">Token Allocation</p>
+                    <p class="text-[14px] font-medium leading-[18px] tracking-[-0.28px] text-heading">1 Token = 1 Tonne CO2</p>
+                  </div>
+                  <div class="space-y-1 text-left sm:text-right">
+                    <p class="text-[12px] font-medium leading-[14px] tracking-[-0.24px] text-subtext">Total Carbon Credits</p>
+                    <p class="text-[14px] font-medium leading-[18px] tracking-[-0.28px] text-heading">25,000 Tonnes CO2</p>
+                  </div>
+                </section>
+
+                <section class="space-y-[14px]">
+                  <div class="grid grid-cols-2 gap-[10px] sm:grid-cols-4">
+                    <button type="button" data-amount-button data-amount="1000" class="allocation-button flex h-7 items-center justify-center rounded-[6px] border border-border bg-white text-[11px] font-medium leading-[15px] tracking-[-0.22px] text-heading transition hover:border-purple/40">1,000 USDC</button>
+                    <button type="button" data-amount-button data-amount="5000" class="allocation-button flex h-7 items-center justify-center rounded-[6px] border border-border bg-white text-[11px] font-medium leading-[15px] tracking-[-0.22px] text-heading transition hover:border-purple/40">5,000 USDC</button>
+                    <button type="button" data-amount-button data-amount="10000" aria-pressed="true" class="allocation-button is-active flex h-7 items-center justify-center rounded-[6px] border border-purpleStroke bg-purpleSoft text-[11px] font-medium leading-[15px] tracking-[-0.22px] text-purple">10,000 USDC</button>
+                    <button type="button" data-amount-button data-amount="15000" class="allocation-button flex h-7 items-center justify-center rounded-[6px] border border-border bg-white text-[11px] font-medium leading-[15px] tracking-[-0.22px] text-heading transition hover:border-purple/40">15,000 USDC</button>
+                  </div>
+
+                  <label for="allocation-input" class="sr-only">Allocation amount in USDC</label>
+                  <div class="flex h-[46px] items-center rounded-[6px] border border-border bg-white px-4">
+                    <span class="mr-2 flex h-[22px] w-[22px] items-center justify-center rounded-full border border-purpleStroke bg-purpleTint text-purple">
+                      <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="8"></circle>
+                        <path d="M12 8v8"></path>
+                        <path d="M9 10.5c0-1 1-1.75 2.5-1.75S14 9.4 14 10.35c0 2-5 1-5 3 0 .95 1 1.65 2.5 1.65S14 14.25 14 13.2"></path>
+                      </svg>
+                    </span>
+                    <input id="allocation-input" type="text" value="1,000 USDC" readonly class="w-full border-0 bg-transparent p-0 text-[14px] font-medium leading-5 tracking-[-0.28px] text-heading focus:outline-none">
+                  </div>
+                  <p id="allocation-helper" class="text-[12px] font-medium leading-5 tracking-[-0.24px] text-subtext">10,000 USDC ~= 1,000 CO2 Credits</p>
+                </section>
+              </div>
+
+              <button type="button" class="mt-6 flex h-12 w-full items-center justify-center rounded-[6px] bg-purple text-[15px] font-semibold leading-6 tracking-[-0.3px] text-white transition hover:bg-purple/95">
+                Connect Your Wallet
+              </button>
+            </div>
+          </article>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const menuButton = document.getElementById("mobile-menu-button");
+      const menuClose = document.getElementById("mobile-menu-close");
+      const mobileSidebar = document.getElementById("mobile-sidebar");
+      const mobileOverlay = document.getElementById("mobile-menu-overlay");
+
+      function openMenu() {
+        mobileSidebar.classList.remove("hidden");
+        mobileSidebar.classList.add("flex");
+        mobileOverlay.classList.remove("hidden");
+        menuButton.setAttribute("aria-expanded", "true");
+      }
+
+      function closeMenu() {
+        mobileSidebar.classList.add("hidden");
+        mobileSidebar.classList.remove("flex");
+        mobileOverlay.classList.add("hidden");
+        menuButton.setAttribute("aria-expanded", "false");
+      }
+
+      menuButton?.addEventListener("click", openMenu);
+      menuClose?.addEventListener("click", closeMenu);
+      mobileOverlay?.addEventListener("click", closeMenu);
+
+      const tabs = Array.from(document.querySelectorAll("[data-tab-target]"));
+      const panels = Array.from(document.querySelectorAll("[data-tab-panel]"));
+
+      function activateTab(target) {
+        tabs.forEach((tab) => {
+          const isSelected = tab.dataset.tabTarget === target;
+          const underline = tab.querySelector("span:last-child");
+          tab.setAttribute("aria-selected", String(isSelected));
+          tab.tabIndex = isSelected ? 0 : -1;
+          tab.classList.toggle("text-heading", isSelected);
+          tab.classList.toggle("text-subtext", !isSelected);
+          if (underline) {
+            underline.classList.toggle("hidden", !isSelected);
+          }
+        });
+
+        panels.forEach((panel) => {
+          panel.hidden = panel.dataset.tabPanel !== target;
+        });
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          activateTab(tab.dataset.tabTarget);
+        });
+      });
+
+      const allocationButtons = Array.from(document.querySelectorAll("[data-amount-button]"));
+      const allocationInput = document.getElementById("allocation-input");
+      const allocationHelper = document.getElementById("allocation-helper");
+
+      function formatUSDC(value) {
+        return Number(value).toLocaleString("en-US") + " USDC";
+      }
+
+      function updateAllocation(value) {
+        allocationButtons.forEach((button) => {
+          const active = button.dataset.amount === String(value);
+          button.setAttribute("aria-pressed", String(active));
+          button.classList.toggle("border-purpleStroke", active);
+          button.classList.toggle("bg-purpleSoft", active);
+          button.classList.toggle("text-purple", active);
+          button.classList.toggle("border-border", !active);
+          button.classList.toggle("bg-white", !active);
+          button.classList.toggle("text-heading", !active);
+        });
+
+        if (allocationInput) {
+          allocationInput.value = formatUSDC(value);
+        }
+
+        if (allocationHelper) {
+          const credits = Math.round(Number(value) / 10);
+          allocationHelper.textContent = formatUSDC(value) + " ~= " + credits.toLocaleString("en-US") + " CO2 Credits";
+        }
+      }
+
+      allocationButtons.forEach((button) => {
+        button.addEventListener("click", () => updateAllocation(button.dataset.amount));
+      });
+
+      activateTab("overview");
+      updateAllocation(10000);
+    })();
+  </script>
+</body>
+</html>
+
+
+
