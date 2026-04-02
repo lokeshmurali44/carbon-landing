@@ -73,7 +73,7 @@
   </style>
 </head>
 
-<body class="bg-bx-bg font-poppins">
+<body class="bg-bx-bg font-poppins" style="overflow-x:hidden;">
 
   <!-- ========== SIDEBAR ========== -->
   <aside class="fixed top-0 left-0 h-full w-[286px] bg-white border-r border-bx-sidebar-border flex flex-col z-50">
@@ -169,7 +169,7 @@
 
   <!-- ========== MAIN CONTENT ========== -->
   <!-- Figma: content starts at left-[326px] = 286px sidebar + 40px gap, top-[60px] -->
-  <main class="ml-[326px] pt-[60px] pr-[40px] pb-[60px] min-h-screen">
+  <main class="ml-[326px] pt-[60px] pr-[40px] pb-[60px] min-h-screen" style="width:calc(100% - 326px);">
     <div class="flex flex-col gap-[40px] items-start w-full">
 
       <!-- ========== PAGE HEADER ========== -->
@@ -249,12 +249,12 @@
         </div>
 
         <!-- ========== CARD GRID ========== -->
-        <!-- Figma: flex flex-col gap-[20px], rows each are flex gap-[21px] -->
-        <div class="flex flex-wrap gap-[21px] items-start w-full" id="projectsGrid">
+        <!-- CSS grid: 3 equal columns, always aligned with filter row -->
+        <div class="grid grid-cols-3 gap-[21px] w-full" id="projectsGrid">
 
             <!-- Card 1: Amazon Rainforest -->
             <!-- Figma: bg-white rounded-[10px] w-[344px], card header: border-[#d8dfeb] 0.815px top/left/right, px-[14px] py-[6px] rounded-tl-[9.776px] rounded-tr-[9.776px] -->
-            <article class="project-card bg-white rounded-[10px] w-[344px] shrink-0 flex flex-col items-start overflow-hidden cursor-pointer"
+            <article class="project-card bg-white rounded-[10px] w-full flex flex-col items-start overflow-hidden cursor-pointer"
               data-status="active" data-name="amazon rainforest carbon offset brazil">
 
               <!-- Card Top: header + image + badge -->
@@ -298,7 +298,7 @@
             </article>
 
             <!-- Card 2: Solar Energy India -->
-            <article class="project-card bg-white rounded-[10px] w-[344px] shrink-0 flex flex-col items-start overflow-hidden cursor-pointer"
+            <article class="project-card bg-white rounded-[10px] w-full flex flex-col items-start overflow-hidden cursor-pointer"
               data-status="active" data-name="solar energy carbon credit initiative india">
               <div class="flex flex-col h-[254px] items-start relative w-full">
                 <div class="flex gap-[8px] items-center px-[14px] py-[6px] bg-white border-t border-l border-r border-bx-stroke w-full whitespace-nowrap shrink-0" style="border-width:0.815px; border-radius: 9.776px 9.776px 0 0;">
@@ -333,7 +333,7 @@
             </article>
 
             <!-- Card 3: Mangrove Indonesia -->
-            <article class="project-card bg-white rounded-[10px] w-[344px] shrink-0 flex flex-col items-start overflow-hidden cursor-pointer"
+            <article class="project-card bg-white rounded-[10px] w-full flex flex-col items-start overflow-hidden cursor-pointer"
               data-status="active" data-name="mangrove restoration carbon project indonesia">
               <div class="flex flex-col h-[254px] items-start relative w-full">
                 <div class="flex gap-[8px] items-center px-[14px] py-[6px] bg-white border-t border-l border-r border-bx-stroke w-full whitespace-nowrap shrink-0" style="border-width:0.815px; border-radius: 9.776px 9.776px 0 0;">
@@ -369,7 +369,7 @@
 
             <!-- Card 4: Grassland USA -->
 
-            <article class="project-card bg-white rounded-[10px] w-[344px] shrink-0 flex flex-col items-start overflow-hidden cursor-pointer"
+            <article class="project-card bg-white rounded-[10px] w-full flex flex-col items-start overflow-hidden cursor-pointer"
               data-status="active" data-name="grassland carbon sequestration project usa">
               <div class="flex flex-col h-[254px] items-start relative w-full">
                 <div class="flex gap-[8px] items-center px-[14px] py-[6px] bg-white border-t border-l border-r border-bx-stroke w-full whitespace-nowrap shrink-0" style="border-width:0.815px; border-radius: 9.776px 9.776px 0 0;">
@@ -404,7 +404,7 @@
             </article>
 
             <!-- Card 5: Reforestation Colombia -->
-            <article class="project-card bg-white rounded-[10px] w-[344px] shrink-0 flex flex-col items-start overflow-hidden cursor-pointer"
+            <article class="project-card bg-white rounded-[10px] w-full flex flex-col items-start overflow-hidden cursor-pointer"
               data-status="active" data-name="reforestation carbon credit project colombia">
               <div class="flex flex-col h-[254px] items-start relative w-full">
                 <div class="flex gap-[8px] items-center px-[14px] py-[6px] bg-white border-t border-l border-r border-bx-stroke w-full whitespace-nowrap shrink-0" style="border-width:0.815px; border-radius: 9.776px 9.776px 0 0;">
@@ -439,7 +439,7 @@
             </article>
 
             <!-- Card 6: Afforestation Italy -->
-            <article class="project-card bg-white rounded-[10px] w-[344px] shrink-0 flex flex-col items-start overflow-hidden cursor-pointer"
+            <article class="project-card bg-white rounded-[10px] w-full flex flex-col items-start overflow-hidden cursor-pointer"
               data-status="active" data-name="afforestation carbon credit estate italy">
               <div class="flex flex-col h-[254px] items-start relative w-full">
                 <div class="flex gap-[8px] items-center px-[14px] py-[6px] bg-white border-t border-l border-r border-bx-stroke w-full whitespace-nowrap shrink-0" style="border-width:0.815px; border-radius: 9.776px 9.776px 0 0;">
@@ -475,7 +475,7 @@
 
             <!-- Card 7: Wind Energy Kenya -->
 
-            <article class="project-card bg-white rounded-[10px] w-[344px] shrink-0 flex flex-col items-start overflow-hidden cursor-pointer"
+            <article class="project-card bg-white rounded-[10px] w-full flex flex-col items-start overflow-hidden cursor-pointer"
               data-status="upcoming" data-name="wind energy carbon credit kenya">
               <div class="flex flex-col h-[254px] items-start relative w-full">
                 <div class="flex gap-[8px] items-center px-[14px] py-[6px] bg-white border-t border-l border-r border-bx-stroke w-full whitespace-nowrap shrink-0" style="border-width:0.815px; border-radius: 9.776px 9.776px 0 0;">
@@ -510,7 +510,7 @@
             </article>
 
             <!-- Card 8: Ocean Blue Carbon Philippines -->
-            <article class="project-card bg-white rounded-[10px] w-[344px] shrink-0 flex flex-col items-start overflow-hidden cursor-pointer"
+            <article class="project-card bg-white rounded-[10px] w-full flex flex-col items-start overflow-hidden cursor-pointer"
               data-status="upcoming" data-name="ocean blue carbon project philippines">
               <div class="flex flex-col h-[254px] items-start relative w-full">
                 <div class="flex gap-[8px] items-center px-[14px] py-[6px] bg-white border-t border-l border-r border-bx-stroke w-full whitespace-nowrap shrink-0" style="border-width:0.815px; border-radius: 9.776px 9.776px 0 0;">
@@ -545,7 +545,7 @@
             </article>
 
             <!-- Card 9: Peatland Germany -->
-            <article class="project-card bg-white rounded-[10px] w-[344px] shrink-0 flex flex-col items-start overflow-hidden cursor-pointer"
+            <article class="project-card bg-white rounded-[10px] w-full flex flex-col items-start overflow-hidden cursor-pointer"
               data-status="upcoming" data-name="peatland restoration carbon germany">
               <div class="flex flex-col h-[254px] items-start relative w-full">
                 <div class="flex gap-[8px] items-center px-[14px] py-[6px] bg-white border-t border-l border-r border-bx-stroke w-full whitespace-nowrap shrink-0" style="border-width:0.815px; border-radius: 9.776px 9.776px 0 0;">
@@ -580,7 +580,7 @@
             </article>
             <!-- Card 10: Savanna Tanzania -->
 
-            <article class="project-card bg-white rounded-[10px] w-[344px] shrink-0 flex flex-col items-start overflow-hidden cursor-pointer"
+            <article class="project-card bg-white rounded-[10px] w-full flex flex-col items-start overflow-hidden cursor-pointer"
               data-status="upcoming" data-name="savanna conservation carbon tanzania">
               <div class="flex flex-col h-[254px] items-start relative w-full">
                 <div class="flex gap-[8px] items-center px-[14px] py-[6px] bg-white border-t border-l border-r border-bx-stroke w-full whitespace-nowrap shrink-0" style="border-width:0.815px; border-radius: 9.776px 9.776px 0 0;">
@@ -688,3 +688,4 @@
 
 </body>
 </html>
+
