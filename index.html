@@ -14,104 +14,40 @@
       theme: {
         extend: {
           fontFamily: {
-            poppins: ['Poppins', 'sans-serif'],
+            poppins: ["Poppins", "sans-serif"],
           },
           colors: {
             purple: {
-              DEFAULT: '#661eb9',
-              dark: '#4e1fa3',
+              DEFAULT: "#661eb9",
+              dark: "#4e1fa3",
             },
-            heading: '#111928',
-            subtext: '#72798b',
-            body: '#6d6d6d',
-            stroke: '#d8dfeb',
-            dark: '#191a1e',
-          }
+            heading: "#111928",
+            subtext: "#72798b",
+            body: "#6d6d6d",
+            stroke: "#d8dfeb",
+            dark: "#191a1e",
+          },
+          boxShadow: {
+            subtle: "0 18px 40px rgba(17, 25, 40, 0.05)",
+          },
         }
-      },
-      plugins: [
-        function ({ addBase }) {
-          addBase({
-            'h1, h2, h3, h4, h5, h6, p, a, span': {
-              'leading-trim': 'both',
-              'text-edge': 'cap',
-            }
-          })
-        }
-      ]
-    }
+      }
+    };
   </script>
   <style>
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      font-family: "Poppins", sans-serif;
       overflow-x: hidden;
       background-color: #ffffff;
-    }
-
-
-    .hero-bg {
-      background: rgba(102, 30, 185, 0.06);
-      overflow: hidden;
-    }
-
-    .gradient-text {
-      background: linear-gradient(90deg, #4e1fa3, #661eb9);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .gradient-border-btn {
-      background: linear-gradient(90deg, rgba(78, 31, 163, 0.1), rgba(102, 30, 185, 0.1));
-      border: 1px solid #4e1fa3;
-    }
-
-    .progress-bar-bg {
-      background: #d9d9d9;
-    }
-
-    .progress-bar-fill {
-      background: rgba(102, 30, 185, 0.6);
-    }
-
-    .bar-gradient {
-      background: linear-gradient(180deg, rgba(142, 109, 212, 0) 74%, #fff 100%);
-    }
-
-    .faq-item .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-
-    .faq-item.active .faq-answer {
-      max-height: 200px;
-    }
-
-    .faq-item .faq-icon-plus {
-      display: block;
-    }
-
-    .faq-item .faq-icon-minus {
-      display: none;
-    }
-
-    .faq-item.active .faq-icon-plus {
-      display: none;
-    }
-
-    .faq-item.active .faq-icon-minus {
-      display: block;
-    }
-
-    .faq-item.active .faq-question-text {
-      color: #111928;
     }
 
     .calculator-slider {
@@ -119,7 +55,7 @@
       appearance: none;
       width: 100%;
       height: 9px;
-      border-radius: 10px;
+      border-radius: 999px;
       background: #e9e9e9;
       outline: none;
     }
@@ -129,860 +65,948 @@
       appearance: none;
       width: 18px;
       height: 18px;
-      border-radius: 50%;
+      border-radius: 999px;
+      border: 0;
       background: #661eb9;
-      cursor: pointer;
       box-shadow: 0 0 0 4px rgba(102, 30, 185, 0.2);
+      cursor: pointer;
     }
 
     .calculator-slider::-moz-range-thumb {
       width: 18px;
       height: 18px;
-      border-radius: 50%;
+      border-radius: 999px;
+      border: 0;
       background: #661eb9;
-      cursor: pointer;
-      border: none;
       box-shadow: 0 0 0 4px rgba(102, 30, 185, 0.2);
-    }
-
-    .calculator-slider::-webkit-slider-runnable-track {
-      border-radius: 10px;
+      cursor: pointer;
     }
   </style>
 </head>
 
-<body>
-
-  <!-- ========== HERO SECTION ========== -->
-  <section class="bg-[rgba(102,30,185,0.06)] relative w-full h-[800px] flex justify-center">
-    <div class="w-[1440px] relative h-full">
-
-      <!-- Background Grid Pattern -->
-      <div class="absolute h-full left-0 top-0 w-[1440px] pointer-events-none overflow-hidden z-0">
-        <div class="absolute inset-[-53.63%_-43.66%_-97.36%_-54.87%]">
-          <img src="./Image/home-banner-bg.png" class="block max-w-none w-full h-full" alt="">
-        </div>
+<body class="overflow-x-hidden bg-white font-poppins text-heading">
+  <main class="w-full overflow-x-hidden">
+    <!-- ========== HERO SECTION ========== -->
+    <header class="relative overflow-hidden bg-[rgba(102,30,185,0.06)]">
+      <div class="pointer-events-none absolute inset-0">
+        <img src="./Image/home-banner-bg.png" alt="" class="h-full w-full object-cover object-center opacity-90">
       </div>
 
-      <!-- Navigation -->
-      <nav class="absolute top-[40px] left-[50px] w-[1340px] bg-white rounded-[70px] px-[40px] py-[12px] flex items-center justify-between z-10">
-        <!-- Logo -->
-        <div class="h-[48px] relative shrink-0 w-[154.286px]">
-          <a href="#">
-            <img src="https://www.figma.com/api/mcp/asset/9521a443-d724-4189-83ff-556cff804a12" alt="BlockchainX Logo" class="absolute block max-w-none w-full h-full object-contain">
-          </a>
-        </div>
-        <!-- Links -->
-        <div class="flex gap-[32px] items-center text-[18px]">
-          <a href="#" class="font-semibold text-purple tracking-[-0.54px] underline leading-normal whitespace-nowrap">Home</a>
-          <a href="projects.html" class="font-medium text-heading leading-[1.4] whitespace-nowrap hover:text-purple transition-colors">Projects</a>
-          <a href="#" class="font-medium text-heading leading-[1.4] whitespace-nowrap hover:text-purple transition-colors">Platform</a>
-          <a href="#" class="font-medium text-heading leading-[1.4] whitespace-nowrap hover:text-purple transition-colors">About Us</a>
-          <a href="#" class="font-medium text-heading leading-[1.4] whitespace-nowrap hover:text-purple transition-colors">Contact Us</a>
-        </div>
-        <!-- Button -->
-        <div class="flex items-center shrink-0">
-          <button class="bg-gradient-to-r from-[rgba(78,31,163,0.1)] to-[rgba(102,30,185,0.1)] border border-[#4e1fa3] border-solid rounded-[48px] px-[24px] py-[12px] h-[40px] flex items-center justify-center shrink-0 hover:shadow-lg hover:-translate-y-[1px] transition-all duration-300">
-            <span class="bg-clip-text bg-gradient-to-r from-[#4e1fa3] to-[#661eb9] text-[transparent] text-[14px] font-medium leading-[1.4] whitespace-nowrap">Connect Wallet</span>
-          </button>
-        </div>
-      </nav>
+      <div class="relative mx-auto w-full max-w-[1760px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 2xl:px-20">
+        <!-- Navigation -->
+        <nav class="relative z-20 pt-6 sm:pt-8 lg:pt-10">
+          <div class="flex items-center justify-between gap-4 rounded-[40px] bg-white px-5 py-4 shadow-subtle sm:px-6 lg:rounded-[70px] lg:px-10 lg:py-3">
+            <a href="#" class="shrink-0">
+              <img src="./Image/Blockchain%20Logo%20White.png" alt="BlockchainX Logo" class="h-10 w-auto sm:h-11 lg:h-12">
+            </a>
 
-      <!-- Left Content -->
-      <div class="absolute left-[80px] top-[calc(50%+45.5px)] -translate-y-1/2 w-[676px] flex flex-col gap-[52px] items-start z-[5]">
-        <div class="flex flex-col gap-[30px] items-start w-full">
-          <div class="bg-[#e8dff4] flex items-center justify-center px-[20px] py-[12px] rounded-[100px] shrink-0">
-            <span class="text-purple font-semibold text-[14px] capitalize leading-normal whitespace-nowrap">Verified Carbon Assets</span>
+            <div class="hidden items-center gap-6 xl:flex 2xl:gap-8">
+              <a href="#" class="text-[18px] font-semibold leading-[1.4] text-purple underline underline-offset-[6px]">Home</a>
+              <a href="projects.html" class="text-[18px] font-medium leading-[1.4] text-heading transition-colors hover:text-purple">Projects</a>
+              <a href="#" class="text-[18px] font-medium leading-[1.4] text-heading transition-colors hover:text-purple">Platform</a>
+              <a href="#" class="text-[18px] font-medium leading-[1.4] text-heading transition-colors hover:text-purple">About Us</a>
+              <a href="#" class="text-[18px] font-medium leading-[1.4] text-heading transition-colors hover:text-purple">Contact Us</a>
+            </div>
+
+            <div class="hidden items-center gap-3 md:flex">
+              <button class="flex h-10 items-center justify-center rounded-[48px] border border-[#4e1fa3] bg-gradient-to-r from-[rgba(78,31,163,0.1)] to-[rgba(102,30,185,0.1)] px-6 text-[14px] font-medium leading-[1.4] text-purple transition-all duration-300 hover:-translate-y-[1px] hover:shadow-md">
+                Connect Wallet
+              </button>
+            </div>
+
+            <button id="mobileMenuButton" type="button" aria-label="Open menu" aria-expanded="false" class="flex h-11 w-11 items-center justify-center rounded-full border border-stroke text-heading transition-colors hover:bg-[#f8f8f8] xl:hidden">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <path d="M4 7h16"></path>
+                <path d="M4 12h16"></path>
+                <path d="M4 17h16"></path>
+              </svg>
+            </button>
           </div>
-          <div class="flex flex-col gap-[15px] items-start w-full">
-            <h1 class="font-bold text-[55px] text-heading flex flex-col justify-center leading-[0] w-full">
-              <span><span class="leading-[62px]">Build the Future of </span><span class="leading-[62px] text-purple">Carbon Markets</span></span>
-            </h1>
-            <p class="font-normal text-[20px] text-subtext leading-[1.5] w-full">
-              Access verified, tokenized carbon credits with full transparency, traceability, and global market participation
-            </p>
+
+          <div id="mobileMenu" class="mt-4 hidden rounded-[28px] bg-white px-5 py-5 shadow-subtle xl:hidden">
+            <div class="flex flex-col gap-4 text-[17px] font-medium text-heading">
+              <a href="#" class="text-purple">Home</a>
+              <a href="projects.html">Projects</a>
+              <a href="#">Platform</a>
+              <a href="#">About Us</a>
+              <a href="#">Contact Us</a>
+              <button class="mt-2 flex h-11 items-center justify-center rounded-full border border-[#4e1fa3] bg-gradient-to-r from-[rgba(78,31,163,0.1)] to-[rgba(102,30,185,0.1)] px-6 text-[14px] font-medium text-purple">
+                Connect Wallet
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="flex gap-[20px] items-center shrink-0">
-          <a href="projects.html" class="bg-purple text-white font-medium text-[16px] leading-[1.5] h-[52px] px-[26px] py-[20px] rounded-[8px] flex items-center justify-center overflow-hidden shrink-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple/30 transition-all duration-300 no-underline">
-            Explore Carbon Projects
-          </a>
-          <a href="projects.html" class="bg-white border border-[#dbdde1] border-solid text-heading font-medium text-[16px] leading-[1.5] h-[52px] px-[26px] py-[20px] rounded-[8px] flex items-center justify-center shrink-0 hover:bg-gray-50 hover:-translate-y-1 hover:shadow-md transition-all duration-300 no-underline">
-            Enter Marketplace
-          </a>
-        </div>
-      </div>
+        </nav>
 
-      <!-- Hero Image -->
-      <div class="absolute right-[103px] top-[152px] w-[550px] h-[549px] z-[5]">
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <img src="./Image/home-banner-hero.png" alt="Carbon Footprints" class="absolute h-[98.24%] left-[0.75%] max-w-none top-[0.77%] w-[98.06%]">
-        </div>
-      </div>
+        <div class="grid min-h-[calc(100vh-80px)] items-center gap-10 pb-16 pt-12 sm:pt-16 sm:pb-20 lg:min-h-[760px] lg:gap-14 lg:pb-24 lg:pt-20 xl:grid-cols-[minmax(0,1.05fr)_minmax(440px,0.95fr)] xl:gap-10 xl:pb-28 2xl:grid-cols-[minmax(0,1.02fr)_minmax(520px,0.98fr)] 2xl:gap-16">
+          <!-- Left Content -->
+          <div class="relative z-10 max-w-[840px]">
+            <div class="flex flex-col items-start gap-8 lg:gap-10">
+              <div class="inline-flex items-center justify-center rounded-[100px] bg-[#e8dff4] px-5 py-3">
+                <span class="text-[14px] font-semibold capitalize leading-normal text-purple">Verified Carbon Assets</span>
+              </div>
 
-    </div>
-  </section>
+              <div class="flex flex-col gap-4 lg:gap-[18px]">
+                <h1 class="max-w-[760px] text-[38px] font-bold leading-[1.08] text-heading sm:text-[46px] md:text-[52px] lg:text-[58px] xl:text-[55px] 2xl:text-[64px]">
+                  Build the Future of <span class="text-purple">Carbon Markets</span>
+                </h1>
+                <p class="max-w-[720px] text-[18px] font-normal leading-[1.6] text-subtext sm:text-[19px] lg:text-[20px] xl:max-w-[676px]">
+                  Access verified, tokenized carbon credits with full transparency, traceability, and global market participation
+                </p>
+              </div>
 
-  <!-- ========== FEATURED CARBON PROJECTS ========== -->
-  <section class="flex flex-col gap-[60px] items-center justify-center pb-[60px] pt-[120px] px-[80px] relative w-full">
-    
-    <!-- Section Header -->
-    <div class="flex flex-col gap-[6px] items-center justify-center leading-[normal] relative text-center w-[821px] shrink-0">
-      <h2 class="font-bold text-[#191a1e] text-[48px] whitespace-nowrap m-0 shrink-0">
-        Featured Carbon Projects
-      </h2>
-      <p class="font-normal text-[#6d6d6d] text-[20px] w-[660px] m-0 shrink-0">
-        Explore registry-verified carbon projects enabling transparent participation in global environmental asset markets.
-      </p>
-    </div>
-
-    <!-- Cards Row -->
-    <div class="flex items-center justify-between relative w-full shrink-0">
-
-      <!-- Card 1: Amazon Rainforest -->
-      <div class="flex flex-col gap-[28px] items-start relative w-[410px] shrink-0">
-        <div class="flex flex-col items-start relative w-full shrink-0">
-          <div class="bg-[#f8f8f8] border-[#d8dfeb] border-l border-r border-t border-solid flex gap-[6px] h-[44px] items-center leading-[normal] px-[16px] py-[14px] relative rounded-tl-[10px] rounded-tr-[10px] w-full whitespace-nowrap shrink-0">
-            <span class="font-medium text-[14px] text-[#72798b] tracking-[-0.42px] shrink-0">
-              Estimated Carbon Yield (Annualized)
-            </span>
-            <span class="font-semibold text-[16px] text-[#111928] text-right tracking-[-0.48px] ml-auto shrink-0">
-              6.5%
-            </span>
-          </div>
-          <div class="h-[268px] relative rounded-bl-[10px] rounded-br-[10px] w-full shrink-0 overflow-hidden">
-            <img src="./Image/featured-amazon-rainforest.png" alt="Amazon Rainforest" class="absolute inset-0 w-full h-full object-cover">
-          </div>
-          <div class="absolute bg-[#661eb9] flex items-center justify-center px-[10px] py-[6px] right-[16px] top-[60px] rounded-[6px]">
-            <span class="font-semibold leading-[normal] text-[12px] text-white text-right whitespace-nowrap">Active</span>
-          </div>
-        </div>
-        <div class="flex flex-col gap-[28px] items-start relative w-[410px] shrink-0">
-          <h3 class="font-medium leading-[32px] overflow-hidden text-[22px] text-[#111928] text-ellipsis w-full shrink-0 m-0">
-            Amazon Rainforest Carbon Offset Project - Brazil
-          </h3>
-          <div class="flex flex-col gap-[20px] items-start relative w-full shrink-0">
-            <div class="flex flex-col gap-[6px] items-start leading-[normal] relative w-full whitespace-nowrap shrink-0">
-              <span class="font-medium text-[16px] text-[#72798b] shrink-0">
-                Price per Carbon Credit (Token)
-              </span>
-              <div class="flex items-center justify-between relative w-full shrink-0">
-                <span class="font-semibold text-[28px] text-[#111928] shrink-0">$1000</span>
-                <span class="font-medium text-[18px] text-[#72798b] shrink-0">2 Days Left</span>
+              <div class="flex flex-wrap items-center gap-4 lg:gap-5">
+                <a href="projects.html" class="flex h-[52px] items-center justify-center rounded-[8px] bg-purple px-[26px] text-[16px] font-medium leading-[1.5] text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple/30">
+                  Explore Carbon Projects
+                </a>
+                <a href="projects.html" class="flex h-[52px] items-center justify-center rounded-[8px] border border-[#dbdde1] bg-white px-[26px] text-[16px] font-medium leading-[1.5] text-heading transition-all duration-300 hover:-translate-y-1 hover:bg-gray-50 hover:shadow-md">
+                  Enter Marketplace
+                </a>
               </div>
             </div>
-            <div class="flex flex-col gap-[15px] items-start relative w-full shrink-0">
-              <div class="h-[6px] relative w-full shrink-0 bg-[#d9d9d9] rounded-[12px]">
-                <div class="absolute bg-[rgba(102,30,185,0.6)] h-[6px] left-0 top-0 w-[366px] rounded-[12px]"></div>
-              </div>
-              <div class="flex gap-[16px] items-center justify-center relative shrink-0">
-                <div class="flex items-end relative shrink-0">
-                  <span class="font-medium leading-[normal] text-[18px] text-[#111928] whitespace-nowrap shrink-0">
-                    $560,000 Raised
-                  </span>
-                </div>
-                <div class="h-[14px] w-px bg-[#d8dfeb] shrink-0"></div>
-                <span class="font-medium leading-[normal] text-[18px] text-[#111928] whitespace-nowrap shrink-0">
-                  70% Allocated
-                </span>
-              </div>
-            </div>
+          </div>
+
+          <!-- Hero Image -->
+          <div class="relative z-10 mx-auto flex w-full max-w-[560px] items-center justify-center xl:mx-0 xl:max-w-[620px] xl:justify-self-end 2xl:max-w-[700px]">
+            <img src="./Image/home-banner-hero.png" alt="Carbon Footprints" class="h-auto w-full object-contain">
           </div>
         </div>
       </div>
+    </header>
 
-      <!-- Card 2: Solar Energy India -->
-      <div class="flex flex-col gap-[28px] items-start relative w-[410px] shrink-0">
-        <div class="flex flex-col items-start relative w-full shrink-0">
-          <div class="bg-[#f8f8f8] border-[#d8dfeb] border-l border-r border-t border-solid flex gap-[6px] h-[44px] items-center leading-[normal] px-[16px] py-[14px] relative rounded-tl-[10px] rounded-tr-[10px] w-full whitespace-nowrap shrink-0">
-            <span class="font-medium text-[14px] text-[#72798b] tracking-[-0.42px] shrink-0">
-              Estimated ROI (Return Of Investment per year)
-            </span>
-            <span class="font-semibold text-[16px] text-[#111928] text-right tracking-[-0.48px] ml-auto shrink-0">
-              7.2%
-            </span>
-          </div>
-          <div class="h-[268px] relative rounded-bl-[10px] rounded-br-[10px] w-full shrink-0 overflow-hidden">
-            <div class="absolute inset-0 rounded-bl-[10px] rounded-br-[10px] overflow-hidden pointer-events-none">
-              <img src="./Image/featured-solar-india.png" alt="Solar Energy India" class="absolute max-w-none" style="height:123.88%;left:-16.13%;top:-11.94%;width:141.68%;">
-            </div>
-          </div>
-          <div class="absolute bg-[#661eb9] flex items-center justify-center px-[10px] py-[6px] right-[16px] top-[60px] rounded-[6px]">
-            <span class="font-semibold leading-[normal] text-[12px] text-white text-right whitespace-nowrap">Active</span>
-          </div>
-        </div>
-        <div class="flex flex-col gap-[28px] items-start relative w-full shrink-0">
-          <h3 class="font-medium leading-[32px] overflow-hidden text-[22px] text-[#111928] text-ellipsis w-full shrink-0 m-0">
-            Solar Energy Carbon Credit Initiative – India
-          </h3>
-          <div class="flex flex-col gap-[24px] items-start relative w-full shrink-0">
-            <div class="flex flex-col gap-[6px] items-start leading-[normal] relative w-full whitespace-nowrap shrink-0">
-              <span class="font-medium text-[16px] text-[#72798b] shrink-0">
-                Price per Carbon Credit (Token)
-              </span>
-              <div class="flex items-center justify-between relative w-full shrink-0">
-                <span class="font-semibold text-[28px] text-[#111928] shrink-0">$2,500</span>
-                <span class="font-medium text-[18px] text-[#72798b] shrink-0">23 Days Left</span>
-              </div>
-            </div>
-            <div class="flex flex-col gap-[15px] items-start relative w-full shrink-0">
-              <div class="h-[6px] relative w-full shrink-0 bg-[#d9d9d9] rounded-[12px]">
-                <div class="absolute bg-[rgba(102,30,185,0.6)] h-[6px] left-0 top-0 w-[196px] rounded-[12px]"></div>
-              </div>
-              <div class="flex gap-[16px] items-center justify-center relative shrink-0">
-                <div class="flex items-end relative shrink-0">
-                  <span class="font-medium leading-[normal] text-[18px] text-[#111928] whitespace-nowrap shrink-0">
-                    $600,000 Raised
-                  </span>
-                </div>
-                <div class="h-[14px] w-px bg-[#d8dfeb] shrink-0"></div>
-                <span class="font-medium leading-[normal] text-[18px] text-[#111928] whitespace-nowrap shrink-0">
-                  50% Allocated
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3: Mangrove Indonesia -->
-      <div class="flex flex-col gap-[28px] items-start relative w-[410px] shrink-0">
-        <div class="flex flex-col items-start relative w-full shrink-0">
-          <div class="bg-[#f8f8f8] border-[#d8dfeb] border-l border-r border-t border-solid flex gap-[6px] h-[44px] items-center leading-[normal] px-[16px] py-[14px] relative rounded-tl-[10px] rounded-tr-[10px] w-full whitespace-nowrap shrink-0">
-            <span class="font-medium text-[14px] text-[#72798b] tracking-[-0.42px] shrink-0">
-              Estimated Carbon Yield (Annualized)
-            </span>
-            <span class="font-semibold text-[16px] text-[#111928] text-right tracking-[-0.48px] ml-auto shrink-0">
-              8.1%
-            </span>
-          </div>
-          <div class="h-[268px] relative rounded-bl-[10px] rounded-br-[10px] w-full shrink-0 overflow-hidden">
-            <img src="./Image/featured-mangrove-indonesia.png" alt="Mangrove Indonesia" class="absolute inset-0 w-full h-full object-cover">
-          </div>
-          <div class="absolute bg-[#661eb9] flex items-center justify-center px-[10px] py-[6px] right-[16px] top-[60px] rounded-[6px]">
-            <span class="font-semibold leading-[normal] text-[12px] text-white text-right whitespace-nowrap">Active</span>
-          </div>
-        </div>
-        <div class="flex flex-col gap-[28px] items-start relative w-full shrink-0">
-          <h3 class="font-medium leading-[32px] overflow-hidden text-[22px] text-[#111928] text-ellipsis w-full whitespace-pre-wrap m-0 shrink-0">Mangrove Restoration Project 
-– Indonesia</h3>
-          <div class="flex flex-col gap-[24px] items-start relative w-full shrink-0">
-            <div class="flex flex-col gap-[6px] items-start leading-[normal] relative w-full whitespace-nowrap shrink-0">
-              <span class="font-medium text-[16px] text-[#72798b] shrink-0">
-                Price per Carbon Credit (Token)
-              </span>
-              <div class="flex items-center justify-between relative w-full shrink-0">
-                <span class="font-semibold text-[28px] text-[#111928] shrink-0">$10,000</span>
-                <span class="font-medium text-[18px] text-[#72798b] shrink-0">13 Days Left</span>
-              </div>
-            </div>
-            <div class="flex flex-col gap-[15px] items-start relative w-full shrink-0">
-              <div class="h-[6px] relative w-full shrink-0 bg-[#d9d9d9] rounded-[12px]">
-                <div class="absolute bg-[rgba(102,30,185,0.6)] h-[6px] left-0 top-0 w-[330px] rounded-[12px]"></div>
-              </div>
-              <div class="flex gap-[16px] items-center justify-center relative shrink-0">
-                <div class="flex items-end relative shrink-0">
-                  <span class="font-medium leading-[normal] text-[18px] text-[#111928] whitespace-nowrap shrink-0">
-                    $600,000 Raised
-                  </span>
-                </div>
-                <div class="h-[14px] w-px bg-[#d8dfeb] shrink-0"></div>
-                <span class="font-medium leading-[normal] text-[18px] text-[#111928] whitespace-nowrap shrink-0">
-                  55% Allocated
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- View All Button -->
-    <a href="projects.html" class="bg-[#f8f8f8] border border-[#d8dfeb] border-solid flex items-center justify-center overflow-hidden px-[28px] py-[16px] rounded-[8px] mt-[0px] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 no-underline shrink-0">
-      <span class="font-medium leading-[1.5] text-[18px] text-[#111928] whitespace-nowrap">
-        View All Carbon Projects
-      </span>
-    </a>
-
-  </section>
-
-  <!-- ========== HOW IT WORKS ========== -->
-  <section class="flex flex-col items-center pt-[60px] relative w-full shrink-0">
-    <div class="flex flex-col items-center gap-[20px] w-full shrink-0">
-      <div class="flex flex-col gap-[6px] items-center text-center w-[977px] shrink-0">
-        <h2 class="font-bold text-[#191a1e] text-[48px] leading-[72px] m-0 shrink-0">
-          How Carbon Asset Infrastructure Works
-        </h2>
-        <p class="font-normal text-[#6d6d6d] text-[20px] leading-[30px] w-[660px] m-0 shrink-0">
-          Understand how environmental assets are verified, tokenized, and made accessible through blockchain infrastructure.
-        </p>
-      </div>
-
-      <div class="flex flex-col items-start w-full shrink-0">
-        <!-- Step 1 -->
-        <div class="flex items-center justify-between px-[80px] h-[560px] w-full shrink-0">
-          <div class="flex flex-col gap-[20px] shrink-0 w-[618px]">
-            <div class="flex flex-col gap-[16px] shrink-0 w-full">
-              <div class="bg-[rgba(102,30,185,0.1)] rounded-[50px] flex items-center justify-center px-[26px] py-[10px] shrink-0 w-fit">
-                <span class="font-semibold text-[20px] text-[#661eb9] leading-[normal] m-0">Step 1</span>
-              </div>
-              <h3 class="font-semibold text-[32px] text-[#111928] leading-[46px] tracking-[-0.32px] m-0 shrink-0">
-                Access Verified Carbon Projects Globally
-              </h3>
-            </div>
-            <p class="font-normal text-[20px] text-[#72798b] leading-[32px] tracking-[-0.6px] m-0 shrink-0">
-              Access registry-backed carbon projects including reforestation, renewable energy, and carbon removal initiatives. Each project is validated through verification bodies, ensuring authenticity.
-            </p>
-          </div>
-          <div class="h-[460px] overflow-hidden relative rounded-[24px] shrink-0 w-[580px]">
-            <img src="https://www.figma.com/api/mcp/asset/be3035f3-982d-4cf5-b6d8-7106b284d40a" alt="Step 1" class="absolute inset-0 h-full object-cover w-full pointer-events-none">
-          </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="flex items-center justify-between px-[80px] h-[560px] w-full shrink-0">
-          <div class="h-[460px] overflow-hidden relative rounded-[24px] shrink-0 w-[580px]">
-            <img src="https://www.figma.com/api/mcp/asset/6a9ecb17-c834-4854-aee9-b5c155a40d82" alt="Step 2" class="absolute inset-0 h-full object-cover w-full pointer-events-none">
-          </div>
-          <div class="flex flex-col gap-[20px] shrink-0 w-[607px]">
-            <div class="flex flex-col gap-[16px] shrink-0 w-full">
-              <div class="bg-[rgba(102,30,185,0.1)] rounded-[50px] flex items-center justify-center px-[26px] py-[10px] shrink-0 w-fit">
-                <span class="font-semibold text-[20px] text-[#661eb9] leading-[normal] m-0">Step 2</span>
-              </div>
-              <h3 class="font-semibold text-[32px] text-[#111928] leading-[46px] tracking-[-0.32px] m-0 shrink-0">
-                Tokenize Carbon Credits into Secure Digital Assets
-              </h3>
-            </div>
-            <p class="font-normal text-[20px] text-[#72798b] leading-[32px] tracking-[-0.6px] m-0 shrink-0">
-              Each verified carbon credit is converted into blockchain-based tokens <strong class="font-semibold text-[#111928] bg-transparent">(1 token = 1 tonne CO₂)</strong>, enabling transparent ownership, secure transfer, and global accessibility without intermediaries.
-            </p>
-          </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="flex items-start justify-between px-[80px] pt-[50px] h-[510px] w-full shrink-0">
-          <div class="flex flex-col gap-[20px] mt-[93px] shrink-0 w-[618px]">
-            <div class="flex flex-col gap-[16px] shrink-0 w-full">
-              <div class="bg-[rgba(102,30,185,0.1)] rounded-[50px] flex items-center justify-center px-[26px] py-[10px] shrink-0 w-fit">
-                <span class="font-semibold text-[20px] text-[#661eb9] leading-[normal] m-0">Step 3</span>
-              </div>
-              <h3 class="font-semibold text-[32px] text-[#111928] leading-[46px] tracking-[-0.32px] m-0 shrink-0">
-                Generate Yield with Measurable Environmental Impact
-              </h3>
-            </div>
-            <p class="font-normal text-[20px] text-[#72798b] leading-[32px] tracking-[-0.6px] m-0 shrink-0">
-              Engage in carbon markets through asset appreciation, secondary trading, and measurable carbon offset impact, contributing to global sustainability goals.
-            </p>
-          </div>
-          <div class="h-[460px] overflow-hidden relative rounded-[24px] shrink-0 w-[580px]">
-            <img src="https://www.figma.com/api/mcp/asset/20e66679-692f-4d5e-b547-02d2d99427be" alt="Step 3" class="absolute inset-0 h-full object-cover w-full pointer-events-none">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== WHY CHOOSE BLOCKCHAINX ========== -->
-  <section class="flex flex-col items-center py-[60px] px-[80px] relative w-full shrink-0">
-    <div class="flex flex-col items-center gap-[60px] w-[1280px] shrink-0">
-      <div class="flex flex-col gap-[6px] items-center text-center w-[856px] shrink-0">
-        <h2 class="font-bold text-[#191a1e] text-[48px] leading-[72px] m-0 shrink-0">
-          Why Choose BlockchainX Platform
-        </h2>
-        <p class="font-normal text-[#6d6d6d] text-[20px] leading-[30px] w-[660px] m-0 shrink-0">
-          Access a scalable carbon asset infrastructure built for transparency, traceability, compliance &amp; global ESG participation
-        </p>
-      </div>
-
-      <div class="flex flex-col gap-[22px] w-full shrink-0">
-        <!-- Top row - 3 cards -->
-        <div class="flex items-center justify-between w-full shrink-0">
-          <!-- Card 1 -->
-          <div class="bg-white border border-[#d8dfeb] rounded-[20px] flex flex-col overflow-hidden w-[412px] h-[380px] shrink-0">
-            <div class="h-[230px] relative w-full shrink-0">
-              <img src="https://www.figma.com/api/mcp/asset/78c3aa04-6634-4448-bb1f-6ebeaf45a97c" alt="Accessible Market Entry" class="absolute inset-0 w-full h-full object-cover">
-            </div>
-            <div class="flex flex-col gap-[8px] px-[28px] py-[21px] w-full h-[150px] shrink-0">
-              <h4 class="font-medium text-[22px] text-[#111928] leading-[28px] m-0 shrink-0">Accessible Market Entry</h4>
-              <p class="font-normal text-[16px] text-[#72798b] leading-[24px] m-0 shrink-0">Access verified carbon credits with low entry thresholds and transparent ownership backed by blockchain.</p>
-            </div>
-          </div>
-          <!-- Card 2 -->
-          <div class="bg-white border border-[#d8dfeb] rounded-[20px] flex flex-col overflow-hidden w-[412px] h-[380px] shrink-0">
-            <div class="h-[230px] relative w-full shrink-0">
-              <img src="https://www.figma.com/api/mcp/asset/0f54ec18-850e-4358-ae22-14aa39edd87d" alt="Liquid Carbon Marketplace" class="absolute inset-0 w-full h-full object-cover">
-            </div>
-            <div class="flex flex-col gap-[8px] px-[28px] py-[21px] w-full h-[150px] shrink-0">
-              <h4 class="font-medium text-[22px] text-[#111928] leading-[28px] m-0 shrink-0">Liquid Carbon Marketplace</h4>
-              <p class="font-normal text-[16px] text-[#72798b] leading-[24px] m-0 shrink-0">Trade tokenized carbon credits with real-time pricing, deep liquidity, and seamless global market access.</p>
-            </div>
-          </div>
-          <!-- Card 3 -->
-          <div class="bg-white border border-[#d8dfeb] rounded-[20px] flex flex-col overflow-hidden w-[412px] h-[380px] shrink-0">
-            <div class="h-[230px] relative w-full shrink-0">
-              <img src="https://www.figma.com/api/mcp/asset/a9727f65-9d2c-4916-94d8-696969e37f58" alt="Verified & Traceable Assets" class="absolute inset-0 w-full h-full object-cover">
-            </div>
-            <div class="flex flex-col gap-[8px] px-[28px] py-[21px] w-full h-[150px] shrink-0">
-              <h4 class="font-medium text-[22px] text-[#111928] leading-[28px] m-0 shrink-0">Verified &amp; Traceable Assets</h4>
-              <p class="font-normal text-[16px] text-[#72798b] leading-[24px] m-0 shrink-0">Every carbon credit is verified by global registries with full traceability, auditability, and on-chain transparency.</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Bottom row - 2 cards -->
-        <div class="flex items-center justify-between gap-[22px] w-full shrink-0">
-          <!-- Card 4 -->
-          <div class="bg-white border border-[#d8dfeb] rounded-[20px] flex flex-col overflow-hidden w-[629px] h-[356px] shrink-0">
-            <div class="h-[230px] relative w-full shrink-0">
-              <img src="https://www.figma.com/api/mcp/asset/1f991b2f-c942-405d-9a14-fa3cdb659b8e" alt="Carbon Yield & Environmental Impact" class="absolute inset-0 w-full h-full object-cover">
-            </div>
-            <div class="flex flex-col gap-[8px] px-[28px] py-[21px] w-full h-[126px] shrink-0">
-              <h4 class="font-medium text-[22px] text-[#111928] leading-[28px] m-0 shrink-0">Carbon Yield &amp; Environmental Impact</h4>
-              <p class="font-normal text-[16px] text-[#72798b] leading-[24px] m-0 shrink-0">Track carbon asset performance and environmental impact through appreciation, demand-driven pricing, and verified CO₂ reduction.</p>
-            </div>
-          </div>
-          <!-- Card 5 -->
-          <div class="bg-white border border-[#d8dfeb] rounded-[20px] flex flex-col overflow-hidden w-[629px] h-[356px] shrink-0">
-            <div class="h-[230px] relative w-full shrink-0">
-              <img src="https://www.figma.com/api/mcp/asset/3db9bac6-a933-497c-866e-993d30ab9034" alt="Global Carbon Market Access" class="absolute inset-0 w-full h-full object-cover">
-            </div>
-            <div class="flex flex-col gap-[8px] px-[28px] py-[21px] w-full h-[126px] shrink-0">
-              <h4 class="font-medium text-[22px] text-[#111928] leading-[28px] m-0 shrink-0">Global Carbon Market Access</h4>
-              <p class="font-normal text-[16px] text-[#72798b] leading-[24px] m-0 shrink-0">Access global carbon markets with blockchain-backed transparency, cross-border participation, and compliance-ready infrastructure.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== CALCULATOR SECTION ========== -->
-  <section class="flex flex-col items-center py-[60px] px-[80px] relative w-full shrink-0">
-    <div class="flex flex-col items-center gap-[60px] w-[1280px] shrink-0">
-      <div class="flex flex-col gap-[6px] items-center text-center w-[821px] shrink-0">
-        <h2 class="font-bold text-[#191a1e] text-[48px] leading-[72px] m-0 shrink-0">
-          Carbon Asset Impact Calculator
-        </h2>
-        <p class="font-normal text-[#6d6d6d] text-[20px] leading-[30px] w-[660px] m-0 shrink-0">
-          Estimate carbon credit growth, yield, and measurable CO₂ impact based on your participation in global carbon markets.
-        </p>
-      </div>
-
-      <div class="flex items-center justify-between w-full shrink-0">
-        <!-- Left - Calculator -->
-        <div class="bg-[#ffffff] border border-[#d8dfeb] rounded-[24px] flex flex-col gap-[40px] px-[36px] py-[36px] w-[580px] h-[498px] shrink-0">
-          
-          <div class="flex flex-col gap-[12px] w-full shrink-0">
-            <div class="bg-[#f8f8f8] border border-[#d8dfeb] rounded-[12px] flex flex-col items-start justify-center gap-[12px] px-[28px] py-[24px] w-[508px] h-[98px] shrink-0">
-              <span class="font-normal text-[16px] text-[#72798b] leading-[20px] m-0 shrink-0">Enter allocation amount (USDC)</span>
-              <span class="font-bold text-[32px] text-[#661eb9] leading-[36px] m-0 shrink-0" id="allocationDisplay">25,000 USDC</span>
-            </div>
-            <span class="font-normal text-[16px] text-[#72798b] leading-[22px] m-0 shrink-0">Carbon Equivalent ≈ <span id="carbonEquivalent">2,500</span> Carbon Credits (1 Credit = 1 tonne CO₂)</span>
-          </div>
-
-          <div class="flex flex-col gap-[16px] w-full shrink-0">
-            <div class="flex items-center justify-between w-full shrink-0">
-              <span class="font-semibold text-[20px] text-[#111928] leading-[24px] m-0 shrink-0">Estimated Carbon Yield (%)</span>
-              <div class="bg-[#ffffff] border border-[#d8dfeb] rounded-[8px] flex items-center justify-center px-[16px] py-[8px] h-[36px] shrink-0">
-                <span class="font-semibold text-[16px] text-[#111928] leading-[20px] m-0 shrink-0" id="yieldDisplay">5.00%</span>
-              </div>
-            </div>
-            <div class="flex flex-col w-full shrink-0 relative">
-              <input type="range" min="2" max="12" value="5" step="0.1" class="calculator-slider" id="yieldSlider"
-                style="background: linear-gradient(to right, rgba(102,30,185,0.6) 30%, #e9e9e9 30%)">
-              <div class="flex items-center justify-between w-full mt-[8px]">
-                <span class="font-medium text-[16px] text-[#72798b] leading-[24px] m-0 shrink-0">2.00%</span>
-                <span class="font-medium text-[16px] text-[#72798b] leading-[24px] m-0 shrink-0">12.00%</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex flex-col gap-[16px] w-full shrink-0">
-            <div class="flex items-center justify-between w-full shrink-0">
-              <span class="font-semibold text-[20px] text-[#111928] leading-[24px] m-0 shrink-0">Carbon Credit Appreciation (%)</span>
-              <div class="bg-[#ffffff] border border-[#d8dfeb] rounded-[8px] flex items-center justify-center px-[16px] py-[8px] h-[36px] shrink-0">
-                <span class="font-semibold text-[16px] text-[#111928] leading-[20px] m-0 shrink-0" id="appreciationDisplay">3.00%</span>
-              </div>
-            </div>
-            <div class="flex flex-col w-full shrink-0 relative">
-              <input type="range" min="2" max="8" value="3" step="0.1" class="calculator-slider" id="appreciationSlider"
-                style="background: linear-gradient(to right, rgba(102,30,185,0.6) 16.7%, #e9e9e9 16.7%)">
-              <div class="flex items-center justify-between w-full mt-[8px]">
-                <span class="font-medium text-[16px] text-[#72798b] leading-[24px] m-0 shrink-0">2.00%</span>
-                <span class="font-medium text-[16px] text-[#72798b] leading-[24px] m-0 shrink-0">8.00%</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Right - Results -->
-        <div class="flex flex-col gap-[26px] w-[610px] shrink-0">
-          <div class="flex flex-col gap-[10px] w-full shrink-0">
-            <h3 class="font-semibold text-[32px] text-[#111928] leading-[38px] tracking-[-0.32px] m-0 shrink-0">
-              Projected Carbon Asset Growth &amp; Environmental Impact
-            </h3>
-            <p class="font-normal text-[20px] text-[#72798b] leading-[32px] tracking-[-0.6px] m-0 shrink-0">
-              Projections are based on carbon credit yield and market dynamics. Over time, assets may appreciate while contributing to measurable CO₂ offset and sustainability goals.
-            </p>
-          </div>
-
-          <div class="flex flex-col gap-[20px] w-full shrink-0">
-            <div class="flex items-center justify-between w-full shrink-0">
-              <div class="bg-[#ffffff] border border-[rgba(102,30,185,0.2)] rounded-[12px] flex flex-col items-center justify-center gap-[8px] py-[24px] w-[295px] h-[102px] shrink-0">
-                <span class="font-semibold text-[26px] text-[#661eb9] leading-[normal] tracking-[-0.26px] m-0 shrink-0" id="yieldValue">6,200 USDC</span>
-                <span class="font-normal text-[16px] text-[#72798b] leading-[normal] tracking-[-0.16px] m-0 shrink-0">Total Carbon Yield Value</span>
-              </div>
-              <div class="bg-[#ffffff] border border-[rgba(102,30,185,0.2)] rounded-[12px] flex flex-col items-center justify-center gap-[8px] py-[24px] w-[295px] h-[102px] shrink-0">
-                <span class="font-semibold text-[26px] text-[#661eb9] leading-[normal] tracking-[-0.26px] m-0 shrink-0" id="appreciationValue">4,500 USDC</span>
-                <span class="font-normal text-[16px] text-[#72798b] leading-[normal] tracking-[-0.16px] m-0 shrink-0">Total Carbon Asset Appreciation</span>
-              </div>
-            </div>
-            <div class="bg-[rgba(102,30,185,0.03)] border border-[rgba(102,30,185,0.2)] rounded-[12px] flex flex-col items-center justify-center gap-[8px] py-[24px] w-[610px] h-[102px] shrink-0">
-              <span class="font-semibold text-[26px] text-[#661eb9] leading-[normal] tracking-[-0.26px] m-0 shrink-0" id="co2Value">8,000 Tonnes CO₂</span>
-              <span class="font-normal text-[16px] text-[#72798b] leading-[normal] tracking-[-0.16px] m-0 shrink-0">Total CO₂ Offset (Tonnes)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== CARBON IMPACT STORIES ========== -->
-  <section class="flex flex-col items-center py-[60px] relative w-full overflow-hidden shrink-0">
-    <div class="flex flex-col items-center gap-[60px] w-full shrink-0">
-      <div class="flex flex-col gap-[6px] items-center text-center w-[821px] shrink-0">
-        <h2 class="font-bold text-[#191a1e] text-[48px] leading-[72px] m-0 shrink-0">
-          Carbon Impact Stories
-        </h2>
-        <p class="font-normal text-[#6d6d6d] text-[20px] leading-[30px] w-[660px] m-0 shrink-0">
-          Discover how participants are contributing to global carbon reduction while accessing transparent carbon asset markets.
-        </p>
-      </div>
-
-      <div class="flex items-center gap-[24px] w-full max-w-[1432px] justify-center px-[4px] shrink-0">
-        <!-- Story 1 -->
-        <div class="bg-[#ffffff] border border-[#d8dfeb] rounded-[16px] flex flex-col gap-[32px] p-[32px] w-[460px] shrink-0">
-          <p class="font-normal text-[16px] text-[#72798b] leading-[26px] m-0 shrink-0">
-            "Reforestation carbon projects enabled consistent asset growth while delivering measurable CO₂ reduction and long-term environmental impact."
-          </p>
-          <div class="flex items-center gap-[16px] shrink-0 w-full">
-            <img src="https://www.figma.com/api/mcp/asset/91e09192-8e0e-446c-a3e5-261b5d427bd5" alt="Daniel R" class="w-[48px] h-[48px] rounded-full object-cover shrink-0">
-            <div class="flex flex-col shrink-0">
-              <span class="font-semibold text-[18px] text-[#111928] leading-[24px] m-0 shrink-0">Daniel R</span>
-              <span class="font-normal text-[14px] text-[#72798b] leading-[20px] m-0 shrink-0">Brazil (Amazon Region)</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Story 2 -->
-        <div class="bg-[#ffffff] border border-[#d8dfeb] rounded-[16px] flex flex-col gap-[32px] p-[32px] w-[460px] shrink-0">
-          <p class="font-normal text-[16px] text-[#72798b] leading-[26px] m-0 shrink-0">
-            "Renewable energy carbon credits enabled transparent tracking, scalable exposure, and seamless participation in global carbon markets."
-          </p>
-          <div class="flex items-center gap-[16px] shrink-0 w-full">
-            <img src="https://www.figma.com/api/mcp/asset/77b2e0fa-73ce-41b9-9aa4-bd226f07abd4" alt="Sophia L" class="w-[48px] h-[48px] rounded-full object-cover shrink-0">
-            <div class="flex flex-col shrink-0">
-              <span class="font-semibold text-[18px] text-[#111928] leading-[24px] m-0 shrink-0">Sophia L</span>
-              <span class="font-normal text-[14px] text-[#72798b] leading-[20px] m-0 shrink-0">Singapore (Global ESG Investor)</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Story 3 -->
-        <div class="bg-[#ffffff] border border-[#d8dfeb] rounded-[16px] flex flex-col gap-[32px] p-[32px] w-[460px] shrink-0">
-          <p class="font-normal text-[16px] text-[#72798b] leading-[26px] m-0 shrink-0">
-            "Carbon credit tokenization enabled access to a transparent, verifiable asset class with stable demand and measurable sustainability impact."
-          </p>
-          <div class="flex items-center gap-[16px] shrink-0 w-full">
-            <img src="https://www.figma.com/api/mcp/asset/14b679b4-ad8e-44d0-aa23-2cb3930fb449" alt="Michael K" class="w-[48px] h-[48px] rounded-full object-cover shrink-0">
-            <div class="flex flex-col shrink-0">
-              <span class="font-semibold text-[18px] text-[#111928] leading-[24px] m-0 shrink-0">Michael K</span>
-              <span class="font-normal text-[14px] text-[#72798b] leading-[20px] m-0 shrink-0">United States (Institutional Participant)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== CTA SECTION ========== -->
-  <section class="flex w-full items-center justify-center px-4 py-10 md:px-10 lg:px-[80px] lg:py-[60px]">
-    <!-- Banner Wrapper -->
-    <div class="relative w-full max-w-[1280px] overflow-hidden rounded-[20px] bg-[rgba(102,30,185,0.03)] min-h-[426px] lg:h-[426px]">
-      <!-- Left Content -->
-      <div class="relative z-10 flex w-full flex-col gap-8 px-6 py-10 sm:px-10 md:px-12 lg:absolute lg:left-[70px] lg:top-1/2 lg:w-[696px] lg:-translate-y-1/2 lg:gap-[50px] lg:px-0 lg:py-0">
-        <div class="flex w-full flex-col gap-5 lg:gap-5">
-          <h2 class="m-0 text-[34px] font-semibold leading-[42px] tracking-[-0.8px] text-[#111928] sm:text-[38px] sm:leading-[48px] lg:text-[42px] lg:leading-[56px] lg:tracking-[-1.26px]">
-            <span class="block lg:whitespace-nowrap">Start Building Your Carbon</span>
-            <span class="block lg:whitespace-nowrap">Credit Portfolio Instantly</span>
+    <!-- ========== FEATURED CARBON PROJECTS ========== -->
+    <section class="w-full px-4 pb-16 pt-20 sm:px-6 lg:px-10 lg:pb-20 lg:pt-24 xl:px-14 2xl:px-20">
+      <div class="mx-auto flex w-full max-w-[1680px] flex-col items-center gap-12 lg:gap-[60px]">
+        <!-- Section Header -->
+        <div class="flex max-w-[900px] flex-col items-center gap-[6px] text-center">
+          <h2 class="text-[36px] font-bold leading-[1.15] text-dark sm:text-[42px] lg:text-[48px]">
+            Featured Carbon Projects
           </h2>
-          <p class="m-0 text-[18px] font-normal leading-[30px] tracking-[-0.4px] text-[#72798b] sm:max-w-[640px] lg:min-w-full lg:w-min lg:text-[22px] lg:leading-[36px] lg:tracking-[-0.66px]">
-            <span class="block lg:whitespace-nowrap">Access verified carbon credits and participate in global</span>
-            <span class="block lg:whitespace-nowrap">carbon markets with measurable impact.</span>
+          <p class="max-w-[760px] text-[18px] font-normal leading-[1.55] text-body lg:text-[20px]">
+            Explore registry-verified carbon projects enabling transparent participation in global environmental asset markets.
           </p>
         </div>
 
-        <!-- CTA Buttons -->
-        <div class="flex w-full flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center lg:gap-[30px]">
-          <a href="projects.html" class="flex h-[52px] items-center justify-center rounded-[8px] bg-[#661eb9] px-[26px] text-[16px] font-medium leading-6 text-white no-underline transition-colors hover:bg-[#5b19a7] lg:w-auto">
-            Explore Carbon Marketplace
-          </a>
-          <a href="projects.html" class="flex h-[52px] items-center justify-center rounded-[8px] border border-[#c1c1c1] bg-white px-[26px] text-[16px] font-medium leading-6 text-[#111928] no-underline transition-colors hover:bg-[#fafafa] lg:w-auto">
-            View Verified Projects
-          </a>
-        </div>
-      </div>
-
-      <!-- Right Artwork Block -->
-      <div class="pointer-events-none relative mt-4 h-[250px] w-full overflow-hidden sm:h-[300px] lg:absolute lg:right-0 lg:top-0 lg:mt-0 lg:h-[426px] lg:w-[488px]">
-        <img src="./Image/cta-carbon-illustration.png" alt="" class="absolute left-[-55%] top-[-18%] h-[145%] w-[220%] max-w-none sm:left-[-62%] sm:top-[-22%] sm:h-[150%] sm:w-[230%] lg:left-[-83.54%] lg:top-[-33.16%] lg:h-[161.7%] lg:w-[258.79%]">
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== FAQ SECTION ========== -->
-  <section class="flex flex-col items-center py-[60px] relative w-full shrink-0 faq-section">
-    <div class="flex flex-col items-center gap-[60px] w-full shrink-0">
-      <div class="flex flex-col gap-[6px] items-center text-center w-[821px] shrink-0">
-        <h2 class="font-bold text-[#191a1e] text-[48px] leading-[72px] m-0 shrink-0">
-          Carbon Credit Tokenization FAQ
-        </h2>
-        <p class="font-normal text-[#6d6d6d] text-[20px] leading-[30px] w-[786px] m-0 shrink-0">
-          Find answers to common questions about carbon credits, verification, tokenization, and market participation.
-        </p>
-      </div>
-
-      <div class="flex flex-col gap-[20px] w-[1018px] shrink-0">
-        <!-- FAQ 1 - Open by default -->
-        <div class="faq-item active cursor-pointer group flex flex-col gap-[20px] w-full shrink-0" onclick="toggleFaq(this)">
-          <div class="flex flex-col gap-[16px] w-full shrink-0">
-            <div class="flex items-center justify-between w-full shrink-0">
-              <span class="faq-question-text font-medium text-[22px] text-[#111928] leading-[28px] m-0 shrink-0">What are tokenized carbon credits?</span>
-              <img src="https://www.figma.com/api/mcp/asset/6a9c1a34-8a3c-4d6c-b3de-9f7d5d699949" class="faq-icon-minus w-[24px] h-[24px] shrink-0" alt="-">
-              <img src="https://www.figma.com/api/mcp/asset/248e3eeb-7949-4b7c-a20a-55d4653f9199" class="faq-icon-plus w-[24px] h-[24px] shrink-0" alt="+">
+        <!-- Cards Row -->
+        <div class="grid w-full gap-10 md:grid-cols-2 2xl:grid-cols-3">
+          <!-- Card 1: Amazon Rainforest -->
+          <article class="flex h-full flex-col gap-7">
+            <div class="overflow-hidden rounded-[10px]">
+              <div class="flex h-[44px] items-center gap-[6px] border border-b-0 border-stroke bg-[#f8f8f8] px-4">
+                <span class="text-[14px] font-medium tracking-[-0.42px] text-subtext">Estimated Carbon Yield (Annualized)</span>
+                <span class="ml-auto text-[16px] font-semibold tracking-[-0.48px] text-heading">6.5%</span>
+              </div>
+              <div class="relative h-[268px] overflow-hidden rounded-b-[10px]">
+                <img src="./Image/featured-amazon-rainforest.png" alt="Amazon Rainforest" class="h-full w-full object-cover">
+                <div class="absolute right-4 top-4 flex items-center justify-center rounded-[6px] bg-purple px-[10px] py-[6px]">
+                  <span class="text-[12px] font-semibold leading-normal text-white">Active</span>
+                </div>
+              </div>
             </div>
-            <div class="faq-answer">
-              <p class="font-normal text-[18px] text-[#72798b] leading-[28px] m-0 shrink-0">
-                Tokenized carbon credits represent verified carbon offsets (1 token = 1 tonne CO₂). These tokens are recorded on blockchain, enabling transparent ownership, traceability, and seamless transferability across global markets.
-              </p>
+
+            <div class="flex flex-1 flex-col gap-7">
+              <h3 class="text-[22px] font-medium leading-[1.45] text-heading">Amazon Rainforest Carbon Offset Project - Brazil</h3>
+              <div class="flex flex-col gap-5">
+                <div class="flex flex-col gap-[6px]">
+                  <span class="text-[16px] font-medium text-subtext">Price per Carbon Credit (Token)</span>
+                  <div class="flex flex-wrap items-center justify-between gap-3">
+                    <span class="text-[28px] font-semibold text-heading">$1000</span>
+                    <span class="text-[18px] font-medium text-subtext">2 Days Left</span>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-[15px]">
+                  <div class="h-[6px] rounded-[12px] bg-[#d9d9d9]">
+                    <div class="h-[6px] w-[70%] rounded-[12px] bg-[rgba(102,30,185,0.6)]"></div>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-4 text-[18px] font-medium text-heading">
+                    <span>$560,000 Raised</span>
+                    <span class="h-[14px] w-px bg-stroke"></span>
+                    <span>70% Allocated</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2: Solar Energy India -->
+          <article class="flex h-full flex-col gap-7">
+            <div class="overflow-hidden rounded-[10px]">
+              <div class="flex h-[44px] items-center gap-[6px] border border-b-0 border-stroke bg-[#f8f8f8] px-4">
+                <span class="text-[14px] font-medium tracking-[-0.42px] text-subtext">Estimated ROI (Return Of Investment per year)</span>
+                <span class="ml-auto text-[16px] font-semibold tracking-[-0.48px] text-heading">7.2%</span>
+              </div>
+              <div class="relative h-[268px] overflow-hidden rounded-b-[10px]">
+                <img src="./Image/featured-solar-india.png" alt="Solar Energy India" class="h-full w-full object-cover">
+                <div class="absolute right-4 top-4 flex items-center justify-center rounded-[6px] bg-purple px-[10px] py-[6px]">
+                  <span class="text-[12px] font-semibold leading-normal text-white">Active</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-1 flex-col gap-7">
+              <h3 class="text-[22px] font-medium leading-[1.45] text-heading">Solar Energy Carbon Credit Initiative - India</h3>
+              <div class="flex flex-col gap-5">
+                <div class="flex flex-col gap-[6px]">
+                  <span class="text-[16px] font-medium text-subtext">Price per Carbon Credit (Token)</span>
+                  <div class="flex flex-wrap items-center justify-between gap-3">
+                    <span class="text-[28px] font-semibold text-heading">$2,500</span>
+                    <span class="text-[18px] font-medium text-subtext">23 Days Left</span>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-[15px]">
+                  <div class="h-[6px] rounded-[12px] bg-[#d9d9d9]">
+                    <div class="h-[6px] w-1/2 rounded-[12px] bg-[rgba(102,30,185,0.6)]"></div>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-4 text-[18px] font-medium text-heading">
+                    <span>$600,000 Raised</span>
+                    <span class="h-[14px] w-px bg-stroke"></span>
+                    <span>50% Allocated</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3: Mangrove Indonesia -->
+          <article class="flex h-full flex-col gap-7 md:col-span-2 2xl:col-span-1">
+            <div class="overflow-hidden rounded-[10px]">
+              <div class="flex h-[44px] items-center gap-[6px] border border-b-0 border-stroke bg-[#f8f8f8] px-4">
+                <span class="text-[14px] font-medium tracking-[-0.42px] text-subtext">Estimated Carbon Yield (Annualized)</span>
+                <span class="ml-auto text-[16px] font-semibold tracking-[-0.48px] text-heading">8.1%</span>
+              </div>
+              <div class="relative h-[268px] overflow-hidden rounded-b-[10px]">
+                <img src="./Image/featured-mangrove-indonesia.png" alt="Mangrove Indonesia" class="h-full w-full object-cover">
+                <div class="absolute right-4 top-4 flex items-center justify-center rounded-[6px] bg-purple px-[10px] py-[6px]">
+                  <span class="text-[12px] font-semibold leading-normal text-white">Active</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-1 flex-col gap-7">
+              <h3 class="text-[22px] font-medium leading-[1.45] text-heading">Mangrove Restoration Project - Indonesia</h3>
+              <div class="flex flex-col gap-5">
+                <div class="flex flex-col gap-[6px]">
+                  <span class="text-[16px] font-medium text-subtext">Price per Carbon Credit (Token)</span>
+                  <div class="flex flex-wrap items-center justify-between gap-3">
+                    <span class="text-[28px] font-semibold text-heading">$10,000</span>
+                    <span class="text-[18px] font-medium text-subtext">13 Days Left</span>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-[15px]">
+                  <div class="h-[6px] rounded-[12px] bg-[#d9d9d9]">
+                    <div class="h-[6px] w-[55%] rounded-[12px] bg-[rgba(102,30,185,0.6)]"></div>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-4 text-[18px] font-medium text-heading">
+                    <span>$600,000 Raised</span>
+                    <span class="h-[14px] w-px bg-stroke"></span>
+                    <span>55% Allocated</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <a href="projects.html" class="flex items-center justify-center rounded-[8px] border border-stroke bg-[#f8f8f8] px-7 py-4 text-[18px] font-medium leading-[1.5] text-heading transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+          View All Carbon Projects
+        </a>
+      </div>
+    </section>
+    <!-- ========== HOW IT WORKS ========== -->
+    <section class="w-full px-4 pb-[88px] pt-16 sm:px-6 lg:px-10 xl:px-14 2xl:px-20">
+      <div class="mx-auto flex w-full max-w-[1680px] flex-col items-center gap-10 lg:gap-14">
+        <div class="flex max-w-[980px] flex-col items-center gap-[6px] text-center">
+          <h2 class="text-[36px] font-bold leading-[1.15] text-dark sm:text-[42px] lg:text-[48px]">
+            How Carbon Asset Infrastructure Works
+          </h2>
+          <p class="max-w-[760px] text-[18px] font-normal leading-[1.55] text-body lg:text-[20px]">
+            Understand how environmental assets are verified, tokenized, and made accessible through blockchain infrastructure.
+          </p>
+        </div>
+
+        <div class="flex w-full flex-col gap-14 xl:gap-16">
+          <!-- Step 1 -->
+          <div class="grid items-center gap-10 xl:grid-cols-[minmax(0,1.04fr)_minmax(440px,0.96fr)] xl:gap-14">
+            <div class="max-w-[700px]">
+              <div class="flex flex-col gap-5">
+                <div class="inline-flex w-fit items-center justify-center rounded-[50px] bg-[rgba(102,30,185,0.1)] px-[26px] py-[10px]">
+                  <span class="text-[20px] font-semibold leading-normal text-purple">Step 1</span>
+                </div>
+                <h3 class="text-[30px] font-semibold leading-[1.35] tracking-[-0.32px] text-heading lg:text-[32px] lg:leading-[46px]">
+                  Access Verified Carbon Projects Globally
+                </h3>
+                <p class="text-[18px] font-normal leading-[1.6] tracking-[-0.2px] text-subtext lg:text-[20px] lg:leading-[32px]">
+                  Access registry-backed carbon projects including reforestation, renewable energy, and carbon removal initiatives. Each project is validated through verification bodies, ensuring authenticity.
+                </p>
+              </div>
+            </div>
+            <div class="overflow-hidden rounded-[24px]">
+              <img src="https://www.figma.com/api/mcp/asset/be3035f3-982d-4cf5-b6d8-7106b284d40a" alt="Step 1" class="h-[300px] w-full object-cover sm:h-[360px] lg:h-[420px] xl:h-[460px]">
             </div>
           </div>
-          <div class="bg-[#d8dfeb] h-[1px] w-full shrink-0"></div>
-        </div>
 
-        <!-- FAQ 2 -->
-        <div class="faq-item cursor-pointer group flex flex-col gap-[20px] w-full shrink-0" onclick="toggleFaq(this)">
-          <div class="flex flex-col gap-[16px] w-full shrink-0">
-            <div class="flex items-center justify-between w-full shrink-0">
-              <span class="faq-question-text font-medium text-[22px] text-[#111928] leading-[28px] m-0 shrink-0">How are carbon credits verified?</span>
-              <img src="https://www.figma.com/api/mcp/asset/6a9c1a34-8a3c-4d6c-b3de-9f7d5d699949" class="faq-icon-minus w-[24px] h-[24px] shrink-0" alt="-">
-              <img src="https://www.figma.com/api/mcp/asset/248e3eeb-7949-4b7c-a20a-55d4653f9199" class="faq-icon-plus w-[24px] h-[24px] shrink-0" alt="+">
+          <!-- Step 2 -->
+          <div class="grid items-center gap-10 xl:grid-cols-[minmax(440px,0.96fr)_minmax(0,1.04fr)] xl:gap-14">
+            <div class="overflow-hidden rounded-[24px] xl:order-1">
+              <img src="https://www.figma.com/api/mcp/asset/6a9ecb17-c834-4854-aee9-b5c155a40d82" alt="Step 2" class="h-[300px] w-full object-cover sm:h-[360px] lg:h-[420px] xl:h-[460px]">
             </div>
-            <div class="faq-answer">
-              <p class="font-normal text-[18px] text-[#72798b] leading-[28px] m-0 shrink-0">
-                Carbon credits are verified through globally recognized registries such as Verra, Gold Standard, and other certification bodies that validate carbon offset projects.
-              </p>
+            <div class="max-w-[700px] xl:order-2 xl:justify-self-end">
+              <div class="flex flex-col gap-5">
+                <div class="inline-flex w-fit items-center justify-center rounded-[50px] bg-[rgba(102,30,185,0.1)] px-[26px] py-[10px]">
+                  <span class="text-[20px] font-semibold leading-normal text-purple">Step 2</span>
+                </div>
+                <h3 class="text-[30px] font-semibold leading-[1.35] tracking-[-0.32px] text-heading lg:text-[32px] lg:leading-[46px]">
+                  Tokenize Carbon Credits into Secure Digital Assets
+                </h3>
+                <p class="text-[18px] font-normal leading-[1.6] tracking-[-0.2px] text-subtext lg:text-[20px] lg:leading-[32px]">
+                  Each verified carbon credit is converted into blockchain-based tokens <strong class="font-semibold text-heading">(1 token = 1 tonne CO&#8322;)</strong>, enabling transparent ownership, secure transfer, and global accessibility without intermediaries.
+                </p>
+              </div>
             </div>
           </div>
-          <div class="bg-[#d8dfeb] h-[1px] w-full shrink-0"></div>
-        </div>
 
-        <!-- FAQ 3 -->
-        <div class="faq-item cursor-pointer group flex flex-col gap-[20px] w-full shrink-0" onclick="toggleFaq(this)">
-          <div class="flex flex-col gap-[16px] w-full shrink-0">
-            <div class="flex items-center justify-between w-full shrink-0">
-              <span class="faq-question-text font-medium text-[22px] text-[#111928] leading-[28px] m-0 shrink-0">How does tokenization work (1 Token = 1 Tonne CO₂)?</span>
-              <img src="https://www.figma.com/api/mcp/asset/6a9c1a34-8a3c-4d6c-b3de-9f7d5d699949" class="faq-icon-minus w-[24px] h-[24px] shrink-0" alt="-">
-              <img src="https://www.figma.com/api/mcp/asset/248e3eeb-7949-4b7c-a20a-55d4653f9199" class="faq-icon-plus w-[24px] h-[24px] shrink-0" alt="+">
+          <!-- Step 3 -->
+          <div class="grid items-center gap-10 xl:grid-cols-[minmax(0,1.04fr)_minmax(440px,0.96fr)] xl:gap-14">
+            <div class="max-w-[700px]">
+              <div class="flex flex-col gap-5">
+                <div class="inline-flex w-fit items-center justify-center rounded-[50px] bg-[rgba(102,30,185,0.1)] px-[26px] py-[10px]">
+                  <span class="text-[20px] font-semibold leading-normal text-purple">Step 3</span>
+                </div>
+                <h3 class="text-[30px] font-semibold leading-[1.35] tracking-[-0.32px] text-heading lg:text-[32px] lg:leading-[46px]">
+                  Generate Yield with Measurable Environmental Impact
+                </h3>
+                <p class="text-[18px] font-normal leading-[1.6] tracking-[-0.2px] text-subtext lg:text-[20px] lg:leading-[32px]">
+                  Engage in carbon markets through asset appreciation, secondary trading, and measurable carbon offset impact, contributing to global sustainability goals.
+                </p>
+              </div>
             </div>
-            <div class="faq-answer">
-              <p class="font-normal text-[18px] text-[#72798b] leading-[28px] m-0 shrink-0">
-                Each verified carbon credit is minted as a digital token on the blockchain, where 1 token equals 1 tonne of CO₂ offset. This ensures precise tracking and transferability.
-              </p>
-            </div>
-          </div>
-          <div class="bg-[#d8dfeb] h-[1px] w-full shrink-0"></div>
-        </div>
-
-        <!-- FAQ 4 -->
-        <div class="faq-item cursor-pointer group flex flex-col gap-[20px] w-full shrink-0" onclick="toggleFaq(this)">
-          <div class="flex flex-col gap-[16px] w-full shrink-0">
-            <div class="flex items-center justify-between w-full shrink-0">
-              <span class="faq-question-text font-medium text-[22px] text-[#111928] leading-[28px] m-0 shrink-0">How do carbon credits generate value?</span>
-              <img src="https://www.figma.com/api/mcp/asset/6a9c1a34-8a3c-4d6c-b3de-9f7d5d699949" class="faq-icon-minus w-[24px] h-[24px] shrink-0" alt="-">
-              <img src="https://www.figma.com/api/mcp/asset/248e3eeb-7949-4b7c-a20a-55d4653f9199" class="faq-icon-plus w-[24px] h-[24px] shrink-0" alt="+">
-            </div>
-            <div class="faq-answer">
-              <p class="font-normal text-[18px] text-[#72798b] leading-[28px] m-0 shrink-0">
-                Carbon credits generate value through market demand, regulatory compliance requirements, asset appreciation, and yield from carbon offset activities.
-              </p>
-            </div>
-          </div>
-          <div class="bg-[#d8dfeb] h-[1px] w-full shrink-0"></div>
-        </div>
-
-        <!-- FAQ 5 -->
-        <div class="faq-item cursor-pointer group flex flex-col gap-[20px] w-full shrink-0" onclick="toggleFaq(this)">
-          <div class="flex flex-col gap-[16px] w-full shrink-0">
-            <div class="flex items-center justify-between w-full shrink-0">
-              <span class="faq-question-text font-medium text-[22px] text-[#111928] leading-[28px] m-0 shrink-0">How can I trade or retire carbon credits?</span>
-              <img src="https://www.figma.com/api/mcp/asset/6a9c1a34-8a3c-4d6c-b3de-9f7d5d699949" class="faq-icon-minus w-[24px] h-[24px] shrink-0" alt="-">
-              <img src="https://www.figma.com/api/mcp/asset/248e3eeb-7949-4b7c-a20a-55d4653f9199" class="faq-icon-plus w-[24px] h-[24px] shrink-0" alt="+">
-            </div>
-            <div class="faq-answer">
-              <p class="font-normal text-[18px] text-[#72798b] leading-[28px] m-0 shrink-0">
-                You can trade carbon credit tokens on the marketplace or retire them to permanently offset your carbon footprint, with full on-chain verification.
-              </p>
+            <div class="overflow-hidden rounded-[24px]">
+              <img src="https://www.figma.com/api/mcp/asset/20e66679-692f-4d5e-b547-02d2d99427be" alt="Step 3" class="h-[300px] w-full object-cover sm:h-[360px] lg:h-[420px] xl:h-[460px]">
             </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="bg-[#ffffff] border border-[#d8dfeb] rounded-[12px] flex items-center justify-center py-[20px] px-[32px] w-[1018px] shrink-0">
-        <span class="font-medium text-[20px] text-[#72798b] leading-[30px] m-0 shrink-0 text-center">
-          All carbon credits are registry-backed and blockchain-tracked for full transparency.
-        </span>
+    <!-- ========== WHY CHOOSE BLOCKCHAINX ========== -->
+    <section class="w-full px-4 py-16 sm:px-6 lg:px-10 xl:px-14 2xl:px-20">
+      <div class="mx-auto flex w-full max-w-[1680px] flex-col items-center gap-12 lg:gap-[60px]">
+        <div class="flex max-w-[920px] flex-col items-center gap-[6px] text-center">
+          <h2 class="text-[36px] font-bold leading-[1.15] text-dark sm:text-[42px] lg:text-[48px]">
+            Why Choose BlockchainX Platform
+          </h2>
+          <p class="max-w-[760px] text-[18px] font-normal leading-[1.55] text-body lg:text-[20px]">
+            Access a scalable carbon asset infrastructure built for transparency, traceability, compliance &amp; global ESG participation
+          </p>
+        </div>
+
+        <div class="grid w-full gap-6 md:grid-cols-2 xl:grid-cols-6">
+          <article class="flex h-full flex-col overflow-hidden rounded-[20px] border border-stroke bg-white xl:col-span-2">
+            <img src="https://www.figma.com/api/mcp/asset/78c3aa04-6634-4448-bb1f-6ebeaf45a97c" alt="Accessible Market Entry" class="h-[230px] w-full object-cover">
+            <div class="flex flex-1 flex-col gap-2 px-7 py-[21px]">
+              <h4 class="text-[22px] font-medium leading-[28px] text-heading">Accessible Market Entry</h4>
+              <p class="text-[16px] font-normal leading-[24px] text-subtext">Access verified carbon credits with low entry thresholds and transparent ownership backed by blockchain.</p>
+            </div>
+          </article>
+
+          <article class="flex h-full flex-col overflow-hidden rounded-[20px] border border-stroke bg-white xl:col-span-2">
+            <img src="https://www.figma.com/api/mcp/asset/0f54ec18-850e-4358-ae22-14aa39edd87d" alt="Liquid Carbon Marketplace" class="h-[230px] w-full object-cover">
+            <div class="flex flex-1 flex-col gap-2 px-7 py-[21px]">
+              <h4 class="text-[22px] font-medium leading-[28px] text-heading">Liquid Carbon Marketplace</h4>
+              <p class="text-[16px] font-normal leading-[24px] text-subtext">Trade tokenized carbon credits with real-time pricing, deep liquidity, and seamless global market access.</p>
+            </div>
+          </article>
+
+          <article class="flex h-full flex-col overflow-hidden rounded-[20px] border border-stroke bg-white md:col-span-2 xl:col-span-2">
+            <img src="https://www.figma.com/api/mcp/asset/a9727f65-9d2c-4916-94d8-696969e37f58" alt="Verified and Traceable Assets" class="h-[230px] w-full object-cover">
+            <div class="flex flex-1 flex-col gap-2 px-7 py-[21px]">
+              <h4 class="text-[22px] font-medium leading-[28px] text-heading">Verified &amp; Traceable Assets</h4>
+              <p class="text-[16px] font-normal leading-[24px] text-subtext">Every carbon credit is verified by global registries with full traceability, auditability, and on-chain transparency.</p>
+            </div>
+          </article>
+
+          <article class="flex h-full flex-col overflow-hidden rounded-[20px] border border-stroke bg-white md:col-span-2 xl:col-span-3">
+            <img src="https://www.figma.com/api/mcp/asset/1f991b2f-c942-405d-9a14-fa3cdb659b8e" alt="Carbon Yield and Environmental Impact" class="h-[230px] w-full object-cover">
+            <div class="flex flex-1 flex-col gap-2 px-7 py-[21px]">
+              <h4 class="text-[22px] font-medium leading-[28px] text-heading">Carbon Yield &amp; Environmental Impact</h4>
+              <p class="text-[16px] font-normal leading-[24px] text-subtext">Track carbon asset performance and environmental impact through appreciation, demand-driven pricing, and verified CO&#8322; reduction.</p>
+            </div>
+          </article>
+
+          <article class="flex h-full flex-col overflow-hidden rounded-[20px] border border-stroke bg-white md:col-span-2 xl:col-span-3">
+            <img src="https://www.figma.com/api/mcp/asset/3db9bac6-a933-497c-866e-993d30ab9034" alt="Global Carbon Market Access" class="h-[230px] w-full object-cover">
+            <div class="flex flex-1 flex-col gap-2 px-7 py-[21px]">
+              <h4 class="text-[22px] font-medium leading-[28px] text-heading">Global Carbon Market Access</h4>
+              <p class="text-[16px] font-normal leading-[24px] text-subtext">Access global carbon markets with blockchain-backed transparency, cross-border participation, and compliance-ready infrastructure.</p>
+            </div>
+          </article>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+    <!-- ========== CALCULATOR SECTION ========== -->
+    <section class="w-full px-4 py-16 sm:px-6 lg:px-10 xl:px-14 2xl:px-20">
+      <div class="mx-auto flex w-full max-w-[1680px] flex-col items-center gap-12 lg:gap-[60px]">
+        <div class="flex max-w-[900px] flex-col items-center gap-[6px] text-center">
+          <h2 class="text-[36px] font-bold leading-[1.15] text-dark sm:text-[42px] lg:text-[48px]">
+            Carbon Asset Impact Calculator
+          </h2>
+          <p class="max-w-[760px] text-[18px] font-normal leading-[1.55] text-body lg:text-[20px]">
+            Estimate carbon credit growth, yield, and measurable CO&#8322; impact based on your participation in global carbon markets.
+          </p>
+        </div>
 
+        <div class="grid w-full items-start gap-8 xl:grid-cols-[minmax(520px,0.95fr)_minmax(0,1.05fr)] xl:gap-10 2xl:gap-14">
+          <!-- Left - Calculator -->
+          <article class="flex h-full flex-col gap-8 rounded-[24px] border border-stroke bg-white px-6 py-6 sm:px-8 sm:py-8 xl:min-h-[498px] xl:px-9 xl:py-9">
+            <div class="flex flex-col gap-3">
+              <div class="flex flex-col justify-center gap-3 rounded-[12px] border border-stroke bg-[#f8f8f8] px-6 py-5 sm:px-7 xl:min-h-[98px]">
+                <label for="allocationInput" class="text-[16px] font-normal leading-[20px] text-subtext">Enter allocation amount (USDC)</label>
+                <div class="flex flex-wrap items-baseline gap-2">
+                  <input id="allocationInput" type="text" inputmode="numeric" value="25,000" aria-label="Enter allocation amount in USDC" class="min-w-[160px] bg-transparent p-0 text-[28px] font-bold leading-[1.1] text-purple focus:outline-none sm:text-[32px]">
+                </div>
+              </div>
+              <span class="text-[16px] font-normal leading-[22px] text-subtext">Carbon Equivalent ~= <span id="carbonEquivalent">2,500</span> Carbon Credits (1 Credit = 1 tonne CO&#8322;)</span>
+            </div>
+
+            <div class="flex flex-col gap-4">
+              <div class="flex items-center justify-between gap-4">
+                <span class="text-[18px] font-semibold leading-[24px] text-heading sm:text-[20px]">Estimated Carbon Yield (%)</span>
+                <div class="flex h-[36px] items-center justify-center rounded-[8px] border border-stroke bg-white px-4">
+                  <span class="text-[16px] font-semibold leading-[20px] text-heading" id="yieldDisplay">5.00%</span>
+                </div>
+              </div>
+              <div class="flex flex-col gap-2">
+                <input type="range" min="2" max="12" value="5" step="0.1" class="calculator-slider" id="yieldSlider">
+                <div class="flex items-center justify-between text-[16px] font-medium leading-[24px] text-subtext">
+                  <span>2.00%</span>
+                  <span>12.00%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-4">
+              <div class="flex items-center justify-between gap-4">
+                <span class="text-[18px] font-semibold leading-[24px] text-heading sm:text-[20px]">Carbon Credit Appreciation (%)</span>
+                <div class="flex h-[36px] items-center justify-center rounded-[8px] border border-stroke bg-white px-4">
+                  <span class="text-[16px] font-semibold leading-[20px] text-heading" id="appreciationDisplay">3.00%</span>
+                </div>
+              </div>
+              <div class="flex flex-col gap-2">
+                <input type="range" min="2" max="8" value="3" step="0.1" class="calculator-slider" id="appreciationSlider">
+                <div class="flex items-center justify-between text-[16px] font-medium leading-[24px] text-subtext">
+                  <span>2.00%</span>
+                  <span>8.00%</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Right - Results -->
+          <article class="flex flex-col gap-6 xl:gap-[26px]">
+            <div class="flex flex-col gap-[10px]">
+              <h3 class="max-w-[720px] text-[30px] font-semibold leading-[1.2] tracking-[-0.32px] text-heading lg:text-[32px] lg:leading-[38px]">
+                Projected Carbon Asset Growth &amp; Environmental Impact
+              </h3>
+              <p class="max-w-[760px] text-[18px] font-normal leading-[1.6] tracking-[-0.2px] text-subtext lg:text-[20px] lg:leading-[32px]">
+                Projections are based on carbon credit yield and market dynamics. Over time, assets may appreciate while contributing to measurable CO&#8322; offset and sustainability goals.
+              </p>
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div class="flex min-h-[102px] flex-col items-center justify-center gap-2 rounded-[12px] border border-[rgba(102,30,185,0.2)] bg-white px-5 py-6 text-center">
+                <span class="text-[24px] font-semibold tracking-[-0.26px] text-purple sm:text-[26px]" id="yieldValue">6,200 USDC</span>
+                <span class="text-[16px] font-normal tracking-[-0.16px] text-subtext">Total Carbon Yield Value</span>
+              </div>
+              <div class="flex min-h-[102px] flex-col items-center justify-center gap-2 rounded-[12px] border border-[rgba(102,30,185,0.2)] bg-white px-5 py-6 text-center">
+                <span class="text-[24px] font-semibold tracking-[-0.26px] text-purple sm:text-[26px]" id="appreciationValue">4,500 USDC</span>
+                <span class="text-[16px] font-normal tracking-[-0.16px] text-subtext">Total Carbon Asset Appreciation</span>
+              </div>
+            </div>
+
+            <div class="flex min-h-[102px] flex-col items-center justify-center gap-2 rounded-[12px] border border-[rgba(102,30,185,0.2)] bg-[rgba(102,30,185,0.03)] px-5 py-6 text-center">
+              <span class="text-[24px] font-semibold tracking-[-0.26px] text-purple sm:text-[26px]" id="co2Value">8,000 Tonnes CO&#8322;</span>
+              <span class="text-[16px] font-normal tracking-[-0.16px] text-subtext">Total CO&#8322; Offset (Tonnes)</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CARBON IMPACT STORIES ========== -->
+    <section class="w-full overflow-hidden px-4 py-16 sm:px-6 lg:px-10 xl:px-14 2xl:px-20">
+      <div class="mx-auto flex w-full max-w-[1680px] flex-col items-center gap-12 lg:gap-[60px]">
+        <div class="flex max-w-[900px] flex-col items-center gap-[6px] text-center">
+          <h2 class="text-[36px] font-bold leading-[1.15] text-dark sm:text-[42px] lg:text-[48px]">
+            Carbon Impact Stories
+          </h2>
+          <p class="max-w-[760px] text-[18px] font-normal leading-[1.55] text-body lg:text-[20px]">
+            Discover how participants are contributing to global carbon reduction while accessing transparent carbon asset markets.
+          </p>
+        </div>
+
+        <div id="impactStoriesViewport" class="w-full overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <div id="impactStoriesTrack" class="flex w-max items-stretch gap-6">
+            <article class="flex w-[88vw] max-w-[460px] shrink-0 flex-col gap-8 rounded-[16px] border border-stroke bg-white p-8 sm:w-[460px]">
+              <p class="text-[16px] font-normal leading-[26px] text-subtext">"Reforestation carbon projects enabled consistent asset growth while delivering measurable CO&#8322; reduction and long-term environmental impact."</p>
+              <div class="flex items-center gap-4">
+                <img src="https://www.figma.com/api/mcp/asset/91e09192-8e0e-446c-a3e5-261b5d427bd5" alt="Daniel R" class="h-12 w-12 rounded-full object-cover">
+                <div class="flex flex-col">
+                  <span class="text-[18px] font-semibold leading-[24px] text-heading">Daniel R</span>
+                  <span class="text-[14px] font-normal leading-[20px] text-subtext">Brazil (Amazon Region)</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="flex w-[88vw] max-w-[460px] shrink-0 flex-col gap-8 rounded-[16px] border border-stroke bg-white p-8 sm:w-[460px]">
+              <p class="text-[16px] font-normal leading-[26px] text-subtext">"Renewable energy carbon credits enabled transparent tracking, scalable exposure, and seamless participation in global carbon markets."</p>
+              <div class="flex items-center gap-4">
+                <img src="https://www.figma.com/api/mcp/asset/77b2e0fa-73ce-41b9-9aa4-bd226f07abd4" alt="Sophia L" class="h-12 w-12 rounded-full object-cover">
+                <div class="flex flex-col">
+                  <span class="text-[18px] font-semibold leading-[24px] text-heading">Sophia L</span>
+                  <span class="text-[14px] font-normal leading-[20px] text-subtext">Singapore (Global ESG Investor)</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="flex w-[88vw] max-w-[460px] shrink-0 flex-col gap-8 rounded-[16px] border border-stroke bg-white p-8 sm:w-[460px]">
+              <p class="text-[16px] font-normal leading-[26px] text-subtext">"Carbon credit tokenization enabled access to a transparent, verifiable asset class with stable demand and measurable sustainability impact."</p>
+              <div class="flex items-center gap-4">
+                <img src="https://www.figma.com/api/mcp/asset/14b679b4-ad8e-44d0-aa23-2cb3930fb449" alt="Michael K" class="h-12 w-12 rounded-full object-cover">
+                <div class="flex flex-col">
+                  <span class="text-[18px] font-semibold leading-[24px] text-heading">Michael K</span>
+                  <span class="text-[14px] font-normal leading-[20px] text-subtext">United States (Institutional Participant)</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="flex w-[88vw] max-w-[460px] shrink-0 flex-col gap-8 rounded-[16px] border border-stroke bg-white p-8 sm:w-[460px]">
+              <p class="text-[16px] font-normal leading-[26px] text-subtext">"Blue carbon exposure gave our team a transparent way to back coastal restoration while tracking impact and asset performance in one place."</p>
+              <div class="flex items-center gap-4">
+                <img src="https://www.figma.com/api/mcp/asset/77b2e0fa-73ce-41b9-9aa4-bd226f07abd4" alt="Aisha P" class="h-12 w-12 rounded-full object-cover">
+                <div class="flex flex-col">
+                  <span class="text-[18px] font-semibold leading-[24px] text-heading">Aisha P</span>
+                  <span class="text-[14px] font-normal leading-[20px] text-subtext">Indonesia (Climate Analyst)</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="flex w-[88vw] max-w-[460px] shrink-0 flex-col gap-8 rounded-[16px] border border-stroke bg-white p-8 sm:w-[460px]">
+              <p class="text-[16px] font-normal leading-[26px] text-subtext">"The platform made it easy to compare verified projects and build a diversified carbon allocation strategy with confidence."</p>
+              <div class="flex items-center gap-4">
+                <img src="https://www.figma.com/api/mcp/asset/91e09192-8e0e-446c-a3e5-261b5d427bd5" alt="Liam T" class="h-12 w-12 rounded-full object-cover">
+                <div class="flex flex-col">
+                  <span class="text-[18px] font-semibold leading-[24px] text-heading">Liam T</span>
+                  <span class="text-[14px] font-normal leading-[20px] text-subtext">UK (ESG Portfolio Manager)</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="flex w-[88vw] max-w-[460px] shrink-0 flex-col gap-8 rounded-[16px] border border-stroke bg-white p-8 sm:w-[460px]">
+              <p class="text-[16px] font-normal leading-[26px] text-subtext">"We used retired carbon credits directly from the wallet flow, which made our reporting and sustainability disclosures much easier."</p>
+              <div class="flex items-center gap-4">
+                <img src="https://www.figma.com/api/mcp/asset/14b679b4-ad8e-44d0-aa23-2cb3930fb449" alt="Nora C" class="h-12 w-12 rounded-full object-cover">
+                <div class="flex flex-col">
+                  <span class="text-[18px] font-semibold leading-[24px] text-heading">Nora C</span>
+                  <span class="text-[14px] font-normal leading-[20px] text-subtext">UAE (Sustainability Lead)</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ========== CTA SECTION ========== -->
+    <section class="w-full px-4 py-10 sm:px-6 md:px-10 lg:px-10 lg:py-[60px] xl:px-14 2xl:px-20">
+      <div class="mx-auto w-full max-w-[1680px]">
+        <div class="relative overflow-hidden rounded-[20px] bg-[rgba(102,30,185,0.03)] lg:min-h-[426px]">
+          <!-- Left Content -->
+          <div class="relative z-10 flex w-full flex-col gap-8 px-6 py-10 sm:px-10 md:px-12 lg:max-w-[760px] lg:px-[70px] lg:py-[70px] 2xl:max-w-[820px]">
+            <div class="flex w-full flex-col gap-5">
+              <h2 class="m-0 text-[34px] font-semibold leading-[42px] tracking-[-0.8px] text-heading sm:text-[38px] sm:leading-[48px] lg:text-[42px] lg:leading-[56px] lg:tracking-[-1.26px]">
+                <span class="block lg:whitespace-nowrap">Start Building Your Carbon</span>
+                <span class="block lg:whitespace-nowrap">Credit Portfolio Instantly</span>
+              </h2>
+              <p class="m-0 max-w-[680px] text-[18px] font-normal leading-[30px] tracking-[-0.4px] text-subtext lg:text-[22px] lg:leading-[36px] lg:tracking-[-0.66px]">
+                <span class="block lg:whitespace-nowrap">Access verified carbon credits and participate in global</span>
+                <span class="block lg:whitespace-nowrap">carbon markets with measurable impact.</span>
+              </p>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex w-full flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center lg:gap-[30px]">
+              <a href="projects.html" class="flex h-[52px] items-center justify-center rounded-[8px] bg-purple px-[26px] text-[16px] font-medium leading-6 text-white transition-colors hover:bg-[#5b19a7]">
+                Explore Carbon Marketplace
+              </a>
+              <a href="projects.html" class="flex h-[52px] items-center justify-center rounded-[8px] border border-[#c1c1c1] bg-white px-[26px] text-[16px] font-medium leading-6 text-heading transition-colors hover:bg-[#fafafa]">
+                View Verified Projects
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Artwork Block -->
+          <div class="pointer-events-none relative mt-4 h-[250px] w-full overflow-hidden sm:h-[300px] lg:absolute lg:right-0 lg:top-0 lg:mt-0 lg:h-full lg:w-[46%] xl:w-[488px] 2xl:w-[540px]">
+            <img src="./Image/cta-carbon-illustration.png" alt="" class="absolute left-[-55%] top-[-18%] h-[145%] w-[220%] max-w-none sm:left-[-62%] sm:top-[-22%] sm:h-[150%] sm:w-[230%] lg:left-[-83.54%] lg:top-[-33.16%] lg:h-[161.7%] lg:w-[258.79%]">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FAQ SECTION ========== -->
+    <section class="w-full px-4 py-16 sm:px-6 lg:px-10 xl:px-14 2xl:px-20">
+      <div class="mx-auto flex w-full max-w-[1680px] flex-col items-center gap-12 lg:gap-[60px]">
+        <div class="flex max-w-[900px] flex-col items-center gap-[6px] text-center">
+          <h2 class="text-[36px] font-bold leading-[1.15] text-dark sm:text-[42px] lg:text-[48px]">
+            Carbon Credit Tokenization FAQ
+          </h2>
+          <p class="max-w-[786px] text-[18px] font-normal leading-[1.55] text-body lg:text-[20px]">
+            Find answers to common questions about carbon credits, verification, tokenization, and market participation.
+          </p>
+        </div>
+
+        <div class="w-full max-w-[1018px]">
+          <div class="space-y-5">
+            <div class="faq-item flex flex-col gap-4 border-b border-stroke pb-5" data-faq-item>
+              <button type="button" class="faq-trigger flex w-full items-start justify-between gap-6 text-left" aria-expanded="true" aria-controls="faq-panel-1" id="faq-trigger-1">
+                <span class="faq-question-text pt-1 text-[20px] font-medium leading-[1.4] text-heading lg:text-[22px]">What are tokenized carbon credits?</span>
+                <span class="relative mt-1 flex h-6 w-6 shrink-0 items-center justify-center text-subtext">
+                  <svg class="faq-icon-plus hidden h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <path d="M12 5v14"></path>
+                    <path d="M5 12h14"></path>
+                  </svg>
+                  <svg class="faq-icon-minus h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <path d="M5 12h14"></path>
+                  </svg>
+                </span>
+              </button>
+              <div id="faq-panel-1" class="faq-answer max-w-[900px]" role="region" aria-labelledby="faq-trigger-1">
+                <p class="text-[17px] font-normal leading-[1.65] text-subtext lg:text-[18px] lg:leading-[28px]">
+                  Tokenized carbon credits represent verified carbon offsets (1 token = 1 tonne CO&#8322;). These tokens are recorded on blockchain, enabling transparent ownership, traceability, and seamless transferability across global markets.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item flex flex-col gap-4 border-b border-stroke pb-5" data-faq-item>
+              <button type="button" class="faq-trigger flex w-full items-start justify-between gap-6 text-left" aria-expanded="false" aria-controls="faq-panel-2" id="faq-trigger-2">
+                <span class="faq-question-text pt-1 text-[20px] font-medium leading-[1.4] text-heading lg:text-[22px]">How are carbon credits verified?</span>
+                <span class="relative mt-1 flex h-6 w-6 shrink-0 items-center justify-center text-subtext">
+                  <svg class="faq-icon-plus h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <path d="M12 5v14"></path>
+                    <path d="M5 12h14"></path>
+                  </svg>
+                  <svg class="faq-icon-minus hidden h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <path d="M5 12h14"></path>
+                  </svg>
+                </span>
+              </button>
+              <div id="faq-panel-2" class="faq-answer hidden max-w-[900px]" role="region" aria-labelledby="faq-trigger-2">
+                <p class="text-[17px] font-normal leading-[1.65] text-subtext lg:text-[18px] lg:leading-[28px]">
+                  Carbon credits are verified through globally recognized registries such as Verra, Gold Standard, and other certification bodies that validate carbon offset projects.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item flex flex-col gap-4 border-b border-stroke pb-5" data-faq-item>
+              <button type="button" class="faq-trigger flex w-full items-start justify-between gap-6 text-left" aria-expanded="false" aria-controls="faq-panel-3" id="faq-trigger-3">
+                <span class="faq-question-text pt-1 text-[20px] font-medium leading-[1.4] text-heading lg:text-[22px]">How does tokenization work (1 Token = 1 Tonne CO&#8322;)?</span>
+                <span class="relative mt-1 flex h-6 w-6 shrink-0 items-center justify-center text-subtext">
+                  <svg class="faq-icon-plus h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <path d="M12 5v14"></path>
+                    <path d="M5 12h14"></path>
+                  </svg>
+                  <svg class="faq-icon-minus hidden h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <path d="M5 12h14"></path>
+                  </svg>
+                </span>
+              </button>
+              <div id="faq-panel-3" class="faq-answer hidden max-w-[900px]" role="region" aria-labelledby="faq-trigger-3">
+                <p class="text-[17px] font-normal leading-[1.65] text-subtext lg:text-[18px] lg:leading-[28px]">
+                  Each verified carbon credit is minted as a digital token on the blockchain, where 1 token equals 1 tonne of CO&#8322; offset. This ensures precise tracking and transferability.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item flex flex-col gap-4 border-b border-stroke pb-5" data-faq-item>
+              <button type="button" class="faq-trigger flex w-full items-start justify-between gap-6 text-left" aria-expanded="false" aria-controls="faq-panel-4" id="faq-trigger-4">
+                <span class="faq-question-text pt-1 text-[20px] font-medium leading-[1.4] text-heading lg:text-[22px]">How do carbon credits generate value?</span>
+                <span class="relative mt-1 flex h-6 w-6 shrink-0 items-center justify-center text-subtext">
+                  <svg class="faq-icon-plus h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <path d="M12 5v14"></path>
+                    <path d="M5 12h14"></path>
+                  </svg>
+                  <svg class="faq-icon-minus hidden h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <path d="M5 12h14"></path>
+                  </svg>
+                </span>
+              </button>
+              <div id="faq-panel-4" class="faq-answer hidden max-w-[900px]" role="region" aria-labelledby="faq-trigger-4">
+                <p class="text-[17px] font-normal leading-[1.65] text-subtext lg:text-[18px] lg:leading-[28px]">
+                  Carbon credits generate value through market demand, regulatory compliance requirements, asset appreciation, and yield from carbon offset activities.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item flex flex-col gap-4" data-faq-item>
+              <button type="button" class="faq-trigger flex w-full items-start justify-between gap-6 text-left" aria-expanded="false" aria-controls="faq-panel-5" id="faq-trigger-5">
+                <span class="faq-question-text pt-1 text-[20px] font-medium leading-[1.4] text-heading lg:text-[22px]">How can I trade or retire carbon credits?</span>
+                <span class="relative mt-1 flex h-6 w-6 shrink-0 items-center justify-center text-subtext">
+                  <svg class="faq-icon-plus h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <path d="M12 5v14"></path>
+                    <path d="M5 12h14"></path>
+                  </svg>
+                  <svg class="faq-icon-minus hidden h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <path d="M5 12h14"></path>
+                  </svg>
+                </span>
+              </button>
+              <div id="faq-panel-5" class="faq-answer hidden max-w-[900px]" role="region" aria-labelledby="faq-trigger-5">
+                <p class="text-[17px] font-normal leading-[1.65] text-subtext lg:text-[18px] lg:leading-[28px]">
+                  You can trade carbon credit tokens on the marketplace or retire them to permanently offset your carbon footprint, with full on-chain verification.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full max-w-[1018px] rounded-[12px] border border-stroke bg-white px-6 py-5 text-center">
+          <span class="text-[18px] font-medium leading-[1.55] text-subtext lg:text-[20px]">
+            All carbon credits are registry-backed and blockchain-tracked for full transparency.
+          </span>
+        </div>
+      </div>
+    </section>
+  </main>
   <!-- ========== FOOTER ========== -->
-  <footer class="bg-[#111928] flex flex-col items-center w-full shrink-0">
-    <div class="flex flex-col gap-[48px] items-start py-[50px] w-[1280px] shrink-0">
-      <div class="flex gap-[96px] items-start w-full shrink-0">
+  <footer class="w-full bg-heading px-4 sm:px-6 lg:px-10 xl:px-14 2xl:px-20">
+    <div class="mx-auto flex w-full max-w-[1680px] flex-col gap-12 py-12 lg:gap-[48px] lg:py-[50px]">
+      <div class="grid gap-10 lg:grid-cols-[minmax(320px,384px)_minmax(0,1fr)] lg:gap-16 xl:gap-24">
         <!-- Logo, Description & Social -->
-        <div class="flex flex-col h-[200px] items-start justify-between w-[384px] shrink-0">
-          <div class="inline-grid leading-[0] place-items-start relative shrink-0">
-            <div class="col-start-1 row-start-1 h-[44px] relative w-[149.6px]">
-              <img src="https://www.figma.com/api/mcp/asset/62310617-23e1-49fd-875d-c54b44f0885f" class="absolute block w-full h-full max-w-none" alt="BlockchainX Logo">
-            </div>
-            <div class="col-start-1 row-start-1 h-[16px] relative w-[112px]" style="margin-left:9.31px;margin-top:14.3px;">
-              <img src="https://www.figma.com/api/mcp/asset/6a83bfec-68c9-4f78-b8f4-e601f50ae3c2" class="absolute block w-full h-full max-w-none" alt="">
-            </div>
-          </div>
-          <p class="font-normal text-[#959fac] text-[16px] leading-[1.5] m-0 shrink-0">
+        <div class="flex max-w-[420px] flex-col gap-6 lg:justify-between">
+          <img src="./Image/Blockchain%20Logo%20White.png" alt="BlockchainX Logo" class="h-11 w-auto">
+          <p class="text-[16px] font-normal leading-[1.6] text-[#959fac]">
             Experience secure, sustainable, and transparent investing in tokenized agriculture. Buy, sell, and manage farm-backed assets with confidence.
           </p>
-          <div class="flex gap-[16px] items-center shrink-0">
-            <a href="#" class="w-[24px] h-[24px] relative shrink-0 block">
-              <img src="https://www.figma.com/api/mcp/asset/da7641c0-4de2-4096-b066-1a721357cd1a" class="absolute block w-full h-full max-w-none" alt="GitHub">
+          <div class="flex items-center gap-4">
+            <a href="#" aria-label="GitHub" class="text-[#959fac] transition hover:text-white">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.61-3.37-1.18-3.37-1.18-.46-1.16-1.11-1.47-1.11-1.47-.91-.61.07-.6.07-.6 1 .07 1.53 1.04 1.53 1.04.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.26-4.56-1.11-4.56-4.95 0-1.1.39-2 1.03-2.71-.1-.25-.45-1.29.1-2.69 0 0 .84-.27 2.75 1.03A9.5 9.5 0 0 1 12 6.84c.85 0 1.7.11 2.5.33 1.91-1.3 2.75-1.03 2.75-1.03.55 1.4.2 2.44.1 2.69.64.71 1.03 1.61 1.03 2.71 0 3.85-2.34 4.69-4.57 4.95.36.31.67.92.67 1.86v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"></path>
+              </svg>
             </a>
-            <a href="#" class="w-[24px] h-[24px] relative overflow-hidden shrink-0 block">
-              <div class="absolute inset-[14.56%_14.57%_14.55%_14.55%]">
-                <img src="https://www.figma.com/api/mcp/asset/664ff2fd-5548-4c60-98f2-9d260a5c7f60" class="absolute block w-full h-full max-w-none" alt="LinkedIn">
-              </div>
+            <a href="#" aria-label="LinkedIn" class="text-[#959fac] transition hover:text-white">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M6.94 8.5A1.56 1.56 0 1 1 6.93 5.4a1.56 1.56 0 0 1 .01 3.1ZM5.6 9.74h2.67V18H5.6V9.74Zm4.35 0h2.56v1.13h.04c.36-.67 1.23-1.37 2.53-1.37 2.7 0 3.2 1.78 3.2 4.09V18h-2.67v-3.92c0-.94-.01-2.15-1.31-2.15-1.31 0-1.51 1.03-1.51 2.08V18H9.95V9.74Z"></path>
+              </svg>
             </a>
-            <a href="#" class="w-[24px] h-[24px] relative shrink-0 block">
-              <img src="https://www.figma.com/api/mcp/asset/d899c945-0044-459c-9556-63a396d09577" class="absolute block w-full h-full max-w-none" alt="Twitter">
+            <a href="#" aria-label="Twitter" class="text-[#959fac] transition hover:text-white">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.89-6.62L6.28 22H3.17l7.24-8.28L.8 2h6.4l4.42 6.05L18.9 2Zm-1.1 18h1.73L6.25 3.9H4.39L17.8 20Z"></path>
+              </svg>
             </a>
-            <a href="#" class="w-[24px] h-[24px] relative shrink-0 block">
-              <img src="https://www.figma.com/api/mcp/asset/2aef778b-4fe2-4952-a8b8-81db55629b74" class="absolute block w-full h-full max-w-none" alt="Facebook">
+            <a href="#" aria-label="Facebook" class="text-[#959fac] transition hover:text-white">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M13.5 22v-8.2h2.77l.42-3.2H13.5V8.55c0-.93.26-1.56 1.58-1.56h1.69V4.12c-.29-.04-1.27-.12-2.41-.12-2.39 0-4.03 1.46-4.03 4.13v2.47H7.6v3.2h2.73V22h3.17Z"></path>
+              </svg>
             </a>
           </div>
         </div>
 
         <!-- Footer Links -->
-        <div class="flex flex-1 items-start justify-between min-h-px min-w-px shrink-0">
-          <div class="flex flex-col gap-[20px] items-start w-[150px] shrink-0">
-            <span class="font-semibold text-white text-[14px] tracking-[0.56px] uppercase shrink-0 m-0">INVEST</span>
-            <div class="flex flex-col gap-[18px] items-start text-[#959fac] text-[16px] whitespace-nowrap shrink-0 m-0 w-full">
-              <a href="#" class="hover:text-white transition">Browse Farms</a>
-              <a href="#" class="hover:text-white transition">Crop Yield Notes</a>
-              <a href="#" class="hover:text-white transition">Livestock Fund</a>
-              <a href="#" class="hover:text-white transition">Agricultural Offerings</a>
+        <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8 xl:gap-12">
+          <div class="flex flex-col gap-5">
+            <span class="text-[14px] font-semibold uppercase tracking-[0.56px] text-white">Invest</span>
+            <div class="flex flex-col gap-[18px] text-[16px] text-[#959fac]">
+              <a href="#" class="transition hover:text-white">Browse Farms</a>
+              <a href="#" class="transition hover:text-white">Crop Yield Notes</a>
+              <a href="#" class="transition hover:text-white">Livestock Fund</a>
+              <a href="#" class="transition hover:text-white">Agricultural Offerings</a>
             </div>
           </div>
-          <div class="flex flex-col gap-[20px] items-start w-[150px] shrink-0">
-            <span class="font-semibold text-white text-[14px] tracking-[0.56px] uppercase shrink-0 m-0">LEARN</span>
-            <div class="flex flex-col gap-[18px] items-start text-[#959fac] text-[16px] shrink-0 m-0 w-full">
-              <a href="#" class="hover:text-white transition whitespace-nowrap">How it works</a>
-              <a href="#" class="hover:text-white transition whitespace-nowrap">Learning Center</a>
-              <a href="#" class="hover:text-white transition whitespace-nowrap">Investment Guide</a>
-              <a href="#" class="hover:text-white transition whitespace-nowrap">Fees &amp; Costs</a>
+          <div class="flex flex-col gap-5">
+            <span class="text-[14px] font-semibold uppercase tracking-[0.56px] text-white">Learn</span>
+            <div class="flex flex-col gap-[18px] text-[16px] text-[#959fac]">
+              <a href="#" class="transition hover:text-white">How it works</a>
+              <a href="#" class="transition hover:text-white">Learning Center</a>
+              <a href="#" class="transition hover:text-white">Investment Guide</a>
+              <a href="#" class="transition hover:text-white">Fees &amp; Costs</a>
             </div>
           </div>
-          <div class="flex flex-col gap-[20px] items-start w-[150px] shrink-0">
-            <span class="font-semibold text-white text-[14px] tracking-[0.56px] uppercase shrink-0 m-0">COMPANY</span>
-            <div class="flex flex-col gap-[18px] items-start text-[#959fac] text-[16px] whitespace-nowrap shrink-0 m-0 w-full">
-              <a href="#" class="hover:text-white transition">About Us</a>
-              <a href="#" class="hover:text-white transition">Careers</a>
-              <a href="#" class="hover:text-white transition">Our Team</a>
-              <a href="#" class="hover:text-white transition">Contact Us</a>
+          <div class="flex flex-col gap-5">
+            <span class="text-[14px] font-semibold uppercase tracking-[0.56px] text-white">Company</span>
+            <div class="flex flex-col gap-[18px] text-[16px] text-[#959fac]">
+              <a href="#" class="transition hover:text-white">About Us</a>
+              <a href="#" class="transition hover:text-white">Careers</a>
+              <a href="#" class="transition hover:text-white">Our Team</a>
+              <a href="#" class="transition hover:text-white">Contact Us</a>
             </div>
           </div>
-          <div class="flex flex-col gap-[20px] items-start w-[150px] shrink-0">
-            <span class="font-semibold text-white text-[14px] tracking-[0.56px] uppercase shrink-0 m-0">LEGAL</span>
-            <div class="flex flex-col gap-[18px] items-start text-[#959fac] text-[16px] whitespace-nowrap shrink-0 m-0 w-full">
-              <a href="#" class="hover:text-white transition">Terms of Service</a>
-              <a href="#" class="hover:text-white transition">Privacy Policy</a>
-              <a href="#" class="hover:text-white transition">Key Risks</a>
-              <a href="#" class="hover:text-white transition">AML Measures</a>
+          <div class="flex flex-col gap-5">
+            <span class="text-[14px] font-semibold uppercase tracking-[0.56px] text-white">Legal</span>
+            <div class="flex flex-col gap-[18px] text-[16px] text-[#959fac]">
+              <a href="#" class="transition hover:text-white">Terms of Service</a>
+              <a href="#" class="transition hover:text-white">Privacy Policy</a>
+              <a href="#" class="transition hover:text-white">Key Risks</a>
+              <a href="#" class="transition hover:text-white">AML Measures</a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Copyright -->
-      <div class="flex flex-col items-start w-full shrink-0">
-        <div class="bg-[#383c44] h-[1px] w-full shrink-0"></div>
-        <div class="flex items-center pt-[32px] w-full shrink-0">
-          <p class="flex-1 font-normal text-[#959fac] text-[16px] leading-[1.5] text-center shrink-0 m-0">
-            © 2025 BlockchainX, Inc. All rights reserved.
-          </p>
-        </div>
+      <div class="border-t border-[#383c44] pt-8">
+        <p class="text-center text-[16px] font-normal leading-[1.5] text-[#959fac]">
+          &copy; 2025 BlockchainX, Inc. All rights reserved.
+        </p>
       </div>
     </div>
   </footer>
-
   <script>
-    // FAQ Toggle
-    function toggleFaq(element) {
-      element.classList.toggle('active');
+    const mobileMenuButton = document.getElementById("mobileMenuButton");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener("click", () => {
+        const isExpanded = mobileMenuButton.getAttribute("aria-expanded") === "true";
+        mobileMenuButton.setAttribute("aria-expanded", String(!isExpanded));
+        mobileMenu.classList.toggle("hidden");
+      });
     }
 
+    // FAQ Accordion
+    const faqItems = Array.from(document.querySelectorAll("[data-faq-item]"));
+
+    function setFaqState(item, isOpen) {
+      const trigger = item.querySelector(".faq-trigger");
+      const answer = item.querySelector(".faq-answer");
+      const plus = item.querySelector(".faq-icon-plus");
+      const minus = item.querySelector(".faq-icon-minus");
+
+      trigger.setAttribute("aria-expanded", String(isOpen));
+      answer.classList.toggle("hidden", !isOpen);
+      plus.classList.toggle("hidden", isOpen);
+      minus.classList.toggle("hidden", !isOpen);
+    }
+
+    faqItems.forEach((item, index) => {
+      setFaqState(item, index === 0);
+      item.querySelector(".faq-trigger").addEventListener("click", () => {
+        const isOpen = item.querySelector(".faq-trigger").getAttribute("aria-expanded") === "true";
+        faqItems.forEach((faqItem) => setFaqState(faqItem, false));
+        setFaqState(item, !isOpen);
+      });
+    });
+
     // Calculator Sliders
-    const yieldSlider = document.getElementById('yieldSlider');
-    const appreciationSlider = document.getElementById('appreciationSlider');
-    const yieldDisplay = document.getElementById('yieldDisplay');
-    const appreciationDisplay = document.getElementById('appreciationDisplay');
-    const yieldValue = document.getElementById('yieldValue');
-    const appreciationValue = document.getElementById('appreciationValue');
-    const co2Value = document.getElementById('co2Value');
+    const allocationInput = document.getElementById("allocationInput");
+    const yieldSlider = document.getElementById("yieldSlider");
+    const appreciationSlider = document.getElementById("appreciationSlider");
+    const carbonEquivalent = document.getElementById("carbonEquivalent");
+    const yieldDisplay = document.getElementById("yieldDisplay");
+    const appreciationDisplay = document.getElementById("appreciationDisplay");
+    const yieldValue = document.getElementById("yieldValue");
+    const appreciationValue = document.getElementById("appreciationValue");
+    const co2Value = document.getElementById("co2Value");
 
     function updateSliderBackground(slider, min, max) {
       const percent = ((slider.value - min) / (max - min)) * 100;
       slider.style.background = `linear-gradient(to right, rgba(102,30,185,0.6) ${percent}%, #e9e9e9 ${percent}%)`;
     }
 
+    function parseAllocationValue(value) {
+      const numericValue = parseInt(String(value).replace(/[^\d]/g, ""), 10);
+      return Number.isFinite(numericValue) && numericValue > 0 ? numericValue : 0;
+    }
+
+    function formatAllocationValue(value) {
+      return value.toLocaleString("en-US");
+    }
+
     function calculateResults() {
-      const allocation = 25000;
+      const allocation = parseAllocationValue(allocationInput.value);
       const yieldRate = parseFloat(yieldSlider.value);
       const appreciationRate = parseFloat(appreciationSlider.value);
 
-      yieldDisplay.textContent = yieldRate.toFixed(2) + '%';
-      appreciationDisplay.textContent = appreciationRate.toFixed(2) + '%';
+      yieldDisplay.textContent = yieldRate.toFixed(2) + "%";
+      appreciationDisplay.textContent = appreciationRate.toFixed(2) + "%";
 
       const totalYield = Math.round(allocation * (yieldRate / 100) * 5);
       const totalAppreciation = Math.round(allocation * (appreciationRate / 100) * 5);
       const co2Tonnes = Math.round(allocation * 0.32);
+      const creditEquivalent = Math.round(allocation / 10);
 
-      yieldValue.textContent = totalYield.toLocaleString() + ' USDC';
-      appreciationValue.textContent = totalAppreciation.toLocaleString() + ' USDC';
-      co2Value.textContent = co2Tonnes.toLocaleString() + ' Tonnes CO₂';
+      yieldValue.textContent = totalYield.toLocaleString() + " USDC";
+      appreciationValue.textContent = totalAppreciation.toLocaleString() + " USDC";
+      carbonEquivalent.textContent = creditEquivalent.toLocaleString();
+      co2Value.textContent = co2Tonnes.toLocaleString() + " Tonnes CO2";
 
       updateSliderBackground(yieldSlider, 2, 12);
       updateSliderBackground(appreciationSlider, 2, 8);
     }
 
-    yieldSlider.addEventListener('input', calculateResults);
-    appreciationSlider.addEventListener('input', calculateResults);
+    if (allocationInput && yieldSlider && appreciationSlider) {
+      allocationInput.addEventListener("focus", () => allocationInput.select());
+      allocationInput.addEventListener("input", () => {
+        const allocation = parseAllocationValue(allocationInput.value);
+        allocationInput.value = allocation > 0 ? formatAllocationValue(allocation) : "";
+        allocationInput.setSelectionRange(allocationInput.value.length, allocationInput.value.length);
+        calculateResults();
+      });
+      allocationInput.addEventListener("blur", () => {
+        const allocation = parseAllocationValue(allocationInput.value) || 25000;
+        allocationInput.value = formatAllocationValue(allocation);
+        calculateResults();
+      });
+      yieldSlider.addEventListener("input", calculateResults);
+      appreciationSlider.addEventListener("input", calculateResults);
 
-    // Initialize
-    calculateResults();
+      allocationInput.value = formatAllocationValue(parseAllocationValue(allocationInput.value) || 25000);
+      calculateResults();
+    }
+
+    // Carbon Impact Stories auto-scroll
+    const impactStoriesViewport = document.getElementById("impactStoriesViewport");
+    const impactStoriesTrack = document.getElementById("impactStoriesTrack");
+
+    if (impactStoriesViewport && impactStoriesTrack) {
+      impactStoriesTrack.innerHTML += impactStoriesTrack.innerHTML;
+
+      let isStoriesPaused = false;
+      let storiesAnimationFrame = null;
+      const storiesSpeed = 0.35;
+
+      const scrollStories = () => {
+        if (!isStoriesPaused) {
+          impactStoriesViewport.scrollLeft += storiesSpeed;
+
+          if (impactStoriesViewport.scrollLeft >= impactStoriesTrack.scrollWidth / 2) {
+            impactStoriesViewport.scrollLeft = 0;
+          }
+        }
+
+        storiesAnimationFrame = window.requestAnimationFrame(scrollStories);
+      };
+
+      impactStoriesViewport.addEventListener("mouseenter", () => {
+        isStoriesPaused = true;
+      });
+
+      impactStoriesViewport.addEventListener("mouseleave", () => {
+        isStoriesPaused = false;
+      });
+
+      impactStoriesViewport.addEventListener("touchstart", () => {
+        isStoriesPaused = true;
+      }, { passive: true });
+
+      impactStoriesViewport.addEventListener("touchend", () => {
+        isStoriesPaused = false;
+      });
+
+      storiesAnimationFrame = window.requestAnimationFrame(scrollStories);
+
+      window.addEventListener("beforeunload", () => {
+        if (storiesAnimationFrame) {
+          window.cancelAnimationFrame(storiesAnimationFrame);
+        }
+      });
+    }
   </script>
-
 </body>
 
 </html>
